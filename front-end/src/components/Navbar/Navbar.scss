@@ -58,13 +58,19 @@ app__navbar-links{
             font-weight:500;
             transition: all 0.3s ease-in-out;
 
+            //hover for a
             &:hover {
                 color: var(--secondary-color);
             }
         }//a
     }//li
 
-    
+    //hover for li
+    &:hover{
+        div{
+            background-color: var(--secondary-color);
+        }
+    }
 }
 
 //navbar ends here
