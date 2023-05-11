@@ -33,7 +33,14 @@
 app__navbar-links{
     flex:1;
     display:flex;
-    
+    justify-content: center;
+    align-items:center;
+    list-style:none;
+
+    li{
+        margin: 0 1rem;
+        
+    }
 }
 
 //navbar ends here
