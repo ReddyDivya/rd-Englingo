@@ -132,7 +132,14 @@
 
                 a{
                     color:var(--gray-color);
+                    text-decoration:none;
+                    text-transform:uppercase;
+                    font-weight:500;
                     
+                    //hover for a
+                    &:hover {
+                        color: var(--secondary-color);
+                    }
                 }
             }
 
