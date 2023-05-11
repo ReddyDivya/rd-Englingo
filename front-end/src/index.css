@@ -12,3 +12,10 @@
   --brown-color: #46364a;
   --white-color: #ffffff;
 }
+
+*{
+  box-sizing:border-box;
+  padding:0;
+  margin:0;
+  scroll-behavior:smooth;
+}
