@@ -72,6 +72,12 @@
 .app__navbar-menu{
     width:35px;
     height:35px;
+    border-radius:50%;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background-color: var(--secondary-color);
 }
 
 //navbar ends here
