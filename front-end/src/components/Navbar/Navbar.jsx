@@ -1,5 +1,6 @@
 import React from 'react';
 import "./Navbar.scss";
+import {images} from '../../constants';
 import {HiMenuAlt, HiX} from 'react-icons/hi';
 import {motion} from 'framer-motion';
 
@@ -9,8 +10,7 @@ const Navbar = () => {
     <nav className="app__navbar">
       {/*logo*/}
       <div className='app__navbar-logo'>
-        <h3>englingo</h3>
-        {/* <img src={} alt='logo'/> */}
+        <img src={images.logo} alt='logo'/>
       </div>
 
       {/* menu */}

@@ -19,9 +19,7 @@
     justify-content:flex-start;
     align-items:center;
 
-    h3{
-        width:90px;
-        height:20px;
+    img{
 
         //responsive screen
         @media screen and (min-width:2000px)
@@ -31,6 +29,12 @@
         }
     }//img
 }//app__navbar-logo
+
+app__navbar-links{
+    flex:1;
+    display:flex;
+    
+}
 
 //navbar ends here
 
