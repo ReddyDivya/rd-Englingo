@@ -5,8 +5,11 @@ import {motion} from 'framer-motion';
 
 const Navbar = () => {
   return (
+
     <nav className="app__navbar">
-      <ul>
+
+      {/* menu */}
+      <ul className='app__navbar-links'>
         {
           ['Vocab', 'Idioms', 'Sentences', 'Grammar'].map((item) => (
             <li className='app__flex p-text' key={`link-${item}`}>
