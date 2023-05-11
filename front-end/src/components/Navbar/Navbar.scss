@@ -78,6 +78,20 @@
     justify-content:center;
     align-items:center;
     background-color: var(--secondary-color);
+
+    svg{
+        width:70%;
+        height: 70%;
+        color:var(--white-color);
+    }
+
+    div{
+        position: fixed;
+        top:0;
+        bottom:0;
+        right:0;
+        z-index:5;
+    }
 }
 
 //navbar ends here
