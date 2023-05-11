@@ -1,3 +1,4 @@
+//navbar starts here
 .app__navbar{
     width:100%;
     display:flex;
@@ -11,3 +12,25 @@
     position:fixed;
     z-index:2;
 }
+
+//navbar-logo
+.app__navbar-logo{
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+
+    h3{
+        width:90px;
+        height:20px;
+
+        //responsive screen
+        @media screen and (min-width:2000px)
+        {
+            width:180px;
+            height:40px;
+        }
+    }//img
+}//app__navbar-logo
+
+//navbar ends here
+

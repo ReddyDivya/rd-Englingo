@@ -7,6 +7,11 @@ const Navbar = () => {
   return (
 
     <nav className="app__navbar">
+      {/*logo*/}
+      <div className='app__navbar-logo'>
+        <h3>englingo</h3>
+        {/* <img src={} alt='logo'/> */}
+      </div>
 
       {/* menu */}
       <ul className='app__navbar-links'>
