@@ -2,16 +2,8 @@
     To avoid importing individual components wherever required, 
     importing all the files from container folder in this file.
 */
-import Vocab from './Vocab/Vocab';
-import Idioms from './Idioms/Idioms';
-import Sentences from './Sentences/Sentences';
-import Grammar from './Grammar/Grammar';
-import Footer from './Footer/Footer';
-
-export{
-    Vocab,
-    Idioms,
-    Sentences,
-    Grammar,
-    Footer
-};
+export {default as Vocab}  from './Vocab/Vocab';
+export {default as Idioms}  from './Idioms/Idioms';
+export {default as Sentences}  from './Sentences/Sentences';
+export {default as Grammar}  from './Grammar/Grammar';
+export {default as Footer}  from './Footer/Footer';
