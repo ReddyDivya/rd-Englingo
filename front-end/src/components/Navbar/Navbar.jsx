@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Navbar.scss";
 import {images} from '../../constants';
-import {HiMenuAlt, HiX} from 'react-icons/hi';
+import {HiMenuAlt4, HiX} from 'react-icons/hi';
 import {motion} from 'framer-motion';
 
 const Navbar = () => {
@@ -23,6 +23,12 @@ const Navbar = () => {
           ))
         }
       </ul>
+
+      <div className="app__navbar-menu">
+         {/*displaying menu icon */}
+          <HiMenuAlt4/>
+          <HiX/>
+      </div>
     </nav>
   )
 }
