@@ -91,6 +91,34 @@
         bottom:0;
         right:0;
         z-index:5;
+        padding:1rem;
+        width:80%;
+        height:100vh;
+        
+        display:flex;
+        justify-content: flex-end;
+        align-items:flex-end;
+        flex-direction:column;
+
+        background:url('../../assets/bgWhite.png');
+        background-color:var(--white-color);
+        background-size:cover;
+        background-repeat:repeat;
+
+        /* top box shadow */
+        box-shadow: 0px 0px 20px rgba(168, 168, 168, 0.15);
+
+        svg{
+            width:35px;
+            height:100%;
+            color:var(--secondary-color);
+            margin:0.5rem 1rem;
+        }
+
+        ul{
+            list-style:none;
+            
+        }
     }
 }
 

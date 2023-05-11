@@ -27,7 +27,22 @@ const Navbar = () => {
       <div className="app__navbar-menu">
          {/*displaying menu icon */}
           <HiMenuAlt4/>
-          <HiX/>
+          <motion.div
+            whileInView={{x:[300, 0]}}
+            transition={{duration:0.85, ease: 'easeOut'}}
+          >
+            {/*displaying X icon*/}
+            <HiX/>
+            <ul>
+              {
+                ['Vocab', 'Idioms', 'Sentences', 'Grammar'].map((item) => ( 
+                  <li key={item}>
+                    <a href={`#${item}`}>{item}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </motion.div>  
       </div>
     </nav>
   )
