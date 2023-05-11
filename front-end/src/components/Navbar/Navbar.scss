@@ -117,7 +117,26 @@
 
         ul{
             list-style:none;
-            
+            margin:0;
+            padding:0;
+            height:100%;
+            width:100%;
+
+            display:flex;
+            justify-content: flex-start;
+            align-items:flex-start;
+            flex-direction:column;
+
+            li{
+                margin:1rem;
+
+                a{
+                    color:var(--gray-color);
+                    
+                }
+            }
+
+
         }
     }
 }

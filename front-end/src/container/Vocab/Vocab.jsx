@@ -3,7 +3,7 @@ import "./Vocab.scss";
 
 const Vocab = () => {
   return (
-    <div>Vocab</div>
+    <div id='#Vocab'>Vocab</div>
   )
 }
 
