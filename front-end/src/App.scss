@@ -134,3 +134,39 @@
         }//media
     }//div
 }//app__social
+
+//navigation dots
+.app__navigation{
+    display:flex;
+    justify-content:Center;
+    align-items:center;
+    flex-direction:column;
+    padding:1rem;
+
+    .app__navigation-dot{
+        width:10px;
+        height:10px;
+        border-radius:50%;
+        background-color:#cbcbcb;
+        margin:0.5rem;
+        transition: background-color 0.2s ease-in-out;
+
+        //hover for navigation-dots
+        &:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        //responsiveness for navigation-dots
+        @media screen and (min-width: 2000px) {
+            width: 20px;
+            height: 20px;
+        }//media
+    }//app__navigation-dot
+
+    @media screen and (max-width: 500px) {
+        .app__navigation,
+        .app__social {
+          display: none;
+        }
+    }//media
+}//app__navigation
