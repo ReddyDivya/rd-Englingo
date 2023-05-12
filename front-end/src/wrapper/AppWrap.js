@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavigationDots, SocialMedia } from '../components';
+import { NavigationDots } from '../components';
 
 const AppWrap = (Component, idName, className) => function HOC(){
   return (
     <div id={idName} className={`app__container ${className}`}>
-        <SocialMedia/>
+        {/* <SocialMedia/> */}
 
         <div className='app__wrapper app__flex'>
             <Component/> {/*displaying components like vocab, idoms*/}
@@ -16,4 +16,4 @@ const AppWrap = (Component, idName, className) => function HOC(){
   )
 }
 
-export default AppWrap
+export default AppWrap;

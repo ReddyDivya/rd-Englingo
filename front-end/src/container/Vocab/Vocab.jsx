@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Vocab.scss";
 import {motion} from 'framer-motion';
+import {AppWrap, MotionWrap} from "../../wrapper";
 
 const Vocab = () => {
   return (
@@ -32,4 +33,9 @@ const Vocab = () => {
   )
 }
 
-export default Vocab
+
+//AppWrap - Component, idName, className(parameters)
+//MotionWrap - Component, className(parameters)
+export default AppWrap(MotionWrap(Vocab, 'app__vocab'), 
+"vocab", 
+"app__whitebg");
