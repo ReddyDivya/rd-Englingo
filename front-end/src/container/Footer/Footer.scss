@@ -1,0 +1,35 @@
+/* Footer.jsx starts*/
+.footer-container{
+    color: var(--gray-color);
+    text-align:center;
+    margin-top: 20px;
+    padding: 30px 10px; /*30px - top & bottom, and to 10px - right & left*/
+    font-weight: 700;
+
+    /*
+        note:
+        - flex-direction & align-items are interlinked when it comes to designing through flexbox & grid.
+        - when flex-direction is column & align-items, items are shown in  row.
+        - when flex-direction is row  & align-items, items are shown in column.
+    */
+
+    /*flex - flexible responsive layout structure without using float or positioning*/
+    display: flex; /* this display all divs in the container in one row ___ */
+    flex-direction: column; /* to show copyright and social icons in columns */
+
+    /* align-items - aligns items in vertical */
+    align-items: center;/*center is default*/
+    gap: 10px;
+
+    /* justify-content - aligns items in horizontal */
+    justify-content: center;
+}//footer-container
+  
+.footer-container .icons{
+    font-size: 30px;
+}
+
+.footer-container .icons:hover{
+    color:var(--secondary-color);
+}
+  
