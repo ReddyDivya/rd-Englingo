@@ -40,15 +40,15 @@
     li{
         margin: 0 1rem;
         cursor:pointer;
-        // flex-direction:column;
+        flex-direction:column;
 
         a{
             color:var(--gray-color);
             text-decoration:none;
-            // flex-direction: column;
+            flex-direction: column;
             text-transform:uppercase;
             font-weight:500;
-            // transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
 
             //hover for a
             &:hover {
@@ -65,94 +65,100 @@
 
     //responsive screen
     @media screen and (min-width:900px){
-        // display:none;
+       display:none;
     }
 }//app__navbar-links
 
-.app__navbar-menu{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.app__navbar-menu {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    position: relative;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--secondary-color);
-
-    svg{
-        width:70%;
-        height: 70%;
-        color:var(--white-color);
+  
+  
+    svg {
+      width: 70%;
+      height: 70%;
+      color: var(--white-color);
     }
-
-    div{
-        position: fixed;
-        top:0;
-        bottom:0;
-        right:0;
-        z-index:5;
-        padding:1rem;
-        width:80%;
-        height:100vh;
-        
-        display:flex;
-        justify-content: flex-end;
-        align-items:flex-end;
-        flex-direction:column;
-
-        background:url('../../assets/bgWhite.png');
-        background-color:var(--white-color);
-        background-size:cover;
-        background-repeat:repeat;
-
-        /* top box shadow */
-        box-shadow: 0px 0px 20px rgba(168, 168, 168, 0.15);
-
-        svg{
-            width:35px;
-            height:100%;
-            color:var(--secondary-color);
-            margin:0.5rem 1rem;
+  
+    div {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 5;
+  
+      padding: 1rem;
+  
+      width: 80%;
+      height: 100vh;
+      
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex-direction: column;
+      
+      background: url('../../assets/bgWhite.png');
+      background-color: var(--white-color);
+      background-size: cover;
+      background-repeat: repeat;
+  
+      /* top box shadow */
+      box-shadow: 0px 0px 20px rgba(168, 168, 168, 0.15);
+  
+      svg {
+        width: 35px;
+        height: 35px;
+        color: var(--secondary-color);
+        margin: 0.5rem 1rem;
+      }
+  
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 100%;
+  
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+  
+        li {
+          margin: 1rem;
+  
+          a {
+            color: var(--gray-color);
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 500;
+  
+            transition: all 0.3s ease-in-out;
+  
+            &:hover {
+              color: var(--secondary-color);
+            }
+          }
         }
-
-        ul{
-            list-style:none;
-            margin:0;
-            padding:0;
-            height:100%;
-            width:100%;
-
-            display:flex;
-            justify-content: flex-start;
-            align-items:flex-start;
-            flex-direction:column;
-
-            li{
-                margin:1rem;
-
-                a{
-                    color:var(--gray-color);
-                    text-decoration:none;
-                    text-transform:uppercase;
-                    font-weight:500;
-                    
-                    //hover for a
-                    &:hover {
-                        color: var(--secondary-color);
-                    }
-                }//a
-            }//li
-        }//ul
-
-        @media screen and (min-width: 900px) {
-            display: none;
-        }
-    }//div
-
-    @media screen and (min-width: 900px) {
+      }
+  
+      @media screen and (min-width: 900px) {
         display: none;
-    }    
-}//app__navbar-menu
+      }
+    }
+  
+    @media screen and (min-width: 900px) {
+      display: none;
+    }
+} //app__navbar-menu
 
 
 //navbar ends here
