@@ -63,8 +63,8 @@ const Vocab = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__vocab-item'
           > 
-            <h4>Perplex : Confusion</h4>
-            <p>This quiz is perplexing.</p>
+            <h4>Bin-off : to giveup trying to continue</h4>
+            <p>I decided to bin off the idea to go to South Korea.</p>
           </motion.div>
       </div>
     </>
