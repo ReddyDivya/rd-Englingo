@@ -1,0 +1,42 @@
+/*Idioms starts here*/
+.app__idioms{
+    flex:1;
+    width:100%;
+    margin-top:8%;
+    flex-direction:column;
+}//app__idioms
+
+//idiom items
+.app__idiom-items{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap; //wraps items in the container
+    margin-top:2rem;
+}//app__idiom-items
+
+//idiom item
+.app__idiom-item{
+    width:200px;
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-direction: column;
+    margin:2rem;
+
+    padding:1rem;
+    border-radius:5px;
+    border: 1px solid var(--gray-color);
+
+    &:hover{
+        border: 1px solid var(--secondary-color);
+    }
+
+    //extra large devices
+    @media screen and (min-width:2000px){
+        width:370px;
+        margin: 2rem 4rem;
+    }//media
+}//app__idiom-item
+
+/*Idioms ends here*/
