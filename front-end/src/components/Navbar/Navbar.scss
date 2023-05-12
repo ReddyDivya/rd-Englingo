@@ -27,6 +27,19 @@
         height: 40px;
       }
     }//img
+
+    a {
+      color: var(--gray-color);
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: 500;
+
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: var(--secondary-color);
+      }
+    }//a
 }//app__navbar-logo
   
 .app__navbar-links {
@@ -40,12 +53,13 @@
       margin: 0 1rem;
       cursor: pointer;
       flex-direction: column;
-  
+      
+      //to display dot on navbar-menu's top while hovering.
       div {
         width: 5px;
         height: 5px;
         background: transparent;
-        border-radius: 50%;
+        border-radius: 10%;
         margin-bottom: 5px;
       }//div
   

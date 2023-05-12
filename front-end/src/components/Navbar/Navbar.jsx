@@ -10,15 +10,22 @@ const [toggle, setToggle] = useState(false);
   return (
 
     <nav className="app__navbar">
-      {/* <div className="app__navbar-logo">
-        <img src={images.logo} alt="logo" />
-      </div> */}
+      <div className="app__navbar-logo">
+        <p className="logo">
+            <a href="/">EngLingo</a>
+        </p>
+      </div>
+
       <ul className="app__navbar-links">
 
         {/*menu*/}
         {['vocab', 'idioms', 'sentences', 'grammar'].map((item) => (
           <li className="app__flex p-text" key={`link-${item}`}>
+            
+            {/* div is to display dot on navbar-menu's top while hovering. */}
             <div />
+
+            {/* menu items */}
             <a href={`#${item}`}>{item}</a>
           </li>
         ))}
