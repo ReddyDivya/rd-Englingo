@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {} from 'react'
 import "./Vocab.scss";
 import {motion} from 'framer-motion';
-import {AppWrap, MotionWrap} from "../../wrapper";
+import {AppWrap, MotionWrap} from '../../wrapper';
 
 const Vocab = () => {
   return (
@@ -20,22 +20,14 @@ const Vocab = () => {
             <h4>Perplex : Confusion</h4>
             <p>This quiz is perplexing.</p>
           </motion.div>
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__vocab-item'
-          > 
-            <h4>Perplex : Confusion</h4>
-            <p>This quiz is perplexing.</p>
-          </motion.div>
       </div>
     </>
   )
 }
 
-
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Vocab, 'app__vocab'), 
-"vocab", 
-"app__whitebg");
+export default AppWrap(MotionWrap(Vocab, 'app__vocab'), //component 
+"vocab", //idName
+"app__whitebg" //className for bg color
+); 
