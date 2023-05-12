@@ -35,8 +35,8 @@ const Vocab = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__vocab-item'
           > 
-            <h4>Perplex : Confusion</h4>
-            <p>This quiz is perplexing.</p>
+            <h4>Ace : excellent</h4>
+            <p>She is an ace swimmer.</p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
@@ -53,8 +53,9 @@ const Vocab = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__vocab-item'
           > 
-            <h4>Perplex : Confusion</h4>
-            <p>This quiz is perplexing.</p>
+            <h4>Bizarre : very strange or unusual</h4>
+            <p>His behaviour's been bizarre these last few days. He's beginning to worry me.
+            </p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
