@@ -1,4 +1,5 @@
 /* Footer.jsx starts*/
+//container
 .footer-container{
     color: var(--gray-color);
     text-align:center;
@@ -24,7 +25,18 @@
     /* justify-content - aligns items in horizontal */
     justify-content: center;
 }//footer-container
-  
+
+//copyright
+.footer__copyright{
+    width:100%;
+    padding: 2rem 0 0;
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+}//footer__copyright
+
+//social icons
 .footer-container .icons{
     font-size: 30px;
 }
@@ -32,4 +44,5 @@
 .footer-container .icons:hover{
     color:var(--secondary-color);
 }
-  
+
+/* Footer.jsx ends*/

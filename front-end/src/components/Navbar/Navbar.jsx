@@ -20,7 +20,7 @@ const [toggle, setToggle] = useState(false);
 
         {/*menu*/}
         {['vocab', 'idioms', 'sentences', 'grammar'].map((item) => (
-          <li className="app__flex p-text" key={`link-${item}`}>
+          <li className="app__flex" key={`link-${item}`}>
             
             {/* div is to display dot on navbar-menu's top while hovering. */}
             <div />

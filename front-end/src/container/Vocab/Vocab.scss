@@ -1,0 +1,31 @@
+/* Vocab starts here */
+.app__vocab{
+    flex:1;
+    width:100%;
+    flex-direction:column;
+}//app__vocab
+
+.app__vocab-items{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    margin-top:2rem;
+}//app__vocab-items
+
+.app__vocab-item{
+    width:200px;
+    display:flex;
+    justify-content:flex-start;
+    align-items:flex-start;
+    flex-direction: column;
+    margin:2rem;
+
+    //extra large devices
+    @media screen and (min-width:2000px){
+        width:370px;
+        margin: 2rem 4rem;
+    }//media
+}//app__vocab-item
+
+/* Vocab ends here */
