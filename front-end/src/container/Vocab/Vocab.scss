@@ -9,7 +9,7 @@
     display:flex;
     justify-content:center;
     align-items:flex-start;
-    flex-wrap:wrap;
+    flex-wrap:wrap; //wraps items in the container
     margin-top:2rem;
 }//app__vocab-items
 
@@ -20,6 +20,10 @@
     align-items:flex-start;
     flex-direction: column;
     margin:2rem;
+
+    padding:1rem;
+    border-radius:5px;
+    border: 1px solid var(--gray-color);
 
     //extra large devices
     @media screen and (min-width:2000px){

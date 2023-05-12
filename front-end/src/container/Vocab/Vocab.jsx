@@ -18,6 +18,51 @@ const Vocab = () => {
             className='app__vocab-item'
           > 
             <h4>Perplex : Confusion</h4>
+            <p>You'll also be pursuing intriguing but somewhat perplexing offers.</p>
+          </motion.div>
+
+          <motion.div whileInView={{opacity:1}}
+            whileHover={{ scale: 1.1 }}
+            transition= {{ duration: 0.5, type : 'tween'}}
+            className='app__vocab-item'
+          > 
+            <h4>Sketchy : Incomplete information</h4>
+            <p>Details of what actually happened are still sketchy.</p>
+          </motion.div>
+
+          <motion.div whileInView={{opacity:1}}
+            whileHover={{ scale: 1.1 }}
+            transition= {{ duration: 0.5, type : 'tween'}}
+            className='app__vocab-item'
+          > 
+            <h4>Perplex : Confusion</h4>
+            <p>This quiz is perplexing.</p>
+          </motion.div>
+
+          <motion.div whileInView={{opacity:1}}
+            whileHover={{ scale: 1.1 }}
+            transition= {{ duration: 0.5, type : 'tween'}}
+            className='app__vocab-item'
+          > 
+            <h4>connoisseur : an expert on a subject like food, art</h4>
+            <p>My mother does not work, but she's an art connoisseur.</p>
+          </motion.div>
+
+          <motion.div whileInView={{opacity:1}}
+            whileHover={{ scale: 1.1 }}
+            transition= {{ duration: 0.5, type : 'tween'}}
+            className='app__vocab-item'
+          > 
+            <h4>Perplex : Confusion</h4>
+            <p>This quiz is perplexing.</p>
+          </motion.div>
+
+          <motion.div whileInView={{opacity:1}}
+            whileHover={{ scale: 1.1 }}
+            transition= {{ duration: 0.5, type : 'tween'}}
+            className='app__vocab-item'
+          > 
+            <h4>Perplex : Confusion</h4>
             <p>This quiz is perplexing.</p>
           </motion.div>
       </div>
