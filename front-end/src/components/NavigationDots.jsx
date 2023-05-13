@@ -6,7 +6,7 @@ const NavigationDots = ({active}) => {
     <div className='app__navigation'>
       {
         ['vocab', 'idioms', 'sentences', 'grammar'].map((item, index) => (
-          <a href={`${item}`}
+          <a href={`#${item}`}
              key = {item+index}
              className='app__navigation-dot'
              style={active === item ? {backgroundColor : '#313BAC'} : {}}
