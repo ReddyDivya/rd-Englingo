@@ -10,7 +10,8 @@ const Vocab = () => {
 
   //fetching vocabs data from sanity
   useEffect(() => {
-    const query = `*[  == 'vocabs']`;
+
+    const query =`*[_type == 'vocabs']`; 
     client.fetch(query).then((data) => setVocabs(data)).catch(console.error);
   }, []);
 
