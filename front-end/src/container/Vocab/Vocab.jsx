@@ -14,7 +14,6 @@ const Vocab = () => {
 
     client.fetch(query).then((data) => {
       setVocabs(data);
-      console.log('Vocab >> '+ vocabs);
     });
   }, []);
 

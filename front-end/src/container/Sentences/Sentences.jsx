@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import "./Sentences.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
+import { client } from '../../client.js';
 
 const Sentences = () => {
+  const [sentences, setSentences] = useState([]);
+
+  //fetching sentences data from sanity
+  useEffect(() => {
+    const query = `*[_type == "sentences"]`;
+
+    client.fetch(query).then((data) => {
+      setSentences(data);
+    });
+  }, []);
+
   return (
     <>
       <h2 className='head-text'>Sentences</h2>
@@ -13,53 +25,19 @@ const Sentences = () => {
       {/*displaying sentences*/}
       <div className='app__sentences-items'>
           {/* sentence card */}
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__sentence-item'
-          > 
-            <p>Its getting late, I should better hit the sack , until time, have a good life folks.</p>
-          </motion.div>
 
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__sentence-item'
-          >
-            <p>She's so disorganized - I wish she'd get her act together.</p>
-          </motion.div>
-
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__sentence-item'
-          > 
-            <p>Don't beat around the bush - get to the point!</p>
-          </motion.div>
-
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__sentence-item'
-          > 
-            <p>Do you think she'd go out with me if I asked her? "Your guess is as good as mine.</p>
-          </motion.div>
-
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__sentence-item'
-          > 
-            <p>His behaviour's been bizarre these last few days. He's beginning to worry me.</p>
-          </motion.div>
-
-          <motion.div whileInView={{opacity:1}}
-            whileHover={{ scale: 1.1 }}
-            transition= {{ duration: 0.5, type : 'tween'}}
-            className='app__sentence-item'
-          >
-            <p>Patients who lack medical insurance are left out in the cold.</p>
-          </motion.div>
+          {
+            sentences.map((sentence, index) => (
+              <motion.div whileInView={{opacity:1}}
+                whileHover={{ scale: 1.1 }}
+                transition= {{ duration: 0.5, type : 'tween'}}
+                className='app__sentence-item'
+                key= {sentence + index}
+              > 
+                <p>{sentence.sentence}</p>
+              </motion.div>
+            ))
+          }
       </div>
     </>
   )
