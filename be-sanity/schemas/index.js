@@ -1,1 +1,3 @@
-export const schemaTypes = []
+import vocabs from './vocabs';
+
+export const schemaTypes = [vocabs];
