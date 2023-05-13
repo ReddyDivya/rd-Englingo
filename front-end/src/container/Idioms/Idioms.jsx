@@ -62,7 +62,7 @@ const Idioms = () => {
             whileHover={{ scale: 1.1 }}
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
-          > 
+          >
             <h4>Left out in the cold : ignore someone</h4>
             <p>Patients who lack medical insurance are left out in the cold.</p>
           </motion.div>
