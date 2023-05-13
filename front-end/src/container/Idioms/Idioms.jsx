@@ -18,8 +18,8 @@ const Idioms = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
           > 
-            <h4>Perplex : Confusion</h4>
-            <p>You'll also be pursuing intriguing but somewhat perplexing offers.</p>
+            <h4>Hit the sack : Go to sleep</h4>
+            <p>Its getting late, I should better hit the sack , until time, have a good life folks.</p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
@@ -27,8 +27,8 @@ const Idioms = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
           > 
-            <h4>Sketchy : Incomplete information</h4>
-            <p>Details of what actually happened are still sketchy.</p>
+            <h4>Get your act together : Get organized and do things effectively</h4>
+            <p>She's so disorganized - I wish she'd get her act together.</p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
@@ -36,8 +36,8 @@ const Idioms = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
           > 
-            <h4>Ace : excellent</h4>
-            <p>She is an ace swimmer.</p>
+            <h4>Beat around the bush : To avoid talking about what’s important</h4>
+            <p>Don't beat around the bush - get to the point!</p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
@@ -45,8 +45,8 @@ const Idioms = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
           > 
-            <h4>connoisseur : an expert on a subject like food, art</h4>
-            <p>My mother does not work, but she's an art connoisseur.</p>
+            <h4>Your guess is as good as mine : I don't know</h4>
+            <p>Do you think she'd go out with me if I asked her? "Your guess is as good as mine.</p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
@@ -54,9 +54,8 @@ const Idioms = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
           > 
-            <h4>Bizarre : very strange or unusual</h4>
-            <p>His behaviour's been bizarre these last few days. He's beginning to worry me.
-            </p>
+            <h4>Back against the wall : Stuck in a difficult circumstance with no escape</h4>
+            <p>His behaviour's been bizarre these last few days. He's beginning to worry me.</p>
           </motion.div>
 
           <motion.div whileInView={{opacity:1}}
@@ -64,8 +63,8 @@ const Idioms = () => {
             transition= {{ duration: 0.5, type : 'tween'}}
             className='app__idiom-item'
           > 
-            <h4>Bin-off : to giveup trying to continue</h4>
-            <p>I decided to bin off the idea to go to South Korea.</p>
+            <h4>Left out in the cold : ignore someone</h4>
+            <p>Patients who lack medical insurance are left out in the cold.</p>
           </motion.div>
       </div>
     </>
