@@ -2,6 +2,7 @@ import React from 'react';
 import {motion} from 'framer-motion';//for animation
 
 const MotionWrap = (Component, classNames) => function HOC() {
+
   return (
     //for animation
     <motion.div whileInView={{y:[100, 50, 0], opacity:[0, 0, 1]}}
