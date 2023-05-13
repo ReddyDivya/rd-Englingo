@@ -1,9 +1,19 @@
-import React, {} from 'react'
+import React, {useState, useEffect} from 'react'
 import "./Vocab.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
+import {client} from '../../client';
 
 const Vocab = () => {
+
+  const [vocabs, setVocabs] = useState([]);
+
+  //fetching vocabs data from sanity
+  useEffect(() => {
+    const query = `*[_type == 'vocabs']`;
+    client.fetch(query).then((data) => setVocabs(data)).catch(console.error);
+  }, []);
+
   return (
     <>
       <h2 className='head-text'>Vocabulary</h2>
