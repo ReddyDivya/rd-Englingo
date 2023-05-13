@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "./Vocab.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
-import {client} from '../../client';
+import { client } from '../../client.js';
 
 const Vocab = () => {
 
@@ -10,9 +10,12 @@ const Vocab = () => {
 
   //fetching vocabs data from sanity
   useEffect(() => {
+    const query = `*[_type == "vocabs"]`;
 
-    const query =`*[_type == 'vocabs']`; 
-    client.fetch(query).then((data) => setVocabs(data)).catch(console.error);
+    client.fetch(query).then((data) => {
+      setVocabs(data);
+      console.log('Vocab >> '+ vocabs);
+    });
   }, []);
 
   return (
