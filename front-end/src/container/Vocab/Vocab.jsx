@@ -3,9 +3,11 @@ import "./Vocab.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
+import {AiFillPlusCircle} from 'react-icons/ai';
 
 const Vocab = () => {
 
+  const [isShowVocabForm, setShowVocabForm] = useState(false);
   const [vocabs, setVocabs] = useState([]);
   const [formData, setFormData] = useState({
     word : '',
@@ -20,6 +22,7 @@ const Vocab = () => {
 
   //adding new word
   const handleChangeInput = (e) => {
+ 
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
@@ -40,6 +43,7 @@ const Vocab = () => {
     client.create(vocab).then(() =>{
       setLoading(false);//loading
       setIsFormSubmitted(true);
+      setShowVocabForm(false);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
@@ -54,14 +58,16 @@ const Vocab = () => {
 
   return (
     <>
-      <h2 className='head-text'>Vocabulary</h2>
+      <h2 className='head-text'>Vocabulary 
+          <AiFillPlusCircle onClick={() => setShowVocabForm(true)}/>
+      </h2>
       <p className='p-text'>In this section you can do practice vocabulary.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
       {/*adding vocabs*/}
 
       {/* Add new vocab starts here */}
       {
-        !isFormSubmitted ? (
+        isShowVocabForm ? (
           <div className='app__vocab-form app__flex'>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
@@ -80,7 +86,7 @@ const Vocab = () => {
         (
           <div>
             <h3 className="head-text">
-              A new vocab is added.
+              {/* A new vocab is added. */}
             </h3>
           </div>
         )
