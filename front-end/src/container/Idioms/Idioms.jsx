@@ -3,7 +3,8 @@ import "./Idioms.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillDelete} from 'react-icons/ai';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Idioms = () => {
   
@@ -43,6 +44,18 @@ const Idioms = () => {
       setShowIdiomForm(false);//hide idiom form after submission of new word
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+  //delete idiom
+  const handleDelete = (index, _id) => {
+    client.delete({query: `*[_type == "idioms"][${index}]`})
+    .then(() => {
+      toast.success('Successfully deleted!')
+      console.log('Deleted');
+    })
+    .catch((err) => {
+      console.error('Delete failed: ', err.message)
+    })
+  }//handleDelete
 
   //fetching idioms data from sanity
   useEffect(() => {
@@ -109,6 +122,9 @@ const Idioms = () => {
             > 
               <h4>{idiom.idiom} : {idiom.meaning}</h4>
               <p>{idiom.sentence}</p>
+              <p>
+                <AiFillDelete onClick={() => handleDelete(index, idiom._id)}/>
+              </p>
             </motion.div>
             ))
           }
