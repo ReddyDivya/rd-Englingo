@@ -4,8 +4,7 @@ import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
 import {AiFillPlusCircle, AiFillDelete} from 'react-icons/ai';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Sentences = () => {
 
@@ -60,9 +59,7 @@ const Sentences = () => {
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "sentences"][${index}]`})
     .then(() => {
-      toast.success('Deleted successfully!', {
-        position: toast.POSITION.TOP_RIGHT
-      });
+      toast.success('Successfully deleted!')
       console.log('Deleted');
     })
     .catch((err) => {
@@ -134,6 +131,13 @@ const Sentences = () => {
               </motion.div>
             ))
           }
+
+          <div>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+          </div>
       </div>
     </>
   )
