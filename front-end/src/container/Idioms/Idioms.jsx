@@ -128,6 +128,13 @@ const Idioms = () => {
             </motion.div>
             ))
           }
+
+          <div>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+          </div>
       </div>
     </>
   )

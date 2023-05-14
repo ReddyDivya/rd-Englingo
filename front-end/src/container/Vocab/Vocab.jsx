@@ -128,6 +128,13 @@ const Vocab = () => {
               </motion.div>
              ))
           }
+
+          <div>
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+            />
+          </div>
       </div>
       {/* displaying vocabs items ends here */}
     </>
