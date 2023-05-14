@@ -7,6 +7,41 @@ import { client } from '../../client.js';
 const Vocab = () => {
 
   const [vocabs, setVocabs] = useState([]);
+  const [formData, setFormData] = useState({
+    word : '',
+    meaning : '',
+    sentence: '',
+  });
+
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  
+  const {word, meaning, sentence} = formData;
+
+  //adding new word
+  const handleChangeInput = (e) => {
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setFormData({...formData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeInput
+
+  //submit new vocab to sanity
+  const handleSubmit = () => {
+    setLoading(true);//loading
+
+    //adding new vocab data
+    const vocab = {
+      _type: 'vocabs',//vocabs document
+      word: formData.word,
+      meaning: formData.meaning,
+      sentence: formData.sentence,
+    };
+
+    //creating a new vocab data into sanity
+    client.create(vocab).then(() =>{
+      setLoading(false);//loading
+      setIsFormSubmitted(true);
+    }).catch((err) => console.log(err));
+  }//handleSubmit
 
   //fetching vocabs data from sanity
   useEffect(() => {
@@ -23,19 +58,36 @@ const Vocab = () => {
       <p className='p-text'>In this section you can do practice vocabulary.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
       {/*adding vocabs*/}
-      <div className='app__vocab-form app__flex'>
-          <div className='app__flex'>
-            <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
-          </div>
-          <div className='app__flex'>
-            <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
-          </div>
-          <div className='app__flex'>
-            <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
-          </div>
-      </div>
 
-      {/*displaying vocabs items*/}
+      {/* Add new vocab starts here */}
+      {
+        !isFormSubmitted ? (
+          <div className='app__vocab-form app__flex'>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Send Message' : 'Sending...'}</button>
+          </div>
+        )
+        :
+        (
+          <div>
+            <h3 className="head-text">
+              A new vocab is added.
+            </h3>
+          </div>
+        )
+      }
+      {/* Add new vocab ends here */}
+      
+      {/* displaying vocabs items starts here */}
       <div className='app__vocab-items'>
           {/* vocab item card */}
           {
@@ -52,6 +104,7 @@ const Vocab = () => {
              ))
           }
       </div>
+      {/* displaying vocabs items ends here */}
     </>
   )
 }
