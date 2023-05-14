@@ -1,45 +1,107 @@
 /*Idioms starts here*/
-.app__idioms{
-    flex:1;
-    width:100%;
-    margin-top:8%;
-    flex-direction:column;
-}//app__idioms
+.app__idioms {
+  flex: 1;
+  width: 100%;
+  margin-top: 8%;
+  flex-direction: column;
+} //app__idioms
 
 //idiom items
-.app__idioms-items{
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-    flex-wrap:wrap; //wraps items in the container
-    margin-top:2rem;
-}//app__idioms-items
+.app__idioms-items {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap; //wraps items in the container
+  margin-top: 2rem;
+} //app__idioms-items
 
 //idiom item
-.app__idiom-item{
-    width:900px;
-    display:flex;
-    justify-content:flex-start;
-    align-items:flex-start;
-    flex-direction: column;
+.app__idiom-item {
+  width: 900px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
 
-    padding:1rem;
-    border-radius:5px;
-    border: 1px solid var(--gray-color);
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--gray-color);
 
-    &:hover{
-        border: 1px solid var(--secondary-color);
+  &:hover {
+    border: 1px solid var(--secondary-color);
+  }
+
+  //extra large devices
+  @media screen and (min-width: 2000px) {
+    width: 370px;
+    margin: 2rem 4rem;
+  } //media
+} //app__idiom-item
+
+.app__idiom-form {
+  border-radius: 5px;
+  padding: 4%;
+  background-color: var(--primary-color);
+  width: 60%;
+  flex-direction: column;
+  margin: 1rem 2rem;
+
+  div {
+    width: 100%;
+    margin: 0.75rem 0;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+
+    transition: all 0.3s ease-in-out;
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 0.95rem;
+      border: none;
+      border-radius: 7px;
+      // background-color: var(--primary-color);
+      background-color: var(--white-color);
+
+      font-family: var(--font-base);
+      color: var(--secondary-color);
+      outline: none;
     }
 
-    //extra large devices
-    @media screen and (min-width:2000px){
-        width:370px;
-        margin: 2rem 4rem;
-    }//media
-}//app__idiom-item
+    textarea {
+      height: 170px;
+    }
 
-.app__idiom-form{
+    &:hover {
+      box-shadow: 0 0 25px var(--primary-color);
+    }
+  }
 
-}//app__idiom-form
+  button {
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--secondary-color);
+
+    font-weight: 500;
+    color: var(--white-color);
+    outline: none;
+    margin: 2rem 0 0 0;
+    font-family: var(--font-base);
+
+    transition: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    cursor: pointer;
+
+    &:hover {
+      background-color: #2430af;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    margin: 1rem 0;
+  }
+} //app__idiom-form
 
 /*Idioms ends here*/
