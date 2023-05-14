@@ -3,8 +3,8 @@ import "./Vocab.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
-
+import {AiFillPlusCircle, AiFillDelete} from 'react-icons/ai';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Vocab = () => {
 
@@ -45,6 +45,19 @@ const Vocab = () => {
       setShowVocabForm(false);//hide vocab form after submission of new word
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+  //delete vocab
+  const handleDelete = (index, _id) => {
+    client.delete({query: `*[_type == "vocabs"][${index}]`})
+    .then(() => {
+      toast.success('Successfully deleted!')
+      console.log('Deleted');
+    })
+    .catch((err) => {
+      console.error('Delete failed: ', err.message)
+    })
+  }//handleDelete
+
 
   //fetching vocabs data from sanity
   useEffect(() => {
@@ -108,6 +121,10 @@ const Vocab = () => {
               > 
                 <h4>{vocab.word} : {vocab.meaning}</h4>
                 <p>{vocab.sentence}</p>
+                
+                <p>
+                  <AiFillDelete onClick={() => handleDelete(index, vocab._id)}/>
+                </p>
               </motion.div>
              ))
           }

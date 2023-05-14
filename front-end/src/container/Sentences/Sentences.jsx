@@ -124,7 +124,6 @@ const Sentences = () => {
               > 
                 <p>{sentence.sentence}</p>
                 
-                {/* show sentence form after clicking on the add icon +*/ }
                 <p>
                   <AiFillDelete onClick={() => handleDelete(index, sentence._id)}/>
                 </p>
