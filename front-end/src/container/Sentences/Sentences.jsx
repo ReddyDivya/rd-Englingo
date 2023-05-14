@@ -3,7 +3,9 @@ import "./Sentences.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillDelete} from 'react-icons/ai';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Sentences = () => {
 
@@ -33,10 +35,40 @@ const Sentences = () => {
 
     //creating a new sentence data into sanity
     client.create(sentence).then(() => {
-      setLoading(false);//hie loading after submitting
+      setLoading(false);//hide loading after submitting
       setShowSentenceForm(false);//hide sentence form after submission of new sentence
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+  //update the sentence
+  const handleUpdate = (index, _id, sentence) => {
+
+    // const sentence = {
+    //   _type : 'sentences',
+    //   _id : _id,
+    //   sentence : _sentence,
+    // }
+
+    // const sentenceToRemove = [`sentences[${index}]`, `sentences[_id==${_id}]`];
+    // console.log('sentence >> ', sentenceToRemove);
+
+    // client.patch(_id).unset(sentenceToRemove).commit()
+
+  }//handleUpdate
+
+  //delete the sentence
+  const handleDelete = (index, _id) => {
+    client.delete({query: `*[_type == "sentences"][${index}]`})
+    .then(() => {
+      toast.success('Deleted successfully!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      console.log('Deleted');
+    })
+    .catch((err) => {
+      console.error('Delete failed: ', err.message)
+    })
+  }//handleDelete
 
   //fetching sentences data from sanity
   useEffect(() => {
@@ -94,6 +126,11 @@ const Sentences = () => {
                 key= {sentence + index}
               > 
                 <p>{sentence.sentence}</p>
+                
+                {/* show sentence form after clicking on the add icon +*/ }
+                <h2>
+                  <AiFillDelete onClick={() => handleDelete(index, sentence._id)}/>
+                </h2>
               </motion.div>
             ))
           }

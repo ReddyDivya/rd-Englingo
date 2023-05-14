@@ -5,6 +5,7 @@ import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
 import {AiFillPlusCircle} from 'react-icons/ai';
 
+
 const Vocab = () => {
 
   const [isShowVocabForm, setShowVocabForm] = useState(false);
