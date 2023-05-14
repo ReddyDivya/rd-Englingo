@@ -15,9 +15,7 @@ const Vocab = () => {
     sentence: '',
   });
 
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  
+  const [loading, setLoading] = useState(false);  
   const {word, meaning, sentence} = formData;
 
   //adding new word
@@ -42,8 +40,7 @@ const Vocab = () => {
     //creating a new vocab data into sanity
     client.create(vocab).then(() =>{
       setLoading(false);//loading
-      setIsFormSubmitted(true);
-      setShowVocabForm(false);
+      setShowVocabForm(false);//hide vocab form after submission of new word
     }).catch((err) => console.log(err));
   }//handleSubmit
 
@@ -59,6 +56,9 @@ const Vocab = () => {
   return (
     <>
       <h2 className='head-text'>Vocabulary 
+        {
+          //show vocab form after clicking on the add icon +
+        }
           <AiFillPlusCircle onClick={() => setShowVocabForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice vocabulary.</p>
@@ -85,9 +85,7 @@ const Vocab = () => {
         :
         (
           <div>
-            <h3 className="head-text">
-              {/* A new vocab is added. */}
-            </h3>
+            
           </div>
         )
       }
