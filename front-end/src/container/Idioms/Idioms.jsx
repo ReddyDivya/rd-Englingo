@@ -7,7 +7,7 @@ import {AiFillPlusCircle} from 'react-icons/ai';
 
 const Idioms = () => {
   
-  const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [isShowIdiomForm, setShowIdiomForm] = useState(false);
   const [formData, setFormData] = useState({
     idiom : '',
     meaning : '',
@@ -18,6 +18,30 @@ const Idioms = () => {
   const {idiom, meaning, sentence} = formData;
 
   const [idioms, setIdioms] = useState([]);
+
+  //adding new idiom
+  const handleChangeInput = (e) => {
+      const {name, value} = e.target; //assigning form fields data like idiom, meaning, sentence
+      setFormData({...formData, [name] : value}); //setting previous data, and add new word data
+  }//handleChangeInput
+
+  //submit new vocab to sanity
+  const handleSubmit = () => {
+    setLoading(true);//loading
+
+    //adding new idiom data
+    const idiom = {
+      idiom : formData.idiom,
+      meaning : formData.meaning,
+      sentence : formData.sentence,
+    }
+
+    //creating a new vocab data into sanity
+    client.create((idiom) => {
+      setLoading(false);//loading
+      setShowIdiomForm(false);//hide idiom form after submission of new idiom
+    }).catch((err) => console.log(err));
+  }//handleSubmit
 
   //fetching idioms data from sanity
   useEffect(() => {
@@ -31,6 +55,11 @@ const Idioms = () => {
   return (
     <>
       <h2 className='head-text'>Idioms</h2>
+      {
+          //show vocab form after clicking on the add icon +
+        }
+          <AiFillPlusCircle onClick={() => setShowIdiomForm(true)}/>
+
       <p className='p-text'>In this section you can do practice idioms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
