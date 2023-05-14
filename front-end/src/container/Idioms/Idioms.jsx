@@ -3,8 +3,11 @@ import "./Idioms.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
+import {AiFillPlusCircle} from 'react-icons/ai';
 
 const Idioms = () => {
+  
+  const [isShowVocabForm, setShowVocabForm] = useState(false);
 
   const [idioms, setIdioms] = useState([]);
 

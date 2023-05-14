@@ -8,7 +8,6 @@ import {AiFillPlusCircle} from 'react-icons/ai';
 const Vocab = () => {
 
   const [isShowVocabForm, setShowVocabForm] = useState(false);
-  const [vocabs, setVocabs] = useState([]);
   const [formData, setFormData] = useState({
     word : '',
     meaning : '',
@@ -18,6 +17,9 @@ const Vocab = () => {
   const [loading, setLoading] = useState(false);  
   const {word, meaning, sentence} = formData;
 
+  
+  const [vocabs, setVocabs] = useState([]);
+  
   //adding new word
   const handleChangeInput = (e) => {
  
