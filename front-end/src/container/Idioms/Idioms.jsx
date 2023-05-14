@@ -16,7 +16,7 @@ const Idioms = () => {
 
   const [loading, setLoading] = useState(false);
   const {idiom, meaning, sentence} = formData;
-  
+
   const [idioms, setIdioms] = useState([]);
 
   //fetching idioms data from sanity
