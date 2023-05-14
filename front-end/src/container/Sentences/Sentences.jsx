@@ -94,14 +94,10 @@ const Sentences = () => {
       
       {/* Add new sentence starts here */}
       {
-        isShowAddSentenceForm || isShowEditSentenceForm ? (
+        isShowAddSentenceForm ? (
           <div className='app__sentence-form app__flex'>
             <div className='app__flex'>
-              <h3>
-                {
-                  isShowEditSentenceForm ? 'Update Sentence' : 'Add Sentence'
-                }
-                </h3>
+              <h3>Add Sentence</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
@@ -112,39 +108,36 @@ const Sentences = () => {
         )
         :
         (
-          <div>
-            
-          </div>
+          <div></div>
         )
       }
-      {/* Add new sentence ends here */}
+      {/* 1. Add new sentence ends here */}
 
-      {/* Update new sentence starts here */}
+      {/* 2. Update new sentence starts here */}
       {
         isShowEditSentenceForm ? (
-          <div className='app__sentence-form app__flex'>
-            <div className='app__flex'>
-              <h3>Update Sentence</h3>
+          sentences.map((sentence, index) => {
+            <div className=''>
+              <div className='app__flex'>
+                <h3>Update Sentence</h3>
+              </div>
+              <div className='app__flex'>
+                <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence.sentence} onChange={handleChangeInput} />
+              </div>
+              <button type="button" className="p-text" onClick={(e) => handleUpdate(index, sentence._id, e.target) }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
             </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
-            </div>
-            <button type="button" className="p-text" onClick={(e) => handleUpdate(index, _id, e.target) }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
-          </div>
+          })
         )
         :
         (
-          <div>
-            
-          </div>
+          <div></div>
         )
       }
-      {/* Update new sentence ends here */}
+      {/*2. Update new sentence ends here */}
 
-      {/*displaying sentences*/}
+      {/*3. displaying sentences*/}
       <div className='app__sentences-items'>
           {/* sentence card */}
-
           {
             sentences.map((sentence, index) => (
               <motion.div whileInView={{opacity:1}}
@@ -155,8 +148,8 @@ const Sentences = () => {
               > 
                 <p>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, sentence._id)}/>
+                  &nbsp;&nbsp;
                   <AiFillEdit onClick={() => setShowEditSentenceForm(true)}/>
-                  
                   &nbsp;&nbsp;
                   {sentence.sentence}
                 </p>
