@@ -57,6 +57,29 @@ const Sentences = () => {
       </h2>
       <p className='p-text'>In this section you can do practice Sentences.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
+      
+      {/* Add new sentence starts here */}
+      {
+        isShowSentenceForm ? (
+          <div className='app__sentence-form app__flex'>
+            <div className='app__flex'>
+              <h3>Add Sentence</h3>
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Sentence' : 'Sending...'}</button>
+          </div>
+        )
+        :
+        (
+          <div>
+            
+          </div>
+        )
+      }
+      {/* Add new sentence ends here */}
 
       {/*displaying sentences*/}
       <div className='app__sentences-items'>
