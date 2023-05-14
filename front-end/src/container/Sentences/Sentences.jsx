@@ -3,7 +3,7 @@ import "./Sentences.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle, AiFillDelete} from 'react-icons/ai';
+import {AiFillPlusCircle, AiOutlineMinusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Sentences = () => {
@@ -34,6 +34,7 @@ const Sentences = () => {
 
     //creating a new sentence data into sanity
     client.create(sentence).then(() => {
+      window.location.reload();
       setLoading(false);//hide loading after submitting
       setShowSentenceForm(false);//hide sentence form after submission of new sentence
     }).catch((err) => console.log(err));
@@ -61,6 +62,7 @@ const Sentences = () => {
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
+      window.location.reload();
     })
     .catch((err) => {
       console.error('Delete failed: ', err.message)
@@ -122,10 +124,10 @@ const Sentences = () => {
                 className='app__sentence-item'
                 key= {sentence + index}
               > 
-                <p>{sentence.sentence}</p>
-                
                 <p>
-                  <AiFillDelete onClick={() => handleDelete(index, sentence._id)}/>
+                  {sentence.sentence}
+
+                  <AiOutlineMinusCircle onClick={() => handleDelete(index, sentence._id)}/>
                 </p>
               </motion.div>
             ))
