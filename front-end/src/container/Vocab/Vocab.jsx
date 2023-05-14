@@ -64,7 +64,6 @@ const Vocab = () => {
       </h2>
       <p className='p-text'>In this section you can do practice vocabulary.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
-      {/*adding vocabs*/}
 
       {/* Add new vocab starts here */}
       {

@@ -62,6 +62,33 @@ const Idioms = () => {
 
       <p className='p-text'>In this section you can do practice idioms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
+      
+      {/* Add new idiom starts here */}
+      {
+        isShowIdiomForm ? (
+          <div className='app__idiom-form app__flex'>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="idiom" value={idiom} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Send Message' : 'Sending...'}</button>
+          </div>
+        )
+        :
+        (
+          <div>
+            
+          </div>
+        )
+      }
+
+      {/* Add new idiom ends here */}
 
       {/*displaying idioms items*/}
       <div className='app__idioms-items'>
