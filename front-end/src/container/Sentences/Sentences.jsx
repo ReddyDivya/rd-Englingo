@@ -3,7 +3,7 @@ import "./Sentences.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
 
@@ -44,17 +44,16 @@ const Sentences = () => {
   //update the sentence
   const handleUpdate = (index, _id, sentence) => {
 
-    // const sentence = {
-    //   _type : 'sentences',
-    //   _id : _id,
-    //   sentence : _sentence,
-    // }
-
-    // const sentenceToRemove = [`sentences[${index}]`, `sentences[_id==${_id}]`];
-    // console.log('sentence >> ', sentenceToRemove);
-
-    // client.patch(_id).unset(sentenceToRemove).commit()
-
+    client.patch({query: `*[_type == "sentences"][${index}]`})
+    .set({sentence}).commit()
+    .then(() => {
+      toast.success('Successfully updated!')
+      console.log('Updated');
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.error('Updated failed: ', err.message)
+    })
   }//handleUpdate
 
   //delete the sentence
@@ -127,6 +126,8 @@ const Sentences = () => {
               > 
                 <p>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, sentence._id)}/>
+                  <AiFillEdit onClick={() => handleUpdate(index, sentence._id)}/>
+                  
                   &nbsp;&nbsp;
                   {sentence.sentence}
                 </p>
