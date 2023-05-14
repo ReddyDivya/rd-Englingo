@@ -17,7 +17,6 @@ const Vocab = () => {
   const [loading, setLoading] = useState(false);  
   const {word, meaning, sentence} = formData;
 
-  
   const [vocabs, setVocabs] = useState([]);
   
   //adding new word

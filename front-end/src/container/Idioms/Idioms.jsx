@@ -8,7 +8,15 @@ import {AiFillPlusCircle} from 'react-icons/ai';
 const Idioms = () => {
   
   const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [formData, setFormData] = useState({
+    idiom : '',
+    meaning : '',
+    sentence: ''
+  });
 
+  const [loading, setLoading] = useState(false);
+  const {idiom, meaning, sentence} = formData;
+  
   const [idioms, setIdioms] = useState([]);
 
   //fetching idioms data from sanity
