@@ -50,6 +50,7 @@ const Sentences = () => {
     client.patch({query: `*[_type == "sentences"][${index}]`})
     .set({sentence}).commit()
     .then(() => {
+      setShowEditSentenceForm(false);//hide update sentence form after updating the sentence.
       toast.success('Successfully updated!')
       console.log('Updated');
       window.location.reload();
@@ -149,9 +150,12 @@ const Sentences = () => {
                 <p>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, sentence._id)}/>
                   &nbsp;&nbsp;
-                  <AiFillEdit onClick={() => setShowEditSentenceForm(true)}/>
-                  &nbsp;&nbsp;
+                  
                   {sentence.sentence}
+
+                  &nbsp;&nbsp;
+
+                  <AiFillEdit onClick={() => setShowEditSentenceForm(true)}/>
                 </p>
               </motion.div>
             ))
