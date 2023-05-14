@@ -124,7 +124,6 @@ const Vocab = () => {
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
                   &nbsp;&nbsp;
                   {vocab.word} : {vocab.meaning}
-                  
                 </h4>
                 <p>                  
                   {vocab.sentence}
