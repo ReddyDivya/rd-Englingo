@@ -41,7 +41,7 @@
 .app__idiom-form {
   border-radius: 5px;
   padding: 4%;
-  background-color: var(--primary-color);
+  background-color: var(--white-color);
   width: 60%;
   flex-direction: column;
   margin: 1rem 2rem;
@@ -51,26 +51,19 @@
     margin: 0.75rem 0;
     border-radius: 10px;
     cursor: pointer;
-    background-color: var(--primary-color);
-
+    background-color: var(--white-color);
     transition: all 0.3s ease-in-out;
 
-    input,
-    textarea {
+    input {
       width: 100%;
       padding: 0.95rem;
       border: none;
       border-radius: 7px;
-      // background-color: var(--primary-color);
-      background-color: var(--white-color);
+      background-color: var(--primary-color);
 
       font-family: var(--font-base);
       color: var(--secondary-color);
       outline: none;
-    }
-
-    textarea {
-      height: 170px;
     }
 
     &:hover {
@@ -96,7 +89,7 @@
     &:hover {
       background-color: #2430af;
     }
-  }
+  }//button
 
   @media screen and (max-width: 768px) {
     width: 100%;

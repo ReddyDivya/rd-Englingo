@@ -70,6 +70,9 @@ const Vocab = () => {
         isShowVocabForm ? (
           <div className='app__vocab-form app__flex'>
             <div className='app__flex'>
+              <h3>Add Vocabulary</h3>
+            </div>
+            <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>

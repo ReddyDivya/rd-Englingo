@@ -31,15 +31,16 @@ const Idioms = () => {
 
     //adding new idiom data
     const idiom = {
+      _type : 'idioms', //idioms document
       idiom : formData.idiom,
       meaning : formData.meaning,
       sentence : formData.sentence,
     }
 
-    //creating a new vocab data into sanity
-    client.create((idiom) => {
+    //creating a new idiom data into sanity
+    client.create(idiom).then(() =>{
       setLoading(false);//loading
-      setShowIdiomForm(false);//hide idiom form after submission of new idiom
+      setShowIdiomForm(false);//hide idiom form after submission of new word
     }).catch((err) => console.log(err));
   }//handleSubmit
 
@@ -54,11 +55,12 @@ const Idioms = () => {
 
   return (
     <>
-      <h2 className='head-text'>Idioms</h2>
+      <h2 className='head-text'>Idioms
       {
-          //show vocab form after clicking on the add icon +
-        }
+          //show idiom form after clicking on the add icon +
           <AiFillPlusCircle onClick={() => setShowIdiomForm(true)}/>
+      }
+      </h2>
 
       <p className='p-text'>In this section you can do practice idioms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
@@ -68,7 +70,10 @@ const Idioms = () => {
         isShowIdiomForm ? (
           <div className='app__idiom-form app__flex'>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a word" name="idiom" value={idiom} onChange={handleChangeInput} />
+              <h3>Add Idiom</h3>
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a idiom" name="idiom" value={idiom} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
