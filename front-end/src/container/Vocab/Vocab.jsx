@@ -3,8 +3,9 @@ import "./Vocab.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle, AiFillDelete} from 'react-icons/ai';
+import {AiFillPlusCircle, AiOutlineMinusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
+import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const Vocab = () => {
 
@@ -119,12 +120,16 @@ const Vocab = () => {
               className='app__vocab-item'
               key={vocab.title + index}
               > 
-                <h4>{vocab.word} : {vocab.meaning}</h4>
-                <p>{vocab.sentence}</p>
-                
-                <p>
-                  <AiFillDelete onClick={() => handleDelete(index, vocab._id)}/>
+                <h4>
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
+                  &nbsp;&nbsp;
+                  {vocab.word} : {vocab.meaning}
+                  
+                </h4>
+                <p>                  
+                  {vocab.sentence}
                 </p>
+                
               </motion.div>
              ))
           }

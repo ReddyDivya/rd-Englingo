@@ -27,6 +27,13 @@
   border-radius: 5px;
   border: 1px solid var(--gray-color);
 
+  svg{
+    color:#ff0000;
+    width:20px;
+    height:20px;
+    margin-bottom:-5px;
+  }
+  
   &:hover {
     border: 1px solid var(--secondary-color);
   }

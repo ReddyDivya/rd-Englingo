@@ -125,9 +125,9 @@ const Sentences = () => {
                 key= {sentence + index}
               > 
                 <p>
-                  {sentence.sentence}
-
                   <AiOutlineMinusCircle onClick={() => handleDelete(index, sentence._id)}/>
+                  &nbsp;&nbsp;
+                  {sentence.sentence}
                 </p>
               </motion.div>
             ))
