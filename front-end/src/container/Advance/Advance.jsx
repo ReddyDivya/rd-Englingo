@@ -1,56 +1,56 @@
 import React, {useState, useEffect} from 'react'
-import "./Vocab.scss";
+import "./Advance.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle, AiOutlineMinusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
-const Vocab = () => {
+const Advance = () => {
 
-  const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [isShowAdvanceForm, setShowAdvanceForm] = useState(false);
   const [formData, setFormData] = useState({
-    word : '',
-    meaning : '',
+    normalPhrase : '',
+    advancePhrase : '',
     sentence: '',
   });
 
   const [loading, setLoading] = useState(false);  
-  const {word, meaning, sentence} = formData;
+  const {normalPhrase, advancePhrase, sentence} = formData;
 
-  const [vocabs, setVocabs] = useState([]);
+  const [advance, setAdvance] = useState([]);
   
-  //adding new word
+  //adding new advance phrase
   const handleChangeInput = (e) => {
  
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new vocab to sanity
+  //submit new advance phrase to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
 
-    //adding new vocab data
-    const vocab = {
-      _type: 'vocabs',//vocabs document
-      word: formData.word,
-      meaning: formData.meaning,
+    //adding new advance data
+    const advance = {
+      _type: 'advance',//advance document
+      normalPhrase: formData.normalPhrase,
+      advancePhrase: formData.advancePhrase,
       sentence: formData.sentence,
     };
 
-    //creating a new vocab data into sanity
-    client.create(vocab).then(() =>{
+    //creating a new advance data into sanity
+    client.create(advance).then(() =>{
       setLoading(false);//loading
-      setShowVocabForm(false);//hide vocab form after submission of new word
+      setShowAdvanceForm(false);//hide advance form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete vocab
+  //delete advance
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "vocabs"][${index}]`})
+    client.delete({query: `*[_type == "advance"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -61,44 +61,44 @@ const Vocab = () => {
   }//handleDelete
 
 
-  //fetching vocabs data from sanity
+  //fetching advance phrases data from sanity
   useEffect(() => {
-    const query = `*[_type == "vocabs"]`;
+    const query = `*[_type == "advance"]`;
 
     client.fetch(query).then((data) => {
-      setVocabs(data);
+      setAdvance(data);
     });
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>Vocabulary 
+      <h2 className='head-text'>Advance Phrases
         {
-          //show vocab form after clicking on the add icon +
+          //show advance form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowVocabForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowAdvanceForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice vocabulary.</p>
+      <p className='p-text'>In this section you can do practice advance phrases.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new vocab starts here */}
+      {/* Add new advance starts here */}
       {
-        isShowVocabForm ? (
-          <div className='app__vocab-form app__flex'>
+        isShowAdvanceForm ? (
+          <div className='app__advance-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Vocabulary</h3>
+              <h3>Add Advance Phrases</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a normal phrase" name="normalPhrase" value={normalPhrase} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a advance phrase" name="advancePhrase" value={advancePhrase} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Vocab' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Advance' : 'Sending...'}</button>
           </div>
         )
         :
@@ -108,28 +108,27 @@ const Vocab = () => {
           </div>
         )
       }
-      {/* Add new vocab ends here */}
+      {/* Add new advance ends here */}
       
-      {/* displaying vocabs items starts here */}
-      <div className='app__vocab-items'>
-          {/* vocab item card */}
+      {/* displaying advance phrases items starts here */}
+      <div className='app__advance-items'>
+          {/* advance item card */}
           {
-            vocabs.map((vocab, index) => (
+            advance.map((advance, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
-              className='app__vocab-item'
-              key={vocab.title + index}
+              className='app__advance-item'
+              key={advance.title + index}
               > 
                 <h4>
-                  <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, advance._id)}/>
                   &nbsp;&nbsp;
-                  {vocab.word} : {vocab.meaning}
+                  {advance.normalPhrase} : {advance.advancePhrase}
                 </h4>
                 <p>                  
-                  {vocab.sentence}
+                  {advance.sentence}
                 </p>
-                
               </motion.div>
              ))
           }
@@ -141,14 +140,14 @@ const Vocab = () => {
             />
           </div>
       </div>
-      {/* displaying vocabs items ends here */}
+      {/* displaying advance phrases items ends here */}
     </>
   )
 }
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Vocab, 'app__vocab'), //component 
-"vocab", //idName
+export default AppWrap(MotionWrap(Advance, 'app__advance'), //component 
+"advance", //idName
 "app__whitebg" //className for bg color
 ); 

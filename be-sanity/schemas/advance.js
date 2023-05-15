@@ -9,13 +9,18 @@ export default{
     //fields available in 'advance' document
     fields : [
         {
-            name : 'normal',
-            title : 'Normal',
+            name : 'normalPhrase',
+            title : 'Normal Phrase',
             type : 'string'
         },
         {
-            name : 'advance',
-            title : 'Advance',
+            name : 'advancePhrase',
+            title : 'Advance Phrase',
+            type : 'string'
+        },
+        {
+            name : 'sentence',
+            title : 'Sentence',
             type : 'string'
         },
     ]

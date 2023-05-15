@@ -37,6 +37,7 @@ const Sentences = () => {
       window.location.reload();
       setLoading(false);//hide loading after submitting
       setShowAddSentenceForm(false);//hide sentence form after submission of new sentence
+      setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 

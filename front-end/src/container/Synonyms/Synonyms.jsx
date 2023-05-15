@@ -44,6 +44,7 @@ const Synonyms = () => {
     client.create(synonym).then(() =>{
       setLoading(false);//loading
       setShowSynonymsForm(false);//hide synonym form after submission of new word
+      setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
@@ -77,7 +78,7 @@ const Synonyms = () => {
         }
           <AiFillPlusCircle onClick={() => setShowSynonymsForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice vocabulary.</p>
+      <p className='p-text'>In this section you can do practice synonyms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
       {/* Add new synonym starts here */}

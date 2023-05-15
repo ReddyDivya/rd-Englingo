@@ -41,6 +41,7 @@ const Very = () => {
     client.create(very).then(() =>{
       setLoading(false);//loading
       setShowVeryForm(false);//hide very form after submission of new word
+      setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 

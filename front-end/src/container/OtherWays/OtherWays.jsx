@@ -1,25 +1,25 @@
 import React, {useState, useEffect} from 'react'
-import "./Vocab.scss";
+import "./Synonyms.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle, AiOutlineMinusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
-const Vocab = () => {
+const OtherWays = () => {
 
-  const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [isShowSynonymsForm, setShowSynonymsForm] = useState(false);
   const [formData, setFormData] = useState({
     word : '',
-    meaning : '',
+    synonyms : '',
     sentence: '',
   });
 
   const [loading, setLoading] = useState(false);  
-  const {word, meaning, sentence} = formData;
+  const {word, synonyms, sentence} = formData;
 
-  const [vocabs, setVocabs] = useState([]);
+  const [vSynonyms, setSynonyms] = useState([]);
   
   //adding new word
   const handleChangeInput = (e) => {
@@ -28,29 +28,29 @@ const Vocab = () => {
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new vocab to sanity
+  //submit new synonym to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
 
-    //adding new vocab data
-    const vocab = {
-      _type: 'vocabs',//vocabs document
+    //adding new synonym data
+    const synonym = {
+      _type: 'synonyms',//synonyms document
       word: formData.word,
-      meaning: formData.meaning,
+      synonyms: formData.synonyms,
       sentence: formData.sentence,
     };
 
-    //creating a new vocab data into sanity
-    client.create(vocab).then(() =>{
+    //creating a new synonym data into sanity
+    client.create(synonym).then(() =>{
       setLoading(false);//loading
-      setShowVocabForm(false);//hide vocab form after submission of new word
+      setShowSynonymsForm(false);//hide synonym form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete vocab
+  //delete synonym
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "vocabs"][${index}]`})
+    client.delete({query: `*[_type == "synonyms"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -61,44 +61,44 @@ const Vocab = () => {
   }//handleDelete
 
 
-  //fetching vocabs data from sanity
+  //fetching synonyms data from sanity
   useEffect(() => {
-    const query = `*[_type == "vocabs"]`;
+    const query = `*[_type == "synonyms"]`;
 
     client.fetch(query).then((data) => {
-      setVocabs(data);
+      setSynonyms(data);
     });
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>Vocabulary 
+      <h2 className='head-text'>Synonyms 
         {
-          //show vocab form after clicking on the add icon +
+          //show synonym form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowVocabForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowSynonymsForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice vocabulary.</p>
+      <p className='p-text'>In this section you can do practice synonyms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new vocab starts here */}
+      {/* Add new synonym starts here */}
       {
-        isShowVocabForm ? (
-          <div className='app__vocab-form app__flex'>
+        isShowSynonymsForm ? (
+          <div className='app__synonym-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Vocabulary</h3>
+              <h3>Add Synonyms</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a synonyms" name="synonyms" value={synonyms} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Vocab' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Synonyms' : 'Sending...'}</button>
           </div>
         )
         :
@@ -108,28 +108,27 @@ const Vocab = () => {
           </div>
         )
       }
-      {/* Add new vocab ends here */}
+      {/* Add new synonym ends here */}
       
-      {/* displaying vocabs items starts here */}
-      <div className='app__vocab-items'>
-          {/* vocab item card */}
+      {/* displaying synonyms items starts here */}
+      <div className='app__synonym-items'>
+          {/* synonym item card */}
           {
-            vocabs.map((vocab, index) => (
+            vSynonyms.map((synonym, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
-              className='app__vocab-item'
-              key={vocab.title + index}
+              className='app__synonym-item'
+              key={synonym.title + index}
               > 
                 <h4>
-                  <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/>
                   &nbsp;&nbsp;
-                  {vocab.word} : {vocab.meaning}
+                  {synonym.word} : {synonym.synonyms}
                 </h4>
                 <p>                  
-                  {vocab.sentence}
+                  {synonym.sentence}
                 </p>
-                
               </motion.div>
              ))
           }
@@ -141,14 +140,14 @@ const Vocab = () => {
             />
           </div>
       </div>
-      {/* displaying vocabs items ends here */}
+      {/* displaying synonyms items ends here */}
     </>
   )
 }
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Vocab, 'app__vocab'), //component 
-"vocab", //idName
+export default AppWrap(MotionWrap(OtherWays, 'app__synonyms'), //component 
+"OtherWays", //idName
 "app__whitebg" //className for bg color
 ); 

@@ -43,6 +43,7 @@ const Idioms = () => {
     client.create(idiom).then(() =>{
       setLoading(false);//loading
       setShowIdiomForm(false);//hide idiom form after submission of new word
+      setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
