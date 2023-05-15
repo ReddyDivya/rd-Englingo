@@ -1,12 +1,12 @@
 /* Vocab starts here */
-.app__synonym {
+.app__synonyms {
   flex: 1;
   width: 100%;
   margin-top: 8%;
   flex-direction: column;
-} //app__synonym
+} //app__synonyms
 
-//vocab items
+//synonym items
 .app__synonym-items {
   display: flex;
   justify-content: center;
@@ -15,7 +15,7 @@
   margin-top: 2rem;
 } //app__synonym-items
 
-//vocab item
+//synonym item
 .app__synonym-item {
   width: 900px;
   display: flex;

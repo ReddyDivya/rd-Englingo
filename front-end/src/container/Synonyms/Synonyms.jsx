@@ -128,7 +128,6 @@ const Synonyms = () => {
                 <p>                  
                   {synonym.sentence}
                 </p>
-                
               </motion.div>
              ))
           }
@@ -147,7 +146,7 @@ const Synonyms = () => {
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Synonyms, 'app__synonym'), //component 
-"synonym", //idName
+export default AppWrap(MotionWrap(Synonyms, 'app__synonyms'), //component 
+"synonyms", //idName
 "app__whitebg" //className for bg color
 ); 
