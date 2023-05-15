@@ -1,3 +1,4 @@
+//sentence schema
 export default{
     //this name is used in the query i.e "_type": "sentences" to fetch the data from sanity
     name: 'sentences',

@@ -1,4 +1,4 @@
-//advance english  schema
+//advance english schema
 export default{
 
     //this 'name' is used in the query i.e "_type": "advance" to fetch the data from sanity

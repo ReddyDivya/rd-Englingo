@@ -1,3 +1,4 @@
+//vocab schema
 export default{
     //this name is used in the query i.e "_type": "vocabs" to fetch the data from sanity
     name: 'vocabs',

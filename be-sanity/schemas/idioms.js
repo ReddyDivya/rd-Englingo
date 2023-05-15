@@ -1,3 +1,4 @@
+//idioms schema
 export default{
     //this name is used in the query i.e "_type": "idioms" to fetch the data from sanity
     name: 'idioms',
