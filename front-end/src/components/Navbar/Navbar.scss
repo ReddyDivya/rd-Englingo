@@ -11,8 +11,9 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     position: fixed;
     z-index: 2;
+
 }//app__navbar
-  
+
 .app__navbar-logo {
     display: flex;
     justify-content: flex-start;
@@ -30,13 +31,15 @@
       }
     }//a
 }//app__navbar-logo
-  
-.app__navbar-links {
+
+//nav links
+.app__navbar-links{
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
     list-style: none;
+    position:relative; //
   
     li {
       margin: 0 1rem;
@@ -52,7 +55,7 @@
         margin-bottom: 5px;
       }//div
   
-    a {
+      a {
         color: var(--gray-color);
         text-decoration: none;
         flex-direction: column;
@@ -68,6 +71,15 @@
       }//a
   
       &:hover {
+        ul{
+          display:block;
+          position:relative;
+          color: var(--secondary-color);
+          font-size: 80%;
+          left:0;
+          right:0;
+        }
+
         div {
           background: var(--secondary-color);
         }
@@ -77,8 +89,38 @@
     @media screen and (max-width: 900px) {
       display: none;
     }
-}//app__navbar-links 
-  
+}//app__navbar-links
+
+//hide submenu navbar links
+.app__subnavbar-links{
+    position: absolute;
+    top:0;
+    padding: 0;
+    left: 100%;
+    display: none;
+}//app__subnavbar-links
+
+/* smaller font size for sub menu items */  
+.app__subnavbar-links li a {
+  font-size: 80%;
+}
+
+//dropdown sub menu
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+//sub navbar link hover
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+//navigation dots menu
 .app__navbar-menu {
     width: 35px;
     height: 35px;

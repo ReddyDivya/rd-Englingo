@@ -3,6 +3,7 @@ import "./Navbar.scss";
 import {images} from '../../constants';
 import {HiMenuAlt4, HiX} from 'react-icons/hi';
 import {motion} from 'framer-motion';
+import {AiFillCaretDown} from 'react-icons/ai';
 
 const Navbar = () => {
 const [toggle, setToggle] = useState(false);
@@ -19,14 +20,26 @@ const [toggle, setToggle] = useState(false);
       <ul className="app__navbar-links">
 
         {/*menu*/}
-        {['vocab', 'idioms', 'sentences', 'Instead of "very"'].map((item) => (
+        {['vocab', 'idioms', 'sentences', 'Instead of very', 'synonyms', 'advance english'].map((item) => (
           <li className="app__flex" key={`link-${item}`}>
             
             {/* div is to display dot on navbar-menu's top while hovering. */}
             <div />
 
             {/* menu items */}
-            <a href={`#${item}`}>{item}</a>
+            <a href={`#${item}`}>{item}
+                <AiFillCaretDown/>
+            </a>
+
+            { /*submenu*/ }
+            <ul className="app__subnavbar-links">
+                <div className="dropdown-content">
+                  <li className="app__flex">
+                    <a href='#synonyms'>synonyms</a>
+                    <a href='#very'>very</a>
+                  </li>
+                </div>
+            </ul>
           </li>
         ))}
       </ul>
