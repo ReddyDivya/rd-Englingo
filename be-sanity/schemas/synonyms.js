@@ -1,9 +1,10 @@
+//synonyms schema
 export default {
 
-    //this name is used in the query i.e "_type": "synonyms" to fetch the data from sanity
+    //this 'name' is used in the query i.e "_type": "synonyms" to fetch the data from sanity
     name: 'synonyms',
     title: 'Synonyms', //document type name
-    type: 'document', //sentences document
+    type: 'document', //synonyms document
 
     //fields available in 'synonyms' document
     fields : [
