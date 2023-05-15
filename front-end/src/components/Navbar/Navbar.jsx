@@ -28,7 +28,7 @@ const [toggle, setToggle] = useState(false);
 
             {/* menu items */}
             <a href={`#${item}`}>{item}
-                <AiFillCaretDown/>
+                {/* <AiFillCaretDown/> */}
             </a>
 
             { /*submenu*/ }

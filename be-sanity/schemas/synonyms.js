@@ -21,7 +21,7 @@ export default {
         {
             name : 'sentence',
             title : 'Sentence',
-            type: 'string',
+            type: 'textarea',
         },
     ]
 }
