@@ -1,22 +1,22 @@
-/* Vocab starts here */
-.app__vocab {
+/* Very starts here */
+.app__very {
   flex: 1;
   width: 100%;
   margin-top: 8%;
   flex-direction: column;
-} //app__vocab
+} //app__very
 
-//vocab items
-.app__vocab-items {
+//very items
+.app__very-items {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap; //wraps items in the container
   margin-top: 2rem;
-} //app__vocab-items
+} //app__very-items
 
-//vocab item
-.app__vocab-item {
+//very item
+.app__very-item {
   width: 900px;
   display: flex;
   justify-content: flex-start;
@@ -43,9 +43,9 @@
     width: 370px;
     margin: 2rem 4rem;
   } //media
-} //app__vocab-item
+} //app__very-item
 
-.app__vocab-form{
+.app__very-form{
   border-radius: 5px;
   padding: 4%;
   background-color: var(--primary-color);
@@ -103,6 +103,6 @@
     width: 100%;
     margin: 1rem 0;
   }
-}//app__vocab-form
+}//app__very-form
 
-/* Vocab ends here */
+/* Very ends here */

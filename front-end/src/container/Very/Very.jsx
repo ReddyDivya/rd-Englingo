@@ -3,50 +3,48 @@ import "./Very.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle, AiOutlineMinusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const Very = () => {
 
-  const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [isShowVeryForm, setShowVeryForm] = useState(false);
+  const [loading, setLoading] = useState(false);  
+  const [very, setVery] = useState([]);
+  
   const [formData, setFormData] = useState({
     word : '',
     alternative : '',
   });
+  const {word, alternative} = formData;
 
-  const [loading, setLoading] = useState(false);  
-  const {word, meaning, sentence} = formData;
-
-  const [vocabs, setVocabs] = useState([]);
-  
   //adding new word
   const handleChangeInput = (e) => {
  
-    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    const {name, value} = e.target;//assigning form fields data like word, alternative
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new vocab to sanity
+  //submit new instead of very to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
 
     //adding new vocab data
-    const vocab = {
-      _type: 'very',//vocabs document
+    const very = {
+      _type: 'very',//very document
       word: formData.word,
-      meaning: formData.meaning,
-      sentence: formData.sentence,
+      alternative: formData.alternative,
     };
 
-    //creating a new vocab data into sanity
-    client.create(vocab).then(() =>{
+    //creating a new very data into sanity
+    client.create(very).then(() =>{
       setLoading(false);//loading
-      setShowVocabForm(false);//hide vocab form after submission of new word
+      setShowVeryForm(false);//hide very form after submission of new word
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete vocab
+  //delete very
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "very"][${index}]`})
     .then(() => {
@@ -59,41 +57,38 @@ const Very = () => {
   }//handleDelete
 
 
-  //fetching vocabs data from sanity
+  //fetching very data from sanity
   useEffect(() => {
     const query = `*[_type == "very"]`;
 
     client.fetch(query).then((data) => {
-      setVocabs(data);
+      setVery(data);
     });
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>Vocabulary 
+      <h2 className='head-text'>Instead of "very" 
         {
-          //show vocab form after clicking on the add icon +
+          //show very form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowVocabForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowVeryForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice vocabulary.</p>
+      <p className='p-text'>In this section you can do practice instead of very.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new vocab starts here */}
+      {/* Add new very starts here */}
       {
-        isShowVocabForm ? (
-          <div className='app__vocab-form app__flex'>
+        isShowVeryForm ? (
+          <div className='app__very-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Vocabulary</h3>
+              <h3>Add Instead of "very"</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
-            </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter an alternative" name="alternative" value={alternative} onChange={handleChangeInput} />
             </div>
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Vocab' : 'Sending...'}</button>
@@ -108,11 +103,11 @@ const Very = () => {
       }
       {/* Add new vocab ends here */}
       
-      {/* displaying vocabs items starts here */}
+      {/* displaying very items starts here */}
       <div className='app__vocab-items'>
           {/* vocab item card */}
           {
-            vocabs.map((vocab, index) => (
+            very.map((vocab, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
@@ -136,7 +131,7 @@ const Very = () => {
             />
           </div>
       </div>
-      {/* displaying vocabs items ends here */}
+      {/* displaying very items ends here */}
     </>
   )
 }
