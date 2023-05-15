@@ -8,7 +8,7 @@ import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Sentences = () => {
-
+  const [sentences, setSentences] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isShowAddSentenceForm, setShowAddSentenceForm] = useState(false);//to show add sentence form
   const [isShowEditSentenceForm, setShowEditSentenceForm] = useState(false);//to show edit sentence form
@@ -17,8 +17,6 @@ const Sentences = () => {
   });
 
   const {sentence} = formData;//assign 'sentence' value
-
-  const [sentences, setSentences] = useState([]);
 
   const handleChangeInput = (e) => {
     const {name, value} = e.target; //assigning form fields data like sentence
@@ -41,6 +39,15 @@ const Sentences = () => {
       setShowAddSentenceForm(false);//hide sentence form after submission of new sentence
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+  const handleShowUpdate = (index, _id, event) => {
+    console.log(index, _id, sentence);
+    setShowEditSentenceForm(true);//show update sentence form
+
+    const {name, value} = event.target; //assigning form fields data like sentence
+    setFormData({...formData, [name] : value}); //setting previous data, and update new sentence
+
+  }//handleShowUpdate
 
   //update the sentence
   const handleUpdate = (index, _id, sentence) => {
@@ -117,17 +124,15 @@ const Sentences = () => {
       {/* 2. Update new sentence starts here */}
       {
         isShowEditSentenceForm ? (
-          sentences.map((sentence, index) => {
-            <div className=''>
-              <div className='app__flex'>
-                <h3>Update Sentence</h3>
-              </div>
-              <div className='app__flex'>
-                <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence.sentence} onChange={handleChangeInput} />
-              </div>
-              <button type="button" className="p-text" onClick={(e) => handleUpdate(index, sentence._id, e.target) }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
+          <div className=''>
+            <div className='app__flex'>
+              <h3>Update Sentence</h3>
             </div>
-          })
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+            </div>
+            <button type="button" className="p-text" onClick={(e) => handleUpdate(e.target) }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
+          </div>
         )
         :
         (
@@ -155,7 +160,7 @@ const Sentences = () => {
 
                   &nbsp;&nbsp;
 
-                  <AiFillEdit onClick={() => setShowEditSentenceForm(true)}/>
+                  <AiFillEdit onClick={(event) => handleShowUpdate(index, sentence._id, event )}/>
                 </p>
               </motion.div>
             ))
