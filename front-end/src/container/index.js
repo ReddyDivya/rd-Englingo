@@ -4,7 +4,9 @@
 */
 export {default as Vocab}  from './Vocab/Vocab';
 export {default as Very}  from './Very/Very';
+export {default as Synonyms}  from './Synonyms/Synonyms';
 export {default as Idioms}  from './Idioms/Idioms';
 export {default as Sentences}  from './Sentences/Sentences';
 export {default as Grammar}  from './Grammar/Grammar';
 export {default as Footer}  from './Footer/Footer';
+
