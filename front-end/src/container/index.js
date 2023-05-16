@@ -6,7 +6,7 @@ export {default as Vocabulary}  from './Vocabulary/Vocabulary';
 export {default as InsteadOfVery}  from './InsteadOfVery/InsteadOfVery';
 export {default as Synonyms}  from './Synonyms/Synonyms';
 export {default as AdvancedPhrases}  from './AdvancedPhrases/AdvancedPhrases';
-export {default as OtherWays}  from './OtherWays/OtherWays';
+export {default as VisualVocabulary}  from './VisualVocabulary/VisualVocabulary';
 export {default as Idioms}  from './Idioms/Idioms';
 export {default as Sentences}  from './Sentences/Sentences';
 export {default as Grammar}  from './Grammar/Grammar';
