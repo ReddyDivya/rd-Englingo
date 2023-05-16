@@ -13,11 +13,10 @@ const Advance = () => {
   const [formData, setFormData] = useState({
     normalPhrase : '',
     advancePhrase : '',
-    sentence: '',
   });
 
   const [loading, setLoading] = useState(false);  
-  const {normalPhrase, advancePhrase, sentence} = formData;
+  const {normalPhrase, advancePhrase} = formData;
 
   const [advance, setAdvance] = useState([]);
   
@@ -37,7 +36,6 @@ const Advance = () => {
       _type: 'advance',//advance document
       normalPhrase: formData.normalPhrase,
       advancePhrase: formData.advancePhrase,
-      sentence: formData.sentence,
     };
 
     //creating a new advance data into sanity
@@ -94,9 +92,6 @@ const Advance = () => {
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a advance phrase" name="advancePhrase" value={advancePhrase} onChange={handleChangeInput} />
             </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
-            </div>
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Advance' : 'Sending...'}</button>
           </div>
@@ -126,9 +121,6 @@ const Advance = () => {
                   &nbsp;&nbsp;
                   {advance.normalPhrase} : {advance.advancePhrase}
                 </h4>
-                <p>                  
-                  {advance.sentence}
-                </p>
               </motion.div>
              ))
           }
