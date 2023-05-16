@@ -13,6 +13,13 @@
     align-items: flex-start;
     flex-wrap: wrap; //wraps items in the container
     margin-top: 2rem;
+
+    img{
+        width:100%;
+        height:auto;
+        border-radius: 15px;
+        object-fit: cover;
+    }
   } //app__grammar-items
   
   //idiom item

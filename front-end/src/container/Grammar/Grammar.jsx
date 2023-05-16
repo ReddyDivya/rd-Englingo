@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import "./Grammar.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
-import { client } from '../../client.js';
+import { client, urlFor } from '../../client.js';
 import {AiFillPlusCircle} from 'react-icons/ai';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
@@ -16,8 +16,9 @@ const Grammar = () => {
   const [formData, setFormData] = useState({
     heading : '',
     notes : '',
+    imageUrl : '',
   });
-  const {heading, notes} = formData;
+  const {heading, notes, imageUrl} = formData;
 
   //adding new grammar
   const handleChangeInput = (e) => {
@@ -34,6 +35,7 @@ const Grammar = () => {
       _type : 'grammar', //grammar document
       heading : formData.heading,
       notes : formData.notes,
+      // imageUrl : formData.imageUrl, 
     }
 
     //creating a new grammar data into sanity
@@ -121,9 +123,13 @@ const Grammar = () => {
                 &nbsp;&nbsp;
                 {grammar.heading}
               </h4>
-              <p>
+              <pre>
                 {grammar.notes}
-              </p>
+              </pre>
+              {
+                grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
+              }
+              
             </motion.div>
             ))
           }

@@ -13,6 +13,14 @@ export default {
             name:'notes',
             title:'Notes',
             type:'text'
-        }
+        },
+        {
+            name: 'imageUrl', 
+            title: 'ImageUrl',
+            type: 'image',
+            options:{
+                hotspot : true,
+            },
+        },
     ]
 }
