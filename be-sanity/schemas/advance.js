@@ -18,10 +18,5 @@ export default{
             title : 'Advance Phrase',
             type : 'string'
         },
-        {
-            name : 'sentence',
-            title : 'Sentence',
-            type : 'string'
-        },
     ]
 }
