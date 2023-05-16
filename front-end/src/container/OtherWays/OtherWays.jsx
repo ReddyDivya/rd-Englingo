@@ -29,12 +29,15 @@ const OtherWays = () => {
   //submit new OtherWays to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
-
-    alert(formData.imageUrl.split('\\')[2]);
+    const reference = `image-12bn7nhe-${formData.imageUrl.split('\\')[2]}`;
+    
+    alert(reference);
     //adding new OtherWays data
     const OtherWays = {
       _type: 'otherways',//otherways document
-      imageUrl: formData.imageUrl.split('\\')[2],
+      // imageUrl: formData.imageUrl.split('\\')[2],
+      // imageUrl: urlFor({_ref: formData.imageUrl.split('\\')[2]}).url()
+      imageUrl: urlFor({_ref: reference}).auto('format').url()
     };
 
     //creating a new OtherWays data into sanity
