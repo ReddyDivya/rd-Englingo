@@ -10,16 +10,15 @@ import {RiDeleteBack2Fill} from 'react-icons/ri';
 const Vocabulary = () => {
 
   const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [loading, setLoading] = useState(false);  
+  const [vocabs, setVocabs] = useState([]);
+
   const [formData, setFormData] = useState({
     word : '',
     meaning : '',
     sentence: '',
   });
-
-  const [loading, setLoading] = useState(false);  
   const {word, meaning, sentence} = formData;
-
-  const [vocabs, setVocabs] = useState([]);
   
   //adding new word
   const handleChangeInput = (e) => {
