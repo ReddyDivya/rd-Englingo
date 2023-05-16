@@ -1,13 +1,13 @@
 /* Vocab starts here */
-.app__synonyms {
+.app__visualVocabs {
   flex: 1;
   width: 100%;
   margin-top: 8%;
   flex-direction: column;
-} //app__synonyms
+} //app__visualVocabs
 
 //synonym items
-.app__synonym-items {
+.app__visualVocab-items {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -20,10 +20,10 @@
       border-radius: 15px;
       object-fit: cover;
   }
-} //app__synonym-items
+} //app__visualVocab-items
 
 //synonym item
-.app__synonym-item {
+.app__visualVocab-item {
   width: 900px;
   display: flex;
   justify-content: flex-start;
@@ -50,9 +50,9 @@
     width: 370px;
     margin: 2rem 4rem;
   } //media
-} //app__synonym-item
+} //app__visualVocab-item
 
-.app__synonym-form{
+.app__visualVocab-form{
   border-radius: 5px;
   padding: 4%;
   background-color: var(--primary-color);
@@ -110,6 +110,6 @@
     width: 100%;
     margin: 1rem 0;
   }
-}//app__synonym-form
+}//app__visualVocab-form
 
 /* Vocab ends here */

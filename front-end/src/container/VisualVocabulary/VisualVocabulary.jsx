@@ -57,7 +57,7 @@ const VisualVocabulary = () => {
   }//handleDelete
 
 
-  //fetching synonyms data from sanity
+  //fetching visual vocabs data from sanity
   useEffect(() => {
     const query = `*[_type == "visualVocabs"]`;
 
@@ -74,13 +74,13 @@ const VisualVocabulary = () => {
         }
           <AiFillPlusCircle onClick={() => setShowVisualVocabForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice synonyms.</p>
+      <p className='p-text'>In this section you can do practice visual vocabs.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
       {/* Add new VisualVocabulary starts here */}
       {
         isShowVisualVocabForm ? (
-          <div className='app__synonym-form app__flex'>
+          <div className='app__visualVocab-form app__flex'>
             <div className='app__flex'>
               <h3>Add</h3>
             </div>
@@ -100,15 +100,15 @@ const VisualVocabulary = () => {
       }
       {/* Add new VisualVocabulary ends here */}
       
-      {/* displaying synonyms items starts here */}
-      <div className='app__synonym-items'>
+      {/* displaying visual vocabs items starts here */}
+      <div className='app__visualVocab-items'>
           {/* VisualVocabulary item card */}
           {
             visualVocabs.map((visualVocab, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
-              className='app__synonym-item'
+              className='app__visualVocab-item'
               key={index}
               > 
                 <h4>
@@ -126,14 +126,14 @@ const VisualVocabulary = () => {
             />
           </div>
       </div>
-      {/* displaying synonyms items ends here */}
+      {/* displaying visual vocabs items ends here */}
     </>
   )
 }
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(VisualVocabulary, 'app__synonyms'), //component 
-"VisualVocabulary", //idName
+export default AppWrap(MotionWrap(VisualVocabulary, 'app__visualVocabs'), //component 
+"visualvocabulary", //idName
 "app__whitebg" //className for bg color
 ); 
