@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import "./Synonyms.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
-import { client } from '../../client.js';
+import { client, urlFor } from '../../client.js';
 import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
@@ -82,18 +82,9 @@ const OtherWays = () => {
         isShowSynonymsForm ? (
           <div className='app__synonym-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Synonyms</h3>
+              <h3>Add</h3>
             </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
-            </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a synonyms" name="synonyms" value={synonyms} onChange={handleChangeInput} />
-            </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
-            </div>
-
+            
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Synonyms' : 'Sending...'}</button>
           </div>
         )
@@ -120,15 +111,11 @@ const OtherWays = () => {
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/>
                   &nbsp;&nbsp;
-                  {synonym.word} : {synonym.synonyms}
                 </h4>
-                <p>                  
-                  {synonym.sentence}
-                </p>
+                <img src={urlFor(synonym.imageUrl)}/>
               </motion.div>
              ))
           }
-
           <div>
             <Toaster
               position="top-center"
