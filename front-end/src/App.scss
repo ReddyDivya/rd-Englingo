@@ -45,6 +45,13 @@
     color: var(--secondary-color);
     text-transform:capitalize;
 
+    svg{
+        width:35px;
+        height:35px;
+        margin-left:4px;
+        margin-bottom:-5px;    
+    }//svg
+
     @media screen and (min-width:2000px)
     {
         font-size:4rem;
