@@ -1,0 +1,43 @@
+//grammar
+export default {
+    name:'confused',
+    title:'Confused',
+    type:'document',
+    fields:[
+        {
+            name:'word1',
+            title:'Word1',
+            type:'string'
+        },
+        {
+            name:'meaning1',
+            title:'meaning1',
+            type:'string'
+        },
+        {
+            name:'word2',
+            title:'Word2',
+            type:'string'
+        },
+        {
+            name:'meaning2',
+            title:'meaning2',
+            type:'string'
+        },
+        {
+            name:'word3',
+            title:'Word3',
+            type:'string'
+        },
+        {
+            name:'meaning3',
+            title:'meaning3',
+            type:'string'
+        },
+        {
+            name:'notes',
+            title:'Notes',
+            type:'text'
+        },
+    ]
+}
