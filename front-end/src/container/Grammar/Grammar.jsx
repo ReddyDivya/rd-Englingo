@@ -9,21 +9,19 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Grammar = () => {
   
-  const [isShowIdiomForm, setShowIdiomForm] = useState(false);
-  const [formData, setFormData] = useState({
-    idiom : '',
-    meaning : '',
-    sentence: ''
-  });
-
+  const [isShowGrammarForm, setShowGrammarForm] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {idiom, meaning, sentence} = formData;
-
   const [grammar, setIdioms] = useState([]);
 
-  //adding new idiom
+  const [formData, setFormData] = useState({
+    heading : '',
+    notes : '',
+  });
+  const {heading, notes} = formData;
+
+  //adding new grammar
   const handleChangeInput = (e) => {
-      const {name, value} = e.target; //assigning form fields data like idiom, meaning, sentence
+      const {name, value} = e.target; //assigning form fields data like grammar, meaning, sentence
       setFormData({...formData, [name] : value}); //setting previous data, and add new word data
   }//handleChangeInput
 
@@ -31,23 +29,23 @@ const Grammar = () => {
   const handleSubmit = () => {
     setLoading(true);//loading
 
-    //adding new idiom data
-    const idiom = {
+    //adding new grammar data
+    const grammar = {
       _type : 'grammar', //grammar document
-      idiom : formData.idiom,
+      grammar : formData.grammar,
       meaning : formData.meaning,
       sentence : formData.sentence,
     }
 
-    //creating a new idiom data into sanity
-    client.create(idiom).then(() =>{
+    //creating a new grammar data into sanity
+    client.create(grammar).then(() =>{
       setLoading(false);//loading
-      setShowIdiomForm(false);//hide idiom form after submission of new word
+      setShowGrammarForm(false);//hide grammar form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete idiom
+  //delete grammar
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "grammar"][${index}]`})
     .then(() => {
@@ -72,23 +70,23 @@ const Grammar = () => {
     <>
       <h2 className='head-text'>Grammar
       {
-          //show idiom form after clicking on the add icon +
-          <AiFillPlusCircle onClick={() => setShowIdiomForm(true)}/>
+          //show grammar form after clicking on the add icon +
+          <AiFillPlusCircle onClick={() => setShowGrammarForm(true)}/>
       }
       </h2>
 
       <p className='p-text'>In this section you can do practice grammar.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
       
-      {/* Add new idiom starts here */}
+      {/* Add new grammar starts here */}
       {
-        isShowIdiomForm ? (
+        isShowGrammarForm ? (
           <div className='app__grammar-form app__flex'>
             <div className='app__flex'>
               <h3>Add Idiom</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a idiom" name="idiom" value={idiom} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a grammar" name="grammar" value={grammar} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
@@ -108,27 +106,27 @@ const Grammar = () => {
         )
       }
 
-      {/* Add new idiom ends here */}
+      {/* Add new grammar ends here */}
 
       {/*displaying grammar items*/}
       <div className='app__grammar-items'>
-          {/* idiom item card */}
+          {/* grammar item card */}
 
           {
-            grammar.map((idiom, index) => (
+            grammar.map((grammar, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
               className='app__grammar-item'
-              key={'idiom' + index}
+              key={'grammar' + index}
             > 
               <h4>
-                <RiDeleteBack2Fill onClick={() => handleDelete(index, idiom._id)}/>
+                <RiDeleteBack2Fill onClick={() => handleDelete(index, grammar._id)}/>
                 &nbsp;&nbsp;
-                {idiom.idiom} : {idiom.meaning}
+                {grammar.grammar} : {grammar.meaning}
               </h4>
               <p>
-                {idiom.sentence}
+                {grammar.sentence}
               </p>
             </motion.div>
             ))
