@@ -9,7 +9,7 @@ import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const OtherWays = () => {
 
-  const [isShowSynonymsForm, setShowSynonymsForm] = useState(false);
+  const [isShowOtherWaysForm, setShowOtherWaysForm] = useState(false);
   const [formData, setFormData] = useState({
     imageUrl : '',
   });
@@ -26,25 +26,26 @@ const OtherWays = () => {
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new synonym to sanity
+  //submit new OtherWays to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
 
-    //adding new synonym data
-    const synonym = {
+    alert(formData.imageUrl.split('\\')[2]);
+    //adding new OtherWays data
+    const OtherWays = {
       _type: 'otherways',//otherways document
-      imageUrl: formData.imageUrl,
+      imageUrl: formData.imageUrl.split('\\')[2],
     };
 
-    //creating a new synonym data into sanity
-    client.create(synonym).then(() =>{
+    //creating a new OtherWays data into sanity
+    client.create(OtherWays).then(() =>{
       setLoading(false);//loading
-      setShowSynonymsForm(false);//hide synonym form after submission of new word
+      setShowOtherWaysForm(false);//hide OtherWays form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete synonym
+  //delete OtherWays
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "otherways"][${index}]`})
     .then(() => {
@@ -70,22 +71,25 @@ const OtherWays = () => {
     <>
       <h2 className='head-text'>Other Ways 
         {
-          //show synonym form after clicking on the add icon +
+          //show OtherWays form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowSynonymsForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowOtherWaysForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice synonyms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new synonym starts here */}
+      {/* Add new OtherWays starts here */}
       {
-        isShowSynonymsForm ? (
+        isShowOtherWaysForm ? (
           <div className='app__synonym-form app__flex'>
             <div className='app__flex'>
               <h3>Add</h3>
             </div>
+            <div className='app__flex'>
+              <input type="file" name="imageUrl" value={imageUrl} onChange={handleChangeInput} />
+            </div>
             
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Synonyms' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add' : 'Sending...'}</button>
           </div>
         )
         :
@@ -95,11 +99,11 @@ const OtherWays = () => {
           </div>
         )
       }
-      {/* Add new synonym ends here */}
+      {/* Add new OtherWays ends here */}
       
       {/* displaying synonyms items starts here */}
       <div className='app__synonym-items'>
-          {/* synonym item card */}
+          {/* OtherWays item card */}
           {
             otherWays.map((otherWay, index) => (
               <motion.div whileInView={{opacity:1}}
