@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import "./Synonyms.scss";
+import "./OtherWays.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client, urlFor } from '../../client.js';
@@ -109,7 +109,7 @@ const OtherWays = () => {
               key={synonym.title + index}
               > 
                 <h4>
-                  <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/>
+                  {/* <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/> */}
                   &nbsp;&nbsp;
                 </h4>
                 <img src={urlFor(synonym.imageUrl)}/>
