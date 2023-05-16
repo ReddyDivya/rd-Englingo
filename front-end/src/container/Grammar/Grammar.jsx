@@ -25,16 +25,15 @@ const Grammar = () => {
       setFormData({...formData, [name] : value}); //setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new vocab to sanity
+  //submit new grammar to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
 
     //adding new grammar data
     const grammar = {
       _type : 'grammar', //grammar document
-      grammar : formData.grammar,
-      meaning : formData.meaning,
-      sentence : formData.sentence,
+      heading : formData.heading,
+      notes : formData.notes,
     }
 
     //creating a new grammar data into sanity
@@ -86,16 +85,13 @@ const Grammar = () => {
               <h3>Add Idiom</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a grammar" name="grammar" value={grammar} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a heading" name="heading" value={heading} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
-            </div>
-            <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Idiom' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar' : 'Sending...'}</button>
           </div>
         )
         :
@@ -123,10 +119,10 @@ const Grammar = () => {
               <h4>
                 <RiDeleteBack2Fill onClick={() => handleDelete(index, grammar._id)}/>
                 &nbsp;&nbsp;
-                {grammar.grammar} : {grammar.meaning}
+                {grammar.heading}
               </h4>
               <p>
-                {grammar.sentence}
+                {grammar.notes}
               </p>
             </motion.div>
             ))
