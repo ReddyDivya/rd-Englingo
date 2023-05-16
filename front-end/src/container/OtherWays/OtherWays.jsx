@@ -11,15 +11,13 @@ const OtherWays = () => {
 
   const [isShowSynonymsForm, setShowSynonymsForm] = useState(false);
   const [formData, setFormData] = useState({
-    word : '',
-    synonyms : '',
-    sentence: '',
+    imageUrl : '',
   });
 
   const [loading, setLoading] = useState(false);  
-  const {word, synonyms, sentence} = formData;
+  const {imageUrl} = formData;
 
-  const [vSynonyms, setSynonyms] = useState([]);
+  const [otherWays, setOtherWays] = useState([]);
   
   //adding new word
   const handleChangeInput = (e) => {
@@ -34,10 +32,8 @@ const OtherWays = () => {
 
     //adding new synonym data
     const synonym = {
-      _type: 'synonyms',//synonyms document
-      word: formData.word,
-      synonyms: formData.synonyms,
-      sentence: formData.sentence,
+      _type: 'otherways',//otherways document
+      imageUrl: formData.imageUrl,
     };
 
     //creating a new synonym data into sanity
@@ -50,7 +46,7 @@ const OtherWays = () => {
 
   //delete synonym
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "synonyms"][${index}]`})
+    client.delete({query: `*[_type == "otherways"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -63,7 +59,7 @@ const OtherWays = () => {
 
   //fetching synonyms data from sanity
   useEffect(() => {
-    const query = `*[_type == "synonyms"]`;
+    const query = `*[_type == "otherways"]`;
 
     client.fetch(query).then((data) => {
       setSynonyms(data);

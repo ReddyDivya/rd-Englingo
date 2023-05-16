@@ -9,7 +9,7 @@ import sentences from './sentences';
 import very from './very';
 import advance from './advance';
 import synonyms from './synonyms';
-
+import otherways from './otherways';
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -17,7 +17,7 @@ export default createSchema({
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([vocabs, idioms, sentences, very, advance, synonyms
+  types: schemaTypes.concat([vocabs, idioms, sentences, very, advance, synonyms, otherways
     /* Your types here! */
   ]),
 })

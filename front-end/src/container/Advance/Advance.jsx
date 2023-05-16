@@ -70,13 +70,13 @@ const Advance = () => {
 
   return (
     <>
-      <h2 className='head-text'>Advance Phrases
+      <h2 className='head-text'>Normal vs Advances Phrases
         {
           //show advance form after clicking on the add icon +
         }
           <AiFillPlusCircle onClick={() => setShowAdvanceForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice advance phrases.</p>
+      <p className='p-text'>In this section you can do practice advanced phrases.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
       {/* Add new advance starts here */}
