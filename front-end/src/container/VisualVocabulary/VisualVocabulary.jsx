@@ -45,7 +45,7 @@ const VisualVocabulary = () => {
 
   //delete VisualVocabulary
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "visualVocab"][${index}]`})
+    client.delete({query: `*[_type == "visualVocabs"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -58,7 +58,7 @@ const VisualVocabulary = () => {
 
   //fetching synonyms data from sanity
   useEffect(() => {
-    const query = `*[_type == "visualVocab"]`;
+    const query = `*[_type == "visualVocabs"]`;
 
     client.fetch(query).then((data) => {
       setVisualVocabs(data);
@@ -67,7 +67,7 @@ const VisualVocabulary = () => {
 
   return (
     <>
-      <h2 className='head-text'>Other Ways 
+      <h2 className='head-text'>Visual Vocabulary
         {
           //show VisualVocabulary form after clicking on the add icon +
         }
