@@ -62,13 +62,13 @@ const OtherWays = () => {
     const query = `*[_type == "otherways"]`;
 
     client.fetch(query).then((data) => {
-      setSynonyms(data);
+      setOtherWays(data);
     });
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>Synonyms 
+      <h2 className='head-text'>Other Ways 
         {
           //show synonym form after clicking on the add icon +
         }
@@ -101,18 +101,18 @@ const OtherWays = () => {
       <div className='app__synonym-items'>
           {/* synonym item card */}
           {
-            vSynonyms.map((synonym, index) => (
+            otherWays.map((otherWay, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
               className='app__synonym-item'
-              key={synonym.title + index}
+              key={index}
               > 
                 <h4>
-                  {/* <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/> */}
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, otherWays._id)}/>
                   &nbsp;&nbsp;
                 </h4>
-                <img src={urlFor(synonym.imageUrl)}/>
+                <img src={urlFor(otherWay.imageUrl)}/>
               </motion.div>
              ))
           }
