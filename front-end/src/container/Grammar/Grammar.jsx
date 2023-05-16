@@ -33,7 +33,7 @@ const Grammar = () => {
 
     //adding new idiom data
     const idiom = {
-      _type : 'idioms', //idioms document
+      _type : 'grammar', //idioms document
       idiom : formData.idiom,
       meaning : formData.meaning,
       sentence : formData.sentence,
@@ -49,7 +49,7 @@ const Grammar = () => {
 
   //delete idiom
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "idioms"][${index}]`})
+    client.delete({query: `*[_type == "grammar"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -61,7 +61,7 @@ const Grammar = () => {
 
   //fetching idioms data from sanity
   useEffect(() => {
-    const query = `*[_type == "idioms"]`;
+    const query = `*[_type == "grammar"]`;
 
     client.fetch(query).then((data) => {
       setIdioms(data);
