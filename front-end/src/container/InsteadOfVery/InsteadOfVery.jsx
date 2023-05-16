@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import "./Very.scss";
+import "./InsteadOfVery.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
@@ -7,7 +7,7 @@ import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
-const Very = () => {
+const InsteadOfVery = () => {
 
   const [isShowVeryForm, setShowVeryForm] = useState(false);
   const [loading, setLoading] = useState(false);  
@@ -69,7 +69,7 @@ const Very = () => {
 
   return (
     <>
-      <h2 className='head-text'>Instead of "very" 
+      <h2 className='head-text'>Instead of "Very" 
         {
           //show very form after clicking on the add icon +
         }
@@ -105,14 +105,14 @@ const Very = () => {
       {/* Add new vocab ends here */}
       
       {/* displaying very items starts here */}
-      <div className='app__vocab-items'>
+      <div className='app__very-items'>
           {/* vocab item card */}
           {
             very.map((vocab, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
-              className='app__vocab-item'
+              className='app__very-item'
               key={vocab.title + index}
               > 
                 <h4>
@@ -139,7 +139,7 @@ const Very = () => {
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Very, 'app__vocab'), //component 
-"very", //idName
+export default AppWrap(MotionWrap(InsteadOfVery, 'app__very'), //component 
+"insteadofvery", //idName
 "app__whitebg" //className for bg color
 ); 

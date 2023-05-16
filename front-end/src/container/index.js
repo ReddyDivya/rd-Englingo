@@ -3,7 +3,7 @@
     importing all the files from container folder in this file.
 */
 export {default as Vocabulary}  from './Vocabulary/Vocabulary';
-export {default as Very}  from './Very/Very';
+export {default as InsteadOfVery}  from './InsteadOfVery/InsteadOfVery';
 export {default as Synonyms}  from './Synonyms/Synonyms';
 export {default as AdvancedPhrases}  from './AdvancedPhrases/AdvancedPhrases';
 export {default as OtherWays}  from './OtherWays/OtherWays';

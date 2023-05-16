@@ -148,6 +148,6 @@ const Vocabulary = () => {
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
 export default AppWrap(MotionWrap(Vocabulary, 'app__vocab'), //component 
-"vocab", //idName
+"vocabulary", //idName
 "app__whitebg" //className for bg color
 ); 
