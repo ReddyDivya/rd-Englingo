@@ -5,7 +5,7 @@ import very from './very';
 import advanced from './advanced';
 import grammar from './grammar';
 import synonyms from './synonyms';
-import otherways from './otherways';
+import visualVocabs from './visualVocabs';
 
 
-export const schemaTypes = [vocabs, idioms, sentences, very, advanced, synonyms, otherways, grammar];
+export const schemaTypes = [vocabs, idioms, sentences, very, advanced, synonyms, visualVocabs, grammar];
