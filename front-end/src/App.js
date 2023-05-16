@@ -8,13 +8,13 @@ const App = () => {
     <div className="app">
         <Navbar/>
         <Vocabulary/>
-        <InsteadOfVery/>
         <Synonyms/>
-        <AdvancedPhrases/>
-        <VisualVocabulary/>
-        <Idioms/>
         <Sentences/>
+        <Idioms/>
+        <InsteadOfVery/>
+        <AdvancedPhrases/>
         <Grammar/>
+        <VisualVocabulary/>
         <Footer/>
     </div>
   )

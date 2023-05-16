@@ -149,5 +149,5 @@ const Grammar = () => {
 //MotionWrap - Component, className(parameters)
 export default AppWrap(MotionWrap(Grammar, 'app__grammar'), //component 
 "grammar", //idName
-"app__primarybg" //className for bg color
+"app__whitebg" //className for bg color
 ); 

@@ -135,5 +135,5 @@ const VisualVocabulary = () => {
 //MotionWrap - Component, className(parameters)
 export default AppWrap(MotionWrap(VisualVocabulary, 'app__visualVocabs'), //component 
 "visualvocabulary", //idName
-"app__whitebg" //className for bg color
+"app__primarybg" //className for bg color
 ); 

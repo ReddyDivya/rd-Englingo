@@ -141,5 +141,5 @@ const AdvancedPhrases = () => {
 //MotionWrap - Component, className(parameters)
 export default AppWrap(MotionWrap(AdvancedPhrases, 'app__advanced'), //component 
 "advancedPhrases", //idName
-"app__whitebg" //className for bg color
+"app__primarybg" //className for bg color
 ); 

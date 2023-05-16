@@ -149,5 +149,5 @@ const Synonyms = () => {
 //MotionWrap - Component, className(parameters)
 export default AppWrap(MotionWrap(Synonyms, 'app__synonyms'), //component 
 "synonyms", //idName
-"app__whitebg" //className for bg color
+"app__primarybg" //className for bg color
 ); 
