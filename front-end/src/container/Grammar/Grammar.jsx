@@ -82,16 +82,16 @@ const Grammar = () => {
         isShowGrammarForm ? (
           <div className='app__grammar-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Idiom</h3>
+              <h3>Add Grammar Notes</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a heading" name="heading" value={heading} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
+              <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar Notes' : 'Sending...'}</button>
           </div>
         )
         :
