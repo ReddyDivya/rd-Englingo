@@ -83,7 +83,7 @@ const InsteadOfVery = () => {
         isShowVeryForm ? (
           <div className='app__very-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Instead of "very"</h3>
+              <h3>Add Instead of "Very"</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
@@ -92,7 +92,7 @@ const InsteadOfVery = () => {
               <input className="p-text" type="text" placeholder="Please, enter an alternative" name="alternative" value={alternative} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Vocab' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Instead of "Very"' : 'Sending...'}</button>
           </div>
         )
         :
