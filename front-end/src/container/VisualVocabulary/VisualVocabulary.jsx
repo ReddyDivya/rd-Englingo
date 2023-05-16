@@ -32,7 +32,8 @@ const VisualVocabulary = () => {
     //adding new visual vocabulary data
     const VisualVocabulary = {
       _type: 'otherways',//otherways document
-      imageUrl: urlFor({_ref: reference}).auto('format').url()
+      // imageUrl: urlFor({_ref: reference}).auto('format').url()
+      imageUrl: '',
     };
 
     //creating a new VisualVocabulary data into sanity
