@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import "./Advance.scss";
+import "./AdvancedPhrases.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
@@ -7,48 +7,48 @@ import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
-const Advance = () => {
+const AdvancedPhrases = () => {
 
-  const [isShowAdvanceForm, setShowAdvanceForm] = useState(false);
+  const [isShowAdvancedForm, setShowAdvancedForm] = useState(false);
   const [formData, setFormData] = useState({
     normalPhrase : '',
-    advancePhrase : '',
+    advancedPhrase : '',
   });
 
   const [loading, setLoading] = useState(false);  
-  const {normalPhrase, advancePhrase} = formData;
+  const {normalPhrase, advancedPhrase} = formData;
 
-  const [advance, setAdvance] = useState([]);
+  const [advanced, setAdvanced] = useState([]);
   
-  //adding new advance phrase
+  //adding new advanced phrase
   const handleChangeInput = (e) => {
  
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new advance phrase to sanity
+  //submit new advanced phrase to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
 
-    //adding new advance data
-    const advance = {
-      _type: 'advance',//advance document
+    //adding new advanced data
+    const advanced = {
+      _type: 'advanced',//advanced document
       normalPhrase: formData.normalPhrase,
-      advancePhrase: formData.advancePhrase,
+      advancedPhrase: formData.advancedPhrase,
     };
 
-    //creating a new advance data into sanity
-    client.create(advance).then(() =>{
+    //creating a new advanced data into sanity
+    client.create(advanced).then(() =>{
       setLoading(false);//loading
-      setShowAdvanceForm(false);//hide advance form after submission of new word
+      setShowAdvancedForm(false);//hide advanced form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete advance
+  //delete advanced
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "advance"][${index}]`})
+    client.delete({query: `*[_type == "advanced"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -59,41 +59,41 @@ const Advance = () => {
   }//handleDelete
 
 
-  //fetching advance phrases data from sanity
+  //fetching advanced phrases data from sanity
   useEffect(() => {
-    const query = `*[_type == "advance"]`;
+    const query = `*[_type == "advanced"]`;
 
     client.fetch(query).then((data) => {
-      setAdvance(data);
+      setAdvanced(data);
     });
   }, []);
 
   return (
     <>
-      <h2 className='head-text'>Normal vs Advances Phrases
+      <h2 className='head-text'>Normal vs Advanced Phrases
         {
-          //show advance form after clicking on the add icon +
+          //show advanced form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowAdvanceForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowAdvancedForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice advanced phrases.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new advance starts here */}
+      {/* Add new advanced starts here */}
       {
-        isShowAdvanceForm ? (
-          <div className='app__advance-form app__flex'>
+        isShowAdvancedForm ? (
+          <div className='app__advanced-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Advance Phrases</h3>
+              <h3>Add Advanced Phrases</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a normal phrase" name="normalPhrase" value={normalPhrase} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a advance phrase" name="advancePhrase" value={advancePhrase} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a advanced phrase" name="advancedPhrase" value={advancedPhrase} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Advance' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Advanced Phrases' : 'Sending...'}</button>
           </div>
         )
         :
@@ -103,23 +103,23 @@ const Advance = () => {
           </div>
         )
       }
-      {/* Add new advance ends here */}
+      {/* Add new advanced ends here */}
       
-      {/* displaying advance phrases items starts here */}
-      <div className='app__advance-items'>
-          {/* advance item card */}
+      {/* displaying advanced phrases items starts here */}
+      <div className='app__advanced-items'>
+          {/* advanced item card */}
           {
-            advance.map((advance, index) => (
+            advanced.map((advanced, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
-              className='app__advance-item'
-              key={advance.title + index}
+              className='app__advanced-item'
+              key={advanced.title + index}
               > 
                 <h4>
-                  <RiDeleteBack2Fill onClick={() => handleDelete(index, advance._id)}/>
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, advanced._id)}/>
                   &nbsp;&nbsp;
-                  {advance.normalPhrase} : {advance.advancePhrase}
+                  {advanced.normalPhrase} : {advanced.advancedPhrase}
                 </h4>
               </motion.div>
              ))
@@ -132,14 +132,14 @@ const Advance = () => {
             />
           </div>
       </div>
-      {/* displaying advance phrases items ends here */}
+      {/* displaying advanced phrases items ends here */}
     </>
   )
 }
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Advance, 'app__advance'), //component 
-"advance", //idName
+export default AppWrap(MotionWrap(AdvancedPhrases, 'app__advanced'), //component 
+"advanced", //idName
 "app__whitebg" //className for bg color
 ); 

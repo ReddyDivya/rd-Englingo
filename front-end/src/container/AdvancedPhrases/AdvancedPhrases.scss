@@ -1,22 +1,22 @@
-/* Advance starts here */
-.app__advance {
+/* Advanced starts here */
+.app__advanced {
   flex: 1;
   width: 100%;
   margin-top: 8%;
   flex-direction: column;
-} //app__advance
+} //app__advanced
 
 //synonym items
-.app__advance-items {
+.app__advanced-items {
   display: flex;
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap; //wraps items in the container
   margin-top: 2rem;
-} //app__advance-items
+} //app__advanced-items
 
 //synonym item
-.app__advance-item {
+.app__advanced-item {
   width: 900px;
   display: flex;
   justify-content: flex-start;
@@ -43,9 +43,9 @@
     width: 370px;
     margin: 2rem 4rem;
   } //media
-} //app__advance-item
+} //app__advanced-item
 
-.app__advance-form{
+.app__advanced-form{
   border-radius: 5px;
   padding: 4%;
   background-color: var(--primary-color);
@@ -103,6 +103,6 @@
     width: 100%;
     margin: 1rem 0;
   }
-}//app__advance-form
+}//app__advanced-form
 
-/* Advance ends here */
+/* Advanced ends here */
