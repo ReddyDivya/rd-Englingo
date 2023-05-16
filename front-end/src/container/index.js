@@ -2,7 +2,7 @@
     To avoid importing individual components wherever required, 
     importing all the files from container folder in this file.
 */
-export {default as Vocab}  from './Vocab/Vocab';
+export {default as Vocabulary}  from './Vocabulary/Vocabulary';
 export {default as Very}  from './Very/Very';
 export {default as Synonyms}  from './Synonyms/Synonyms';
 export {default as AdvancedPhrases}  from './AdvancedPhrases/AdvancedPhrases';
