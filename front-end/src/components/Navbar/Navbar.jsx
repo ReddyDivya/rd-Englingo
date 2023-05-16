@@ -20,7 +20,7 @@ const [toggle, setToggle] = useState(false);
       <ul className="app__navbar-links">
 
         {/*menu*/}
-        {['vocab', 'idioms', 'sentences', 'very', 'synonyms', 'advanced-Phrases', 'OtherWays'].map((item) => (
+        {['vocabulary', 'idioms', 'sentences', 'very', 'synonyms', 'advanced-Phrases', 'OtherWays'].map((item) => (
           <li className="app__flex" key={`link-${item}`}>
             
             {/* div is to display dot on navbar-menu's top while hovering. */}
@@ -58,7 +58,7 @@ const [toggle, setToggle] = useState(false);
             {/*displaying X icon*/}
             <HiX onClick={() => setToggle(false)} />  {/*setToggle = false - to close menu */}
             <ul>
-              {['vocab', 'idioms', 'sentences', 'very', 'synonyms', 'advance english'].map((item) => (
+              {['vocabulary', 'idioms', 'sentences', 'very', 'synonyms', 'advance english'].map((item) => (
                 <li key={item}>
                   <a href={`#${item}`} onClick={() => setToggle(false)}>
                     {item}
