@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import "./OtherWays.scss";
+import "./VisualVocabulary.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client, urlFor } from '../../client.js';
@@ -7,18 +7,17 @@ import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
-const OtherWays = () => {
+const VisualVocabulary = () => {
 
-  const [isShowOtherWaysForm, setShowOtherWaysForm] = useState(false);
+  const [isShowVisualVocabForm, setShowVisualVocabForm] = useState(false);
+  const [loading, setLoading] = useState(false);  
+  const [visualVocabs, setVisualVocabs] = useState([]);
+  
   const [formData, setFormData] = useState({
     imageUrl : '',
   });
-
-  const [loading, setLoading] = useState(false);  
   const {imageUrl} = formData;
 
-  const [otherWays, setOtherWays] = useState([]);
-  
   //adding new word
   const handleChangeInput = (e) => {
  
@@ -26,36 +25,27 @@ const OtherWays = () => {
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new OtherWays to sanity
+  //submit new VisualVocabulary to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
-    // const reference = `image-12bn7nhe-${formData.imageUrl.split('\\')[2]}`;
-    const reference = urlFor(`image-928ac96d53b0c9049836c86ff25fd3c009039a16-${formData.imageUrl.split('\\')[2]}`)
-    .auto('format')
-    .fit('max')
-    .width(720)
-    .toString();
     
-    alert(reference);
-    //adding new OtherWays data
-    const OtherWays = {
+    //adding new visual vocabulary data
+    const VisualVocabulary = {
       _type: 'otherways',//otherways document
-      // imageUrl: formData.imageUrl.split('\\')[2],
-      // imageUrl: urlFor({_ref: formData.imageUrl.split('\\')[2]}).url()
       imageUrl: urlFor({_ref: reference}).auto('format').url()
     };
 
-    //creating a new OtherWays data into sanity
-    client.create(OtherWays).then(() =>{
+    //creating a new VisualVocabulary data into sanity
+    client.create(VisualVocabulary).then(() =>{
       setLoading(false);//loading
-      setShowOtherWaysForm(false);//hide OtherWays form after submission of new word
+      setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  //delete OtherWays
+  //delete VisualVocabulary
   const handleDelete = (index, _id) => {
-    client.delete({query: `*[_type == "otherways"][${index}]`})
+    client.delete({query: `*[_type == "visualVocab"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!')
       console.log('Deleted');
@@ -68,10 +58,10 @@ const OtherWays = () => {
 
   //fetching synonyms data from sanity
   useEffect(() => {
-    const query = `*[_type == "otherways"]`;
+    const query = `*[_type == "visualVocab"]`;
 
     client.fetch(query).then((data) => {
-      setOtherWays(data);
+      setVisualVocabs(data);
     });
   }, []);
 
@@ -79,16 +69,16 @@ const OtherWays = () => {
     <>
       <h2 className='head-text'>Other Ways 
         {
-          //show OtherWays form after clicking on the add icon +
+          //show VisualVocabulary form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowOtherWaysForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowVisualVocabForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice synonyms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new OtherWays starts here */}
+      {/* Add new VisualVocabulary starts here */}
       {
-        isShowOtherWaysForm ? (
+        isShowVisualVocabForm ? (
           <div className='app__synonym-form app__flex'>
             <div className='app__flex'>
               <h3>Add</h3>
@@ -107,13 +97,13 @@ const OtherWays = () => {
           </div>
         )
       }
-      {/* Add new OtherWays ends here */}
+      {/* Add new VisualVocabulary ends here */}
       
       {/* displaying synonyms items starts here */}
       <div className='app__synonym-items'>
-          {/* OtherWays item card */}
+          {/* VisualVocabulary item card */}
           {
-            otherWays.map((otherWay, index) => (
+            visualVocabs.map((visualVocab, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
@@ -121,10 +111,10 @@ const OtherWays = () => {
               key={index}
               > 
                 <h4>
-                  <RiDeleteBack2Fill onClick={() => handleDelete(index, otherWays._id)}/>
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, visualVocab._id)}/>
                   &nbsp;&nbsp;
                 </h4>
-                <img src={urlFor(otherWay.imageUrl)}/>
+                <img src={urlFor(visualVocab.imageUrl)}/>
               </motion.div>
              ))
           }
@@ -142,7 +132,7 @@ const OtherWays = () => {
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(OtherWays, 'app__synonyms'), //component 
-"OtherWays", //idName
+export default AppWrap(MotionWrap(VisualVocabulary, 'app__synonyms'), //component 
+"VisualVocabulary", //idName
 "app__whitebg" //className for bg color
 ); 
