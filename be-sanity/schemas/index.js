@@ -2,8 +2,8 @@ import vocabs from './vocabs';
 import idioms from './idioms';
 import sentences from './sentences';
 import very from './very';
-import advance from './advance';
+import advanced from './advanced';
 import synonyms from './synonyms';
 import otherways from './otherways';
 
-export const schemaTypes = [vocabs, idioms, sentences, very, advance, synonyms, otherways];
+export const schemaTypes = [vocabs, idioms, sentences, very, advanced, synonyms, otherways];

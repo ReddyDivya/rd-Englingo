@@ -7,7 +7,7 @@ import vocabs from './vocabs';
 import idioms from './idioms';
 import sentences from './sentences';
 import very from './very';
-import advance from './advance';
+import advanced from './advanced';
 import synonyms from './synonyms';
 import otherways from './otherways';
 
@@ -17,7 +17,7 @@ export default createSchema({
   name: 'default',
   // Then proceed to concatenate our document type
   // to the ones provided by any plugins that are installed
-  types: schemaTypes.concat([vocabs, idioms, sentences, very, advance, synonyms, otherways
+  types: schemaTypes.concat([vocabs, idioms, sentences, very, advanced, synonyms, otherways
     /* Your types here! */
   ]),
 })

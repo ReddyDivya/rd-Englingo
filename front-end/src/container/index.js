@@ -5,7 +5,7 @@
 export {default as Vocab}  from './Vocab/Vocab';
 export {default as Very}  from './Very/Very';
 export {default as Synonyms}  from './Synonyms/Synonyms';
-export {default as Advance}  from './Advance/Advance';
+export {default as AdvancedPhrases}  from './AdvancedPhrases/AdvancedPhrases';
 export {default as OtherWays}  from './OtherWays/OtherWays';
 export {default as Idioms}  from './Idioms/Idioms';
 export {default as Sentences}  from './Sentences/Sentences';

@@ -20,14 +20,14 @@ const [toggle, setToggle] = useState(false);
       <ul className="app__navbar-links">
 
         {/*menu*/}
-        {['vocab', 'idioms', 'sentences', 'very', 'synonyms', 'advance', 'OtherWays'].map((item) => (
+        {['vocab', 'idioms', 'sentences', 'very', 'synonyms', 'advanced-Phrases', 'OtherWays'].map((item) => (
           <li className="app__flex" key={`link-${item}`}>
             
             {/* div is to display dot on navbar-menu's top while hovering. */}
             <div />
 
             {/* menu items */}
-            <a href={`#${item}`}>{item}
+            <a href={`#${item.replaceAll('-','')}`}>{item.replaceAll('-', ' ')}
                 {/* <AiFillCaretDown/> */}
             </a>
 

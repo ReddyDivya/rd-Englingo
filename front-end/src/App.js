@@ -1,5 +1,5 @@
 import React from 'react';
-import {Vocab, Idioms, Sentences, Grammar, Footer, Very, Synonyms, Advance, OtherWays} from './container';
+import {Vocab, Idioms, Sentences, Grammar, Footer, Very, Synonyms, AdvancedPhrases, OtherWays} from './container';
 import {Navbar} from './components';
 import "./App.scss";
 
@@ -10,7 +10,7 @@ const App = () => {
         <Vocab/>
         <Very/>
         <Synonyms/>
-        <Advance/>
+        <AdvancedPhrases/>
         <OtherWays/>
         <Idioms/>
         <Sentences/>

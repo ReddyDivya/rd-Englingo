@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react'
-import "./Vocab.scss";
+import "./Vocabulary.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle, AiOutlineMinusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
-const Vocab = () => {
+const Vocabulary = () => {
 
   const [isShowVocabForm, setShowVocabForm] = useState(false);
   const [formData, setFormData] = useState({
@@ -98,7 +98,7 @@ const Vocab = () => {
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Vocab' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Vocabulary' : 'Sending...'}</button>
           </div>
         )
         :
@@ -148,7 +148,7 @@ const Vocab = () => {
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Vocab, 'app__vocab'), //component 
+export default AppWrap(MotionWrap(Vocabulary, 'app__vocab'), //component 
 "vocab", //idName
 "app__whitebg" //className for bg color
 ); 
