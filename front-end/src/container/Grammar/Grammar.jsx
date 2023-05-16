@@ -19,7 +19,7 @@ const Grammar = () => {
   const [loading, setLoading] = useState(false);
   const {idiom, meaning, sentence} = formData;
 
-  const [idioms, setIdioms] = useState([]);
+  const [grammar, setIdioms] = useState([]);
 
   //adding new idiom
   const handleChangeInput = (e) => {
@@ -33,7 +33,7 @@ const Grammar = () => {
 
     //adding new idiom data
     const idiom = {
-      _type : 'grammar', //idioms document
+      _type : 'grammar', //grammar document
       idiom : formData.idiom,
       meaning : formData.meaning,
       sentence : formData.sentence,
@@ -59,7 +59,7 @@ const Grammar = () => {
     })
   }//handleDelete
 
-  //fetching idioms data from sanity
+  //fetching grammar data from sanity
   useEffect(() => {
     const query = `*[_type == "grammar"]`;
 
@@ -77,13 +77,13 @@ const Grammar = () => {
       }
       </h2>
 
-      <p className='p-text'>In this section you can do practice idioms.</p>
+      <p className='p-text'>In this section you can do practice grammar.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
       
       {/* Add new idiom starts here */}
       {
         isShowIdiomForm ? (
-          <div className='app__idiom-form app__flex'>
+          <div className='app__grammar-form app__flex'>
             <div className='app__flex'>
               <h3>Add Idiom</h3>
             </div>
@@ -110,16 +110,16 @@ const Grammar = () => {
 
       {/* Add new idiom ends here */}
 
-      {/*displaying idioms items*/}
-      <div className='app__idioms-items'>
+      {/*displaying grammar items*/}
+      <div className='app__grammar-items'>
           {/* idiom item card */}
 
           {
-            idioms.map((idiom, index) => (
+            grammar.map((idiom, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
-              className='app__idiom-item'
+              className='app__grammar-item'
               key={'idiom' + index}
             > 
               <h4>
@@ -147,7 +147,7 @@ const Grammar = () => {
 
 //AppWrap - Component, idName, className(parameters)
 //MotionWrap - Component, className(parameters)
-export default AppWrap(MotionWrap(Grammar, 'app__idioms'), //component 
+export default AppWrap(MotionWrap(Grammar, 'app__grammar'), //component 
 "grammar", //idName
 "app__primarybg" //className for bg color
 ); 
