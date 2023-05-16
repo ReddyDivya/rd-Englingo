@@ -58,7 +58,7 @@ const [toggle, setToggle] = useState(false);
             {/*displaying X icon*/}
             <HiX onClick={() => setToggle(false)} />  {/*setToggle = false - to close menu */}
             <ul>
-              {['vocabulary', 'idioms', 'sentences', 'very', 'synonyms', 'advancedPhrases', 'grammar'].map((item) => (
+              {['vocabulary', 'idioms', 'sentences', 'very', 'synonyms', 'advancedPhrases', 'grammar', 'OtherWays'].map((item) => (
                 <li key={item}>
                   <a href={`#${item}`} onClick={() => setToggle(false)}>
                     {item}
