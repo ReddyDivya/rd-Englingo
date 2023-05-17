@@ -128,6 +128,7 @@
             }
         }//hover for svg
 
+        //extra large devices
         @media screen and (min-width: 2000px) {
             width: 70px;
             height: 70px;
@@ -139,6 +140,14 @@
               height: 30px;
             }
         }//media
+
+        /*
+          - extra small devices - mobile
+          - hiding social media icons
+        */
+        @media screen and (min-width: 200px) {
+            display:none;
+        } //media
     }//div
 }//app__social
 
