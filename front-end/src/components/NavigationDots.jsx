@@ -5,8 +5,8 @@ const NavigationDots = ({active}) => {
   return (
     <div className='app__navigation'>
       {
-        ['vocabulary', 'synonyms', 'sentences', 'idioms', 'instead-of-very', 'advanced-Phrases', 'grammar', 'visual-vocabulary'].map((item, index) => (
-          <a href={`#${item.replaceAll('-','')}`}
+        ['vocabulary', 'synonyms', 'sentences', 'idioms', 'insteadofvery', 'advancedPhrases', 'grammar', 'visualvocabulary'].map((item, index) => (
+          <a href={`#${item}`}
              key = {item+index}
              className='app__navigation-dot'
              style={active === item ? {backgroundColor : '#313BAC'} : {}}
