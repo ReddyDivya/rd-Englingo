@@ -24,6 +24,11 @@
 
     /* justify-content - aligns items in horizontal */
     justify-content: center;
+
+    //extra small devices - mobile
+    @media screen and (min-width: 200px) {
+        width: 280px;
+    } //media
 }//footer-container
 
 //copyright
