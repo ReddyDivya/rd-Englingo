@@ -31,14 +31,13 @@
   } //a
   
   //extra large devices
-  // @media screen and (min-width: 2000px) {
-  //   width: 180px;
-  //   height: 40px;
-  // }
+  @media screen and (min-width: 2000px) {
+    width: 180px;
+    height: 40px;
+  }
 
-  //mobile screen
-  @media screen and (max-width: 200px) {
-    // margin-right:-0.7rem;
+  //On screens that are 360px or less, hide logo
+  @media screen and (max-width: 360px) {
     display:none;
   } //media
 } //app__navbar-logo
