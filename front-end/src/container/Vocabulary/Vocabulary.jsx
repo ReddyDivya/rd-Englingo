@@ -118,7 +118,7 @@ const Vocabulary = () => {
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
               className='app__vocab-item'
-              key={vocab.title + index}
+              key={vocab.word + index}
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>

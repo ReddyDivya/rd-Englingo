@@ -119,7 +119,7 @@ const Synonyms = () => {
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
               className='app__synonym-item'
-              key={synonym.title + index}
+              key={synonym.word + index}
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/>

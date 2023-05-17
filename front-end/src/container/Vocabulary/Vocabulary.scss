@@ -40,8 +40,14 @@
 
   //extra large devices
   @media screen and (min-width: 2000px) {
-    width: 370px;
+    width: 170px;
     margin: 2rem 4rem;
+  } //media
+
+  //extra small devices
+  @media screen and (min-width: 200px) {
+    width: 270px;
+    margin: 2rem;
   } //media
 } //app__vocab-item
 

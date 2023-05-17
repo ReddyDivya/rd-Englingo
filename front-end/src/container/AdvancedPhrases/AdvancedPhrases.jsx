@@ -114,7 +114,7 @@ const AdvancedPhrases = () => {
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
               className='app__advanced-item'
-              key={advanced.title + index}
+              key={advanced.normalPhrase + index}
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, advanced._id)}/>
