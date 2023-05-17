@@ -44,11 +44,11 @@
     margin: 2rem 4rem;
   } //media
 
-  //extra small devices
-  @media screen and (min-width: 200px) {
-    width: 250px;
-    margin-left: -2.5rem;
-  } //media
+  // //extra small devices
+  // @media screen and (min-width: 200px) {
+  //   width: 250px;
+  //   margin-left: -2.5rem;
+  // } //media
 } //app__vocab-item
 
 .app__vocab-form{
@@ -110,5 +110,13 @@
     margin: 1rem 0;
   }
 }//app__vocab-form
+
+//On screens that are 200px or less
+@media screen and (max-width: 360px) {
+  .app__vocab-item{
+    width: 250px;
+    margin-left: -2.5rem;
+  }
+} //media
 
 /* Vocab ends here */
