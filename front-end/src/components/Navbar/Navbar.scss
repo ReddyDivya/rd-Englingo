@@ -36,7 +36,9 @@
     height: 40px;
   }
 
-  //extra small devices
+  /*
+    extra small devices - mobile
+  */
   @media screen and (min-width: 200px) {
     display:none;
   } //media
@@ -203,13 +205,19 @@
           &:hover {
             color: var(--secondary-color);
           }
-        }
+
+           //extra small devices
+          @media screen and (min-width: 200px) {
+            // width: 270px;
+            margin-left: 65px;
+          } //media
+        }//div
       } //a
     } //ul
 
-    // @media screen and (min-width: 900px) {
-    //   display: none;
-    // }
+    @media screen and (min-width: 900px) {
+      display: none;
+    }
   }
 
   // @media screen and (min-width: 900px) {
