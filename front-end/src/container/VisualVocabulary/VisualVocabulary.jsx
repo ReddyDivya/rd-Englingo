@@ -74,7 +74,7 @@ const VisualVocabulary = () => {
         }
           <AiFillPlusCircle onClick={() => setShowVisualVocabForm(true)}/>
       </h2>
-      <p className='p-text'>In this section you can do practice visual vocabs.</p>
+      <p className='p-text'>In this section you can do practice visual vocabulary.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
       {/* Add new VisualVocabulary starts here */}
