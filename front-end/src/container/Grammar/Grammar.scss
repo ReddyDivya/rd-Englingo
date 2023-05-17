@@ -20,6 +20,15 @@
         border-radius: 15px;
         object-fit: cover;
     }
+
+    pre{
+      //extra small devices - mobile
+      @media screen and (min-width: 200px) {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        text-align: justify;
+      } //media
+    }
   } //app__grammar-items
   
   //idiom item
