@@ -43,6 +43,12 @@
     width: 370px;
     margin: 2rem 4rem;
   } //media
+
+  //extra small devices - mobile
+  @media screen and (min-width: 200px) {
+    width: 270px;
+    margin-left: -4.3rem;
+  } //media
 } //app__very-item
 
 .app__very-form{
