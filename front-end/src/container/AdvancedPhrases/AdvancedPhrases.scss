@@ -48,7 +48,7 @@
 .app__advanced-form{
   border-radius: 5px;
   padding: 4%;
-  background-color: var(--primary-color);
+  background-color: var(--white-color);
   width: 60%;
   flex-direction: column;
   margin: 1rem 2rem;
@@ -58,7 +58,7 @@
     margin: 0.75rem 0;
     border-radius: 10px;
     cursor: pointer;
-    background-color: var(--primary-color);
+    background-color: var(--white-color);
 
     transition: all 0.3s ease-in-out;
 
@@ -67,7 +67,7 @@
       padding: 0.95rem;
       border: none;
       border-radius: 7px;
-      background-color: var(--white-color);
+      background-color: var(--primary-color);
 
       font-family: var(--font-base);
       color: var(--secondary-color);
