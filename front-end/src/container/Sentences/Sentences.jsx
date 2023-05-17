@@ -106,13 +106,13 @@ const Sentences = () => {
         isShowAddSentenceForm ? (
           <div className='app__sentence-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Sentence</h3>
+              <h3>Add Sentences</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Sentence' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Sentences' : 'Sending...'}</button>
           </div>
         )
         :

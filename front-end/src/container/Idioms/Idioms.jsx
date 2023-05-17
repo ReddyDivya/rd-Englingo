@@ -85,7 +85,7 @@ const Idioms = () => {
         isShowIdiomForm ? (
           <div className='app__idiom-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Idiom</h3>
+              <h3>Add Idioms</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a idiom" name="idiom" value={idiom} onChange={handleChangeInput} />
@@ -97,7 +97,7 @@ const Idioms = () => {
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
 
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Idiom' : 'Sending...'}</button>
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Idioms' : 'Sending...'}</button>
           </div>
         )
         :

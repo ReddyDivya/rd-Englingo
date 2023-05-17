@@ -82,13 +82,13 @@ const VisualVocabulary = () => {
         isShowVisualVocabForm ? (
           <div className='app__visualVocab-form app__flex'>
             <div className='app__flex'>
-              <h3>Add</h3>
+              <h3>Add Visual Vocabulary</h3>
             </div>
             <div className='app__flex'>
               <input type="file" name="imageUrl" value={imageUrl} onChange={handleChangeInput} />
             </div>
-            
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add' : 'Sending...'}</button>
+
+            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Visual Vocabulary' : 'Sending...'}</button>
           </div>
         )
         :

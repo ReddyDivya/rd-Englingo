@@ -92,7 +92,7 @@ const Synonyms = () => {
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a synonyms" name="synonyms" value={synonyms} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter synonyms" name="synonyms" value={synonyms} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
