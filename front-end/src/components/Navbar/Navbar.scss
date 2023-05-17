@@ -96,10 +96,18 @@
     }
   } //a
 
-  //not displaying navbar menu links
+  /*
+    - On screens that are 900px or less, 
+    - not displaying navbar menu links
+  */
   @media screen and (max-width: 900px) {
     display: none;
   }
+
+  //On screens that are 360px or less, hide logo
+  @media screen and (max-width: 360px) {
+    display: none;
+  } //media
 } //app__navbar-links
 
 //hide submenu navbar links
@@ -131,7 +139,7 @@
   background-color: #ddd;
 }
 
-//navigation dots menu
+//navbar menu icon and menu
 .app__navbar-menu {
   width: 35px;
   height: 35px;
@@ -203,19 +211,18 @@
           &:hover {
             color: var(--secondary-color);
           }
-
-           //extra small devices
-          @media screen and (min-width: 200px) {
-            // width: 270px;
-            margin-left: 65px;
-          } //media
         }//div
       } //a
     } //ul
   }//div
 
-  //to hide menu icon when screen is the large device
+  //to hide navbar menu icon when screen it's the large device
   @media screen and (min-width: 900px) {
     display: none;
   }
+
+  //On screens that are 360px or less, hide logo
+  @media screen and (max-width: 360px) {
+    margin-left:-1rem;
+  } //media
 } //app__navbar-menu

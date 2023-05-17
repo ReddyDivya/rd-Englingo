@@ -110,6 +110,11 @@
     width: 100%;
     margin: 1rem 0;
   }
+
+  //On screens that are 360px or less, hide logo
+  @media screen and (max-width: 360px) {
+    margin-left:-2rem;
+  } //media
 }//app__advanced-form
 
 /* Advanced ends here */
