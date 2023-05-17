@@ -61,7 +61,8 @@
     } //media
 
     //extra small devices - mobile
-    @media screen and (min-width: 200px) {
+    //On screens that are 360px or less
+    @media screen and (max-width: 360px) {
       width: 250px;
       margin-left: -2.5rem;
     } //media
