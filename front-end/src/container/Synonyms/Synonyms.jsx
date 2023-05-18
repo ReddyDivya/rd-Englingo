@@ -3,24 +3,25 @@ import "./Synonyms.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const Synonyms = () => {
 
-  const [isShowSynonymsForm, setShowSynonymsForm] = useState(false);
+  const [loading, setLoading] = useState(false);  
+  const [vSynonyms, setSynonyms] = useState([]);
+  const [isShowAddSynonymsForm, setShowAddSynonymsForm] = useState(false);
+  const [isShowEditSynonymsForm, setShowEditSynonymsForm] = useState(false);
+  let vIndex = 0;
+  
   const [formData, setFormData] = useState({
     word : '',
     synonyms : '',
     sentence: '',
   });
-
-  const [loading, setLoading] = useState(false);  
   const {word, synonyms, sentence} = formData;
 
-  const [vSynonyms, setSynonyms] = useState([]);
-  
   //adding new word
   const handleChangeInput = (e) => {
  
@@ -43,11 +44,41 @@ const Synonyms = () => {
     //creating a new synonym data into sanity
     client.create(synonym).then(() =>{
       setLoading(false);//loading
-      setShowSynonymsForm(false);//hide synonym form after submission of new word
+      setShowAddSynonymsForm(false);//hide synonym form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
+  //show update form
+  const handleShowEditForm = (index, word, synonyms, sentence) => {
+    
+    vIndex = index;
+    setShowEditSynonymsForm(true);//show update synonyms form
+  }//handleShowEditForm
+
+  //update the synonyms
+  const handleUpdate = () => {
+
+    //updating synonym
+    const synonyms = {
+      _type : 'synonyms',
+      word: formData.word,
+      synonyms: formData.synonyms,
+      sentence: formData.sentence,
+    }
+
+    client.patch({query: `*[_type == "synonyms"][${vIndex}]`})
+    .set(synonyms).commit()
+    .then(() => {
+      setShowEditSynonymsForm(false);//hide update synonyms form after updating the synonyms.
+      toast.success('Successfully updated!')
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.error('Updated failed: ', err.message)
+    })
+  }//handleUpdate
+  
   //delete synonym
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "synonyms"][${index}]`})
@@ -76,14 +107,14 @@ const Synonyms = () => {
         {
           //show synonym form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowSynonymsForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowAddSynonymsForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice synonyms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new synonym starts here */}
+      {/*1. Add synonym starts here */}
       {
-        isShowSynonymsForm ? (
+        isShowAddSynonymsForm ? (
           <div className='app__synonym-form app__flex'>
             <div className='app__flex'>
               <h3>Add Synonyms</h3>
@@ -108,7 +139,35 @@ const Synonyms = () => {
           </div>
         )
       }
-      {/* Add new synonym ends here */}
+      {/*1. Add synonym ends here */}
+
+      {/* 2. Update synonyms starts here */}
+      {
+        isShowEditSynonymsForm ? (
+          <div className='app__synonym-form app__flex'>
+            <div className='app__flex'>
+              <h3>Add Synonyms</h3>
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter synonyms" name="synonyms" value={synonyms} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Synonyms' : 'Updating...'}</button>
+          </div>
+        )
+        :
+        (
+          <div></div>
+        )
+      }
+      {/*2. Update synonyms ends here */}
+      
       
       {/* displaying synonyms items starts here */}
       <div className='app__synonym-items'>
@@ -123,6 +182,7 @@ const Synonyms = () => {
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/>
+                  <AiFillEdit onClick={() => handleShowEditForm(index, synonym.word, synonym.synonyms, synonym.sentence)}/>
                   &nbsp;&nbsp;
                   {synonym.word} : {synonym.synonyms}
                 </h4>

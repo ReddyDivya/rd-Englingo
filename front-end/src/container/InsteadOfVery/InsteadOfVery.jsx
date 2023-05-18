@@ -109,7 +109,7 @@ const InsteadOfVery = () => {
       <p className='p-text'>In this section you can do practice instead of very.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new instead of very starts here */}
+      {/*1. Add new instead of very starts here */}
       {
         isShowAddVeryForm ? (
           <div className='app__very-form app__flex'>
@@ -134,8 +134,7 @@ const InsteadOfVery = () => {
         )
       }
       {/*1. Add new instead of very ends here */}
-
-      
+ 
       {/* 2. Update new instead of very starts here */}
       {
         isShowEditVeryForm ? (
