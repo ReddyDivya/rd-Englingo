@@ -51,9 +51,8 @@ const Sentences = () => {
     setShowEditSentenceForm(true);//show update sentence form
     
     vIndex = index;
-    vEditSentence = sentence;
-
-    // document.getElementById("EditSentence").textContent  = sentence;
+    document.getElementsByName("sentence").textContent  = sentence;
+    
   }//handleShowEditForm
 
   //update the sentence
