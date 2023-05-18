@@ -48,10 +48,10 @@ const Sentences = () => {
 
   //show update form
   const handleShowEditForm = (index, sentence) => {
-    setShowEditSentenceForm(true);//show update sentence form
+    // setShowEditSentenceForm(true);//show update sentence form
     
     vIndex = index;
-    document.getElementsByName("sentence").textContent  = sentence;
+    document.getElementById("EditSentence").value  = sentence;
     
   }//handleShowEditForm
 
@@ -132,7 +132,7 @@ const Sentences = () => {
 
       {/* 2. Update new sentence starts here */}
       {
-        isShowEditSentenceForm ? (
+        !isShowEditSentenceForm ? (
           <div className='app__sentence-form app__flex'>
             <div className='app__flex'>
               <h3>Update Sentence</h3>
