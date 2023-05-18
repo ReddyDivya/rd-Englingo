@@ -13,6 +13,7 @@ const Sentences = () => {
   const [isShowAddSentenceForm, setShowAddSentenceForm] = useState(false);//to show add sentence form
   const [isShowEditSentenceForm, setShowEditSentenceForm] = useState(false);//to show edit sentence form
   let vIndex = 0;
+  let vEditSentence = '';
 
   const [formData, setFormData] = useState({
     sentence : ''
@@ -46,16 +47,17 @@ const Sentences = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowUpdate = (index) => {
-
-    vIndex = index;
+  const handleShowEditForm = (index, sentence) => {
     setShowEditSentenceForm(true);//show update sentence form
-  }//handleShowUpdate
+    
+    vIndex = index;
+    vEditSentence = sentence;
+
+    // document.getElementById("EditSentence").textContent  = sentence;
+  }//handleShowEditForm
 
   //update the sentence
   const handleUpdate = () => {
-    const index = vIndex;
-    console.log('new sentence >> '+ formData.sentence);
 
     //updating new sentence
     const sentence = {
@@ -63,12 +65,11 @@ const Sentences = () => {
       sentence : formData.sentence
     }
 
-    client.patch({query: `*[_type == "sentences"][${index}]`})
+    client.patch({query: `*[_type == "sentences"][${vIndex}]`})
     .set(sentence).commit()
     .then(() => {
       setShowEditSentenceForm(false);//hide update sentence form after updating the sentence.
       toast.success('Successfully updated!')
-      console.log('Updated');
       window.location.reload();
     })
     .catch((err) => {
@@ -133,12 +134,12 @@ const Sentences = () => {
       {/* 2. Update new sentence starts here */}
       {
         isShowEditSentenceForm ? (
-          <div className=''>
+          <div className='app__sentence-form app__flex'>
             <div className='app__flex'>
               <h3>Update Sentence</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+              <input className="p-text" type="text" id='EditSentence' placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
           </div>
@@ -169,7 +170,7 @@ const Sentences = () => {
 
                   &nbsp;&nbsp;
 
-                  <AiFillEdit onClick={() => handleShowUpdate(index)}/>
+                  <AiFillEdit onClick={() => handleShowEditForm(index, sentence.sentence)}/>
                 </p>
               </motion.div>
             ))
