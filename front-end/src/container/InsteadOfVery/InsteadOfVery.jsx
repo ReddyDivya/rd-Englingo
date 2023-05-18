@@ -3,16 +3,18 @@ import "./InsteadOfVery.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const InsteadOfVery = () => {
 
-  const [isShowVeryForm, setShowVeryForm] = useState(false);
+  const [isShowAddVeryForm, setShowAddVeryForm] = useState(false);
+  const [isShowEditVeryForm, setShowEditVeryForm] = useState(false);
   const [loading, setLoading] = useState(false);  
   const [very, setVery] = useState([]);
-  
+  let vIndex = 0;
+
   const [formData, setFormData] = useState({
     word : '',
     alternative : '',
@@ -40,11 +42,40 @@ const InsteadOfVery = () => {
     //creating a new very data into sanity
     client.create(very).then(() =>{
       setLoading(false);//loading
-      setShowVeryForm(false);//hide very form after submission of new word
+      setShowAddVeryForm(false);//hide very form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
 
+  //show update form
+  const handleShowEditForm = (index, word, alternative) => {
+    
+    vIndex = index;
+    setShowEditVeryForm(true);//show update instead of very form
+  }//handleShowEditForm
+
+  //update the instead of very
+  const handleUpdate = () => {
+
+    //updating new instead of very phrases
+    const very = {
+      _type : 'very',
+      word : formData.word,
+      alternative : formData.alternative,
+    }
+
+    client.patch({query: `*[_type == "very"][${vIndex}]`})
+    .set(very).commit()
+    .then(() => {
+      setShowEditVeryForm(false);//hide update instead of very phrases form after updating the grammar.
+      toast.success('Successfully updated!')
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.error('Updated failed: ', err.message)
+    })
+  }//handleUpdate
+  
   //delete very
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "very"][${index}]`})
@@ -73,14 +104,14 @@ const InsteadOfVery = () => {
         {
           //show very form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowVeryForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowAddVeryForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice instead of very.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new very starts here */}
+      {/* Add new instead of very starts here */}
       {
-        isShowVeryForm ? (
+        isShowAddVeryForm ? (
           <div className='app__very-form app__flex'>
             <div className='app__flex'>
               <h3>Add Instead of "Very"</h3>
@@ -102,23 +133,49 @@ const InsteadOfVery = () => {
           </div>
         )
       }
-      {/* Add new vocab ends here */}
+      {/*1. Add new instead of very ends here */}
+
+      
+      {/* 2. Update new instead of very starts here */}
+      {
+        isShowEditVeryForm ? (
+          <div className='app__very-form app__flex'>
+            <div className='app__flex'>
+              <h3>Update Instead of "Very"</h3>
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter an alternative" name="alternative" value={alternative} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Instead of Very' : 'Updating...'}</button>
+          </div>
+        )
+        :
+        (
+          <div></div>
+        )
+      }
+      {/*2. Update new instead of very ends here */}
       
       {/* displaying very items starts here */}
       <div className='app__very-items'>
           {/* vocab item card */}
           {
-            very.map((vocab, index) => (
+            very.map((very, index) => (
               <motion.div whileInView={{opacity:1}}
               whileHover={{ scale: 1.1 }}
               transition= {{ duration: 0.5, type : 'tween'}}
               className='app__very-item'
-              key={vocab.word + index}
+              key={very.word + index}
               > 
                 <h4>
-                  <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
+                  <RiDeleteBack2Fill onClick={() => handleDelete(index, very._id)}/>
+                  <AiFillEdit onClick={() => handleShowEditForm(index, very.word, very.alternative)}/>
                   &nbsp;&nbsp;
-                  {vocab.word} : {vocab.alternative}
+                  {very.word} : {very.alternative}
                 </h4>
                 
               </motion.div>

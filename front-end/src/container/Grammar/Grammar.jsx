@@ -3,16 +3,16 @@ import "./Grammar.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client, urlFor } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillEdit } from 'react-icons/ai';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Grammar = () => {
   
   const [isShowAddGrammarForm, setShowAddGrammarForm] = useState(false);
+  const [isShowEditGrammarForm, setShowEditGrammarForm] = useState(false);//to show edit grammar form
+  const [grammar, setGrammar] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [grammar, setIdioms] = useState([]);
-  const [isShowEditGrammarForm, setShowEditGrammarForm] = useState(false);//to show edit sentence form
   let vIndex = 0;
 
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ const Grammar = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, normal, advanced) => {
+  const handleShowEditForm = (index, heading, notes) => {
     
     vIndex = index;
     setShowEditGrammarForm(true);//show update grammar form
@@ -95,7 +95,7 @@ const Grammar = () => {
     const query = `*[_type == "grammar"]`;
 
     client.fetch(query).then((data) => {
-      setIdioms(data);
+      setGrammar(data);
     });
   }, []);
 
@@ -178,7 +178,7 @@ const Grammar = () => {
               <h4>
                 <RiDeleteBack2Fill onClick={() => handleDelete(index, grammar._id)}/>
                 &nbsp;&nbsp;
-                <AiFillEdit onClick={() => handleShowEditForm(index, advanced.normalPhrase, advanced.advancedPhrase)}/>
+                <AiFillEdit onClick={() => handleShowEditForm(index, grammar.heading, grammar.notes)}/>
                 &nbsp;&nbsp;
                 {grammar.heading}
               </h4>
