@@ -13,7 +13,6 @@ const Sentences = () => {
   const [isShowAddSentenceForm, setShowAddSentenceForm] = useState(false);//to show add sentence form
   const [isShowEditSentenceForm, setShowEditSentenceForm] = useState(false);//to show edit sentence form
   let vIndex = 0;
-  let vEditSentence = '';
 
   const [formData, setFormData] = useState({
     sentence : ''
@@ -48,11 +47,9 @@ const Sentences = () => {
 
   //show update form
   const handleShowEditForm = (index, sentence) => {
-    // setShowEditSentenceForm(true);//show update sentence form
     
     vIndex = index;
-    document.getElementById("EditSentence").value  = sentence;
-    
+    setShowEditSentenceForm(true);//show update sentence form
   }//handleShowEditForm
 
   //update the sentence
@@ -132,7 +129,7 @@ const Sentences = () => {
 
       {/* 2. Update new sentence starts here */}
       {
-        !isShowEditSentenceForm ? (
+        isShowEditSentenceForm ? (
           <div className='app__sentence-form app__flex'>
             <div className='app__flex'>
               <h3>Update Sentence</h3>

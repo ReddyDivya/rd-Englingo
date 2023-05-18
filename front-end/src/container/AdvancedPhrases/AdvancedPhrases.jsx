@@ -9,16 +9,17 @@ import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const AdvancedPhrases = () => {
 
+  const [advanced, setAdvanced] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [isShowAdvancedForm, setShowAdvancedForm] = useState(false);
+  const [isShowEditAdvancedForm, setShowEditAdvancedForm] = useState(false);//to show edit sentence form
+  let vIndex = 0;
+
   const [formData, setFormData] = useState({
     normalPhrase : '',
     advancedPhrase : '',
   });
-
-  const [loading, setLoading] = useState(false);  
   const {normalPhrase, advancedPhrase} = formData;
-
-  const [advanced, setAdvanced] = useState([]);
   
   //adding new advanced phrase
   const handleChangeInput = (e) => {
@@ -45,6 +46,35 @@ const AdvancedPhrases = () => {
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+  //show update form
+  const handleShowEditForm = (index, advanced) => {
+    
+    vIndex = index;
+    setShowEditAdvancedForm(true);//show update advanced form
+  }//handleShowEditForm
+
+  //update the advanced
+  const handleUpdate = () => {
+
+    //updating new advanced phrases
+    const advanced = {
+      _type : 'advanced',
+      normalPhrase : formData.normalPhrase,
+      advancedPhrase : formData.advancedPhrase
+    }
+
+    client.patch({query: `*[_type == "advanced"][${vIndex}]`})
+    .set(advanced).commit()
+    .then(() => {
+      setShowEditAdvancedForm(false);//hide update advanced phrases form after updating the sentence.
+      toast.success('Successfully updated!')
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.error('Updated failed: ', err.message)
+    })
+  }//handleUpdate
 
   //delete advanced
   const handleDelete = (index, _id) => {
@@ -79,7 +109,7 @@ const AdvancedPhrases = () => {
       <p className='p-text'>In this section you can do practice advanced phrases.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new advanced starts here */}
+      {/*1. Add new advanced starts here */}
       {
         isShowAdvancedForm ? (
           <div className='app__advanced-form app__flex'>
@@ -103,7 +133,32 @@ const AdvancedPhrases = () => {
           </div>
         )
       }
-      {/* Add new advanced ends here */}
+      {/*1. Add new advanced ends here */}
+
+      {/* 2. Update new sentence starts here */}
+      {
+        isShowEditAdvancedForm ? (
+          <div className='app__advanced-form app__flex'>
+            <div className='app__flex'>
+              <h3>Update Advanced Phrases</h3>
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a normal phrase" name="normalPhrase" value={normalPhrase} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a advanced phrase" name="advancedPhrase" value={advancedPhrase} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
+          </div>
+        )
+        :
+        (
+          <div></div>
+        )
+      }
+      {/*2. Update new sentence ends here */}
+
       
       {/* displaying advanced phrases items starts here */}
       <div className='app__advanced-items'>
