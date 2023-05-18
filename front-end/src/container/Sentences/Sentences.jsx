@@ -12,6 +12,8 @@ const Sentences = () => {
   const [loading, setLoading] = useState(false);
   const [isShowAddSentenceForm, setShowAddSentenceForm] = useState(false);//to show add sentence form
   const [isShowEditSentenceForm, setShowEditSentenceForm] = useState(false);//to show edit sentence form
+  let vIndex = 0;
+
   const [formData, setFormData] = useState({
     sentence : ''
   });
@@ -19,8 +21,11 @@ const Sentences = () => {
   const {sentence} = formData;//assign 'sentence' value
 
   const handleChangeInput = (e) => {
+    alert('handleChangeInput');
     const {name, value} = e.target; //assigning form fields data like sentence
     setFormData({...formData, [name] : value}); //setting previous data, and add new sentence
+
+    alert(formData);
   }//handleChangeInput
 
   const handleSubmit = () => {
@@ -41,31 +46,35 @@ const Sentences = () => {
     }).catch((err) => console.log(err));
   }//handleSubmit
 
-  const handleShowUpdate = (index, _id, event) => {
-    console.log(index, _id, sentence);
-    setShowEditSentenceForm(true);//show update sentence form
+  //show update form
+  const handleShowUpdate = (index) => {
 
-    const {name, value} = event.target; //assigning form fields data like sentence
-    setFormData({...formData, [name] : value}); //setting previous data, and update new sentence
-
+    // vIndex = index;
+    // setShowEditSentenceForm(true);//show update sentence form
   }//handleShowUpdate
 
   //update the sentence
-  const handleUpdate = (index, _id, sentence) => {
+  const handleUpdate = () => {
+    // const index = vIndex;
+    // console.log('new sentence >> '+ formData.sentence);
 
-    console.log(index, _id, sentence);
+    // //updating new sentence
+    // const sentence = {
+    //   _type : 'sentences',
+    //   sentence : formData.sentence
+    // }
 
-    client.patch({query: `*[_type == "sentences"][${index}]`})
-    .set({sentence}).commit()
-    .then(() => {
-      setShowEditSentenceForm(false);//hide update sentence form after updating the sentence.
-      toast.success('Successfully updated!')
-      console.log('Updated');
-      window.location.reload();
-    })
-    .catch((err) => {
-      console.error('Updated failed: ', err.message)
-    })
+    // client.patch({query: `*[_type == "sentences"][${index}]`})
+    // .set(sentence).commit()
+    // .then(() => {
+    //   setShowEditSentenceForm(false);//hide update sentence form after updating the sentence.
+    //   toast.success('Successfully updated!')
+    //   console.log('Updated');
+    //   window.location.reload();
+    // })
+    // .catch((err) => {
+    //   console.error('Updated failed: ', err.message)
+    // })
   }//handleUpdate
 
   //delete the sentence
@@ -132,7 +141,7 @@ const Sentences = () => {
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
-            <button type="button" className="p-text" onClick={(e) => handleUpdate(e.target) }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
+            {/* <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button> */}
           </div>
         )
         :
@@ -151,7 +160,7 @@ const Sentences = () => {
                 whileHover={{ scale: 1.1 }}
                 transition= {{ duration: 0.5, type : 'tween'}}
                 className='app__sentence-item'
-                key= {sentence + index}
+                key= {sentence.sentence + index}
               > 
                 <p>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, sentence._id)}/>
@@ -161,7 +170,7 @@ const Sentences = () => {
 
                   &nbsp;&nbsp;
 
-                  <AiFillEdit onClick={(event) => handleShowUpdate(index, sentence._id, event )}/>
+                  {/* <AiFillEdit onClick={() => handleShowUpdate(index)}/> */}
                 </p>
               </motion.div>
             ))
