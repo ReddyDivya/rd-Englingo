@@ -20,14 +20,13 @@ const Sentences = () => {
 
   const {sentence} = formData;//assign 'sentence' value
 
+  //onchange of input fields
   const handleChangeInput = (e) => {
-    alert('handleChangeInput');
     const {name, value} = e.target; //assigning form fields data like sentence
     setFormData({...formData, [name] : value}); //setting previous data, and add new sentence
-
-    alert(formData);
   }//handleChangeInput
 
+  //adding new sentence
   const handleSubmit = () => {
     setLoading(true);//show loading while submitting
 
@@ -49,32 +48,32 @@ const Sentences = () => {
   //show update form
   const handleShowUpdate = (index) => {
 
-    // vIndex = index;
-    // setShowEditSentenceForm(true);//show update sentence form
+    vIndex = index;
+    setShowEditSentenceForm(true);//show update sentence form
   }//handleShowUpdate
 
   //update the sentence
   const handleUpdate = () => {
-    // const index = vIndex;
-    // console.log('new sentence >> '+ formData.sentence);
+    const index = vIndex;
+    console.log('new sentence >> '+ formData.sentence);
 
-    // //updating new sentence
-    // const sentence = {
-    //   _type : 'sentences',
-    //   sentence : formData.sentence
-    // }
+    //updating new sentence
+    const sentence = {
+      _type : 'sentences',
+      sentence : formData.sentence
+    }
 
-    // client.patch({query: `*[_type == "sentences"][${index}]`})
-    // .set(sentence).commit()
-    // .then(() => {
-    //   setShowEditSentenceForm(false);//hide update sentence form after updating the sentence.
-    //   toast.success('Successfully updated!')
-    //   console.log('Updated');
-    //   window.location.reload();
-    // })
-    // .catch((err) => {
-    //   console.error('Updated failed: ', err.message)
-    // })
+    client.patch({query: `*[_type == "sentences"][${index}]`})
+    .set(sentence).commit()
+    .then(() => {
+      setShowEditSentenceForm(false);//hide update sentence form after updating the sentence.
+      toast.success('Successfully updated!')
+      console.log('Updated');
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.error('Updated failed: ', err.message)
+    })
   }//handleUpdate
 
   //delete the sentence
@@ -141,7 +140,7 @@ const Sentences = () => {
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
             </div>
-            {/* <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button> */}
+            <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
           </div>
         )
         :
@@ -170,7 +169,7 @@ const Sentences = () => {
 
                   &nbsp;&nbsp;
 
-                  {/* <AiFillEdit onClick={() => handleShowUpdate(index)}/> */}
+                  <AiFillEdit onClick={() => handleShowUpdate(index)}/>
                 </p>
               </motion.div>
             ))
