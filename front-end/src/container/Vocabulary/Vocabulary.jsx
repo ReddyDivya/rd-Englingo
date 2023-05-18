@@ -145,7 +145,7 @@ const Vocabulary = () => {
         isShowEditVocabForm ? (
           <div className='app__vocab-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Vocabulary</h3>
+              <h3>Update Vocabulary</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
@@ -180,6 +180,7 @@ const Vocabulary = () => {
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
+                  <AiFillEdit onClick={() => handleShowEditForm(index, vocab.word, vocab.meaning, vocab.sentence)}/>
                   &nbsp;&nbsp;
                   {vocab.word} : {vocab.meaning}
                 </h4>
