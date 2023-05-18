@@ -146,7 +146,7 @@ const Synonyms = () => {
         isShowEditSynonymsForm ? (
           <div className='app__synonym-form app__flex'>
             <div className='app__flex'>
-              <h3>Add Synonyms</h3>
+              <h3>Update Synonyms</h3>
             </div>
             <div className='app__flex'>
               <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
@@ -167,7 +167,6 @@ const Synonyms = () => {
         )
       }
       {/*2. Update synonyms ends here */}
-      
       
       {/* displaying synonyms items starts here */}
       <div className='app__synonym-items'>

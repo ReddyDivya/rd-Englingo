@@ -3,15 +3,17 @@ import "./Vocabulary.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
 const Vocabulary = () => {
 
-  const [isShowVocabForm, setShowVocabForm] = useState(false);
+  const [isShowAddVocabForm, setShowAddVocabForm] = useState(false);
+  const [isShowEditVocabForm, setShowEditVocabForm] = useState(false);
   const [loading, setLoading] = useState(false);  
   const [vocabs, setVocabs] = useState([]);
+  let vIndex = 0;
 
   const [formData, setFormData] = useState({
     word : '',
@@ -42,10 +44,40 @@ const Vocabulary = () => {
     //creating a new vocab data into sanity
     client.create(vocab).then(() =>{
       setLoading(false);//loading
-      setShowVocabForm(false);//hide vocab form after submission of new word
+      setShowAddVocabForm(false);//hide vocab form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+  //show update form
+  const handleShowEditForm = (index, word, synonyms, sentence) => {
+    
+    vIndex = index;
+    setShowEditVocabForm(true);//show update vocabs form
+  }//handleShowEditForm
+
+  //update the vocabs
+  const handleUpdate = () => {
+
+    //updating vocabs
+    const vocabs = {
+      _type : 'vocabs',
+      word: formData.word,
+      meaning: formData.meaning,
+      sentence: formData.sentence,
+    }
+
+    client.patch({query: `*[_type == "vocabs"][${vIndex}]`})
+    .set(vocabs).commit()
+    .then(() => {
+      setShowEditVocabForm(false);//hide update vocabs form after updating the synonyms.
+      toast.success('Successfully updated!')
+      window.location.reload();
+    })
+    .catch((err) => {
+      console.error('Updated failed: ', err.message)
+    })
+  }//handleUpdate
 
   //delete vocab
   const handleDelete = (index, _id) => {
@@ -58,7 +90,6 @@ const Vocabulary = () => {
       console.error('Delete failed: ', err.message)
     })
   }//handleDelete
-
 
   //fetching vocabs data from sanity
   useEffect(() => {
@@ -75,14 +106,14 @@ const Vocabulary = () => {
         {
           //show vocab form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowVocabForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowAddVocabForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice vocabulary.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
-      {/* Add new vocab starts here */}
+      {/*1. Add new vocab starts here */}
       {
-        isShowVocabForm ? (
+        isShowAddVocabForm ? (
           <div className='app__vocab-form app__flex'>
             <div className='app__flex'>
               <h3>Add Vocabulary</h3>
@@ -107,8 +138,35 @@ const Vocabulary = () => {
           </div>
         )
       }
-      {/* Add new vocab ends here */}
+      {/*1. Add new vocab ends here */}
       
+      {/* 2. Update vocab starts here */}
+      {
+        isShowEditVocabForm ? (
+          <div className='app__vocab-form app__flex'>
+            <div className='app__flex'>
+              <h3>Add Vocabulary</h3>
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+            </div>
+
+            <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Vocabulary' : 'Updating...'}</button>
+          </div>
+        )
+        :
+        (
+          <div></div>
+        )
+      }
+      {/*2. Update vocab ends here */}
+
       {/* displaying vocabs items starts here */}
       <div className='app__vocab-items'>
           {/* vocab item card */}
