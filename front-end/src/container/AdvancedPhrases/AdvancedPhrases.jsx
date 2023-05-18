@@ -11,7 +11,7 @@ const AdvancedPhrases = () => {
 
   const [advanced, setAdvanced] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isShowAdvancedForm, setShowAdvancedForm] = useState(false);
+  const [isShowAddAdvancedForm, setShowAddAdvancedForm] = useState(false);
   const [isShowEditAdvancedForm, setShowEditAdvancedForm] = useState(false);//to show edit sentence form
   let vIndex = 0;
 
@@ -42,7 +42,7 @@ const AdvancedPhrases = () => {
     //creating a new advanced data into sanity
     client.create(advanced).then(() =>{
       setLoading(false);//loading
-      setShowAdvancedForm(false);//hide advanced form after submission of new word
+      setShowAddAdvancedForm(false);//hide advanced form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
@@ -104,14 +104,14 @@ const AdvancedPhrases = () => {
         {
           //show advanced form after clicking on the add icon +
         }
-          <AiFillPlusCircle onClick={() => setShowAdvancedForm(true)}/>
+          <AiFillPlusCircle onClick={() => setShowAddAdvancedForm(true)}/>
       </h2>
       <p className='p-text'>In this section you can do practice advanced phrases.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
 
       {/*1. Add new advanced starts here */}
       {
-        isShowAdvancedForm ? (
+        isShowAddAdvancedForm ? (
           <div className='app__advanced-form app__flex'>
             <div className='app__flex'>
               <h3>Add Advanced Phrases</h3>
