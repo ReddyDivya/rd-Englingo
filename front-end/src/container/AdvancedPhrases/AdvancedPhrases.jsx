@@ -3,7 +3,7 @@ import "./AdvancedPhrases.scss";
 import {motion} from 'framer-motion';
 import {AppWrap, MotionWrap} from '../../wrapper';
 import { client } from '../../client.js';
-import {AiFillPlusCircle} from 'react-icons/ai';
+import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 
@@ -48,7 +48,7 @@ const AdvancedPhrases = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, advanced) => {
+  const handleShowEditForm = (index, normal, advanced) => {
     
     vIndex = index;
     setShowEditAdvancedForm(true);//show update advanced form
@@ -175,6 +175,8 @@ const AdvancedPhrases = () => {
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, advanced._id)}/>
                   &nbsp;&nbsp;
                   {advanced.normalPhrase} : {advanced.advancedPhrase}
+                
+                  <AiFillEdit onClick={() => handleShowEditForm(index, advanced.normalPhrase, advanced.advancedPhrase)}/>
                 </h4>
               </motion.div>
              ))
