@@ -66,9 +66,10 @@ const Synonyms = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, word, synonyms, sentence) => {
+  const handleShowEditForm = (index, synonym) => {
     
     vIndex = index;
+    setEditFormData({editWord : synonym.word, editSynonyms : synonym.synonyms, editSentence : synonym.sentence});
     setShowEditSynonymsForm(true);//show update synonyms form
   }//handleShowEditForm
 
@@ -197,7 +198,7 @@ const Synonyms = () => {
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, synonym._id)}/>
-                  <AiFillEdit onClick={() => handleShowEditForm(index, synonym.word, synonym.synonyms, synonym.sentence)}/>
+                  <AiFillEdit onClick={() => handleShowEditForm(index, synonym)}/>
                   &nbsp;&nbsp;
                   {synonym.word} : {synonym.synonyms}
                 </h4>

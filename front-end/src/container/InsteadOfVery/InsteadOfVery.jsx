@@ -15,11 +15,19 @@ const InsteadOfVery = () => {
   const [very, setVery] = useState([]);
   let vIndex = 0;
 
+  //add
   const [formData, setFormData] = useState({
     word : '',
     alternative : '',
   });
   const {word, alternative} = formData;
+
+  //edit
+  const [editFormData, setEditFormData] = useState({
+    editWord : '',
+    editAlternative : '',
+  });
+  const {editWord, editAlternative} = editFormData;
 
   //adding new word
   const handleChangeInput = (e) => {
@@ -28,6 +36,13 @@ const InsteadOfVery = () => {
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
+   //updating a word
+   const handleChangeEditInput = (e) => {
+ 
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeEditInput
+  
   //submit new instead of very to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
@@ -48,9 +63,10 @@ const InsteadOfVery = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, word, alternative) => {
+  const handleShowEditForm = (index, very) => {
     
     vIndex = index;
+    setEditFormData({editWord : very.word, editAlternative : very.alternative});
     setShowEditVeryForm(true);//show update instead of very form
   }//handleShowEditForm
 
@@ -60,8 +76,8 @@ const InsteadOfVery = () => {
     //updating new instead of very phrases
     const very = {
       _type : 'very',
-      word : formData.word,
-      alternative : formData.alternative,
+      word: editFormData.editWord,
+      alternative: editFormData.editAlternative,
     }
 
     client.patch({query: `*[_type == "very"][${vIndex}]`})
@@ -143,10 +159,10 @@ const InsteadOfVery = () => {
               <h3>Update Instead of "Very"</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="editWord" value={editWord} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter an alternative" name="alternative" value={alternative} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter an alternative" name="editAlternative" value={editAlternative} onChange={handleChangeEditInput} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Instead of Very' : 'Updating...'}</button>
@@ -172,7 +188,7 @@ const InsteadOfVery = () => {
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, very._id)}/>
-                  <AiFillEdit onClick={() => handleShowEditForm(index, very.word, very.alternative)}/>
+                  <AiFillEdit onClick={() => handleShowEditForm(index, very)}/>
                   &nbsp;&nbsp;
                   {very.word} : {very.alternative}
                 </h4>

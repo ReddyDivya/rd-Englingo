@@ -15,12 +15,20 @@ const Grammar = () => {
   const [loading, setLoading] = useState(false);
   let vIndex = 0;
 
+  //add
   const [formData, setFormData] = useState({
     heading : '',
     notes : '',
     imageUrl : '',
   });
   const {heading, notes, imageUrl} = formData;
+
+  //edit
+  const [editFormData, setEditFormData] = useState({
+    editHeading : '',
+    editNotes : '',
+  });
+  const {editHeading, editNotes} = editFormData;
 
   //adding new grammar
   const handleChangeInput = (e) => {
@@ -49,9 +57,10 @@ const Grammar = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, heading, notes) => {
+  const handleShowEditForm = (index, grammar) => {
     
     vIndex = index;
+    setEditFormData({editHeading : grammar.heading, editNotes : grammar.notes});
     setShowEditGrammarForm(true);//show update grammar form
   }//handleShowEditForm
 
@@ -178,7 +187,7 @@ const Grammar = () => {
               <h4>
                 <RiDeleteBack2Fill onClick={() => handleDelete(index, grammar._id)}/>
                 &nbsp;&nbsp;
-                <AiFillEdit onClick={() => handleShowEditForm(index, grammar.heading, grammar.notes)}/>
+                <AiFillEdit onClick={() => handleShowEditForm(index, grammar)}/>
                 &nbsp;&nbsp;
                 {grammar.heading}
               </h4>
