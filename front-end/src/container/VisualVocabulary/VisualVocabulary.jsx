@@ -73,20 +73,19 @@ const VisualVocabulary = () => {
   //submit new VisualVocabulary to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
-alert(formData.imageUrl.split("\\")[2]);
+
     let image = formData.imageUrl.split("\\")[2];
+    let assetId = urlFor({_ref: image}).auto('format').url();
+    alert(assetId);
     //adding new visual vocabulary data
     const VisualVocabulary = {
       _type: 'visualVocabs',//visualvocabs document
       imageUrl : {
         "_type": "image",
-        "asset": {
-          "_type": "reference",
-          "_ref" : `https://cdn.sanity.io/images/12bn7nhe/production/image-${urlFor(image).width(200).url()}`,
-          // "_ref" : `https://cdn.sanity.io/images/12bn7nhe/production/G3i4emG6B8JnTmGoN0UjgAp8-300x450.jpg?rect=70,20,120,150&h=200&blur=10`,
-          // "_ref": `https://cdn.sanity.io/images/12bn7nhe/production-${image}`,
-          
-        }
+        "assetId" : "0G0Pkg3JLakKCLrF1podAdE9",
+        "path": "images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
+        "url" : "https://cdn.sanity.io/images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
+        "originalFilename": image,
       }
     };
 
