@@ -15,6 +15,7 @@ const Synonyms = () => {
   const [isShowEditSynonymsForm, setShowEditSynonymsForm] = useState(false);
   let vIndex = 0;
   
+  //add
   const [formData, setFormData] = useState({
     word : '',
     synonyms : '',
@@ -22,12 +23,27 @@ const Synonyms = () => {
   });
   const {word, synonyms, sentence} = formData;
 
+  //edit
+  const [editFormData, setEditFormData] = useState({
+    editWord : '',
+    editSynonyms : '',
+    editSentence: '',
+  });
+  const {editWord, editSynonyms, editSentence} = editFormData;
+  
   //adding new word
   const handleChangeInput = (e) => {
  
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
+
+   //updating a word
+   const handleChangeEditInput = (e) => {
+ 
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeEditInput
 
   //submit new synonym to sanity
   const handleSubmit = () => {
@@ -62,9 +78,9 @@ const Synonyms = () => {
     //updating synonym
     const synonyms = {
       _type : 'synonyms',
-      word: formData.word,
-      synonyms: formData.synonyms,
-      sentence: formData.sentence,
+      word: editFormData.editWord,
+      synonyms: editFormData.editSynonyms,
+      sentence: editFormData.editSentence,
     }
 
     client.patch({query: `*[_type == "synonyms"][${vIndex}]`})
@@ -149,13 +165,13 @@ const Synonyms = () => {
               <h3>Update Synonyms</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="editWord" value={editWord} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter synonyms" name="synonyms" value={synonyms} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter synonyms" name="editSynonyms" value={editSynonyms} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="editSentence" value={editSentence} onChange={handleChangeEditInput} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Synonyms' : 'Updating...'}</button>
