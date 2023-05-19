@@ -15,11 +15,19 @@ const AdvancedPhrases = () => {
   const [isShowEditAdvancedForm, setShowEditAdvancedForm] = useState(false);//to show edit sentence form
   let vIndex = 0;
 
+  //add
   const [formData, setFormData] = useState({
     normalPhrase : '',
     advancedPhrase : '',
   });
   const {normalPhrase, advancedPhrase} = formData;
+  
+  //edit
+  const [editFormData, setEditFormData] = useState({
+    editNormalPhrase : '',
+    editAdvancedPhrase: '',
+  });
+  const {editNormalPhrase, editAdvancedPhrase} = editFormData;
   
   //adding new advanced phrase
   const handleChangeInput = (e) => {
@@ -27,6 +35,13 @@ const AdvancedPhrases = () => {
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
+
+  //updating new word
+  const handleChangeEditInput = (e) => {
+ 
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeEditInput
 
   //submit new advanced phrase to sanity
   const handleSubmit = () => {
@@ -48,9 +63,10 @@ const AdvancedPhrases = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, normal, advanced) => {
+  const handleShowEditForm = (index, advanced) => {
     
     vIndex = index;
+    setEditFormData({editNormalPhrase : advanced.normalPhrase, editAdvancedPhrase : advanced.advancedPhrase });
     setShowEditAdvancedForm(true);//show update advanced form
   }//handleShowEditForm
 
@@ -60,8 +76,8 @@ const AdvancedPhrases = () => {
     //updating new advanced phrases
     const advanced = {
       _type : 'advanced',
-      normalPhrase : formData.normalPhrase,
-      advancedPhrase : formData.advancedPhrase
+      normalPhrase : editFormData.editNormalPhrase,
+      advancedPhrase : editFormData.editAdvancedPhrase
     }
 
     client.patch({query: `*[_type == "advanced"][${vIndex}]`})
@@ -143,10 +159,10 @@ const AdvancedPhrases = () => {
               <h3>Update Advanced Phrases</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a normal phrase" name="normalPhrase" value={normalPhrase} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a normal phrase" name="editNormalPhrase" value={editNormalPhrase} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a advanced phrase" name="advancedPhrase" value={advancedPhrase} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a advanced phrase" name="editAdvancedPhrase" value={editAdvancedPhrase} onChange={handleChangeEditInput} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
@@ -174,9 +190,9 @@ const AdvancedPhrases = () => {
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, advanced._id)}/>
                   &nbsp;&nbsp;
+                  <AiFillEdit onClick={() => handleShowEditForm(index, advanced)}/>
+                  &nbsp;&nbsp;
                   {advanced.normalPhrase} : {advanced.advancedPhrase}
-                
-                  <AiFillEdit onClick={() => handleShowEditForm(index, advanced.normalPhrase, advanced.advancedPhrase)}/>
                 </h4>
               </motion.div>
              ))
