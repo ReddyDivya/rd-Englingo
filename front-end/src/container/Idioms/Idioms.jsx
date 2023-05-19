@@ -13,20 +13,37 @@ const Idioms = () => {
   const [isShowAddIdiomForm, setShowAddIdiomForm] = useState(false);
   const [isShowEditIdiomsForm, setShowEditIdiomsForm] = useState(false);//to show edit idioms form
   const [idioms, setIdioms] = useState([]);
+  let vIndex = 0;
+
+  //add
   const [formData, setFormData] = useState({
     idiom : '',
     meaning : '',
     sentence: ''
   });
   const {idiom, meaning, sentence} = formData;
-  let vIndex = 0;
 
+  //edit
+  const [editFormData, setEditFormData] = useState({
+    editIdiom : '',
+    editMeaning : '',
+    editSentence: '',
+  });
+  const {editIdiom, editMeaning, editSentence} = editFormData;
+  
   //adding new idiom
   const handleChangeInput = (e) => {
       const {name, value} = e.target; //assigning form fields data like idiom, meaning, sentence
       setFormData({...formData, [name] : value}); //setting previous data, and add new word data
   }//handleChangeInput
 
+   //updating a word
+   const handleChangeEditInput = (e) => {
+ 
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeEditInput
+  
   //submit new vocab to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
@@ -48,9 +65,10 @@ const Idioms = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, idiom, meaning, sentence) => {
+  const handleShowEditForm = (index, idiom) => {
     
     vIndex = index;
+    setEditFormData({editIdiom : idiom.idiom, editMeaning : idiom.meaning, editSentence : idiom.sentence});
     setShowEditIdiomsForm(true);//show update idioms form
   }//handleShowEditForm
 
@@ -60,9 +78,9 @@ const Idioms = () => {
     //updating new idiom
     const idioms = {
       _type : 'idioms',
-      idiom : formData.idiom,
-      meaning : formData.meaning,
-      sentence : formData.sentence
+      idiom : editFormData.editIdiom,
+      meaning : editFormData.editMeaning,
+      sentence : editFormData.editSentence
     }
 
     client.patch({query: `*[_type == "idioms"][${vIndex}]`})
@@ -147,13 +165,13 @@ const Idioms = () => {
               <h3>Update Idioms</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a idiom" name="idiom" value={idiom} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a idiom" name="editIdiom" value={editIdiom} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="editMeaning" value={editMeaning} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="editSentence" value={editSentence} onChange={handleChangeEditInput} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Sentence' : 'Updating...'}</button>
@@ -181,12 +199,12 @@ const Idioms = () => {
               <h4>
                 <RiDeleteBack2Fill onClick={() => handleDelete(index, idiom._id)}/>
                 &nbsp;&nbsp;
+                <AiFillEdit onClick={() => handleShowEditForm(index, idiom)}/>
+                &nbsp;&nbsp;
                 {idiom.idiom} : {idiom.meaning}
               </h4>
               <p>
                 {idiom.sentence}
-
-                <AiFillEdit onClick={() => handleShowEditForm(index, idiom.idiom, idiom.meaning,  idiom.sentence)}/>
               </p>
             </motion.div>
             ))
