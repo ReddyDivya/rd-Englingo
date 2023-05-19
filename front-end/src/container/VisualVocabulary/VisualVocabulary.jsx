@@ -26,14 +26,68 @@ const VisualVocabulary = () => {
   }//handleChangeInput
 
   //submit new VisualVocabulary to sanity
+  // const handleSubmit = () => {
+  //   setLoading(true);//loading
+
+  //   alert(formData.imageUrl);
+    
+  //   const filePath = 'D://Divya//Program//rd-react-projects//englingo//front-end//src//assets';
+
+  //   client.assets
+  //   .upload('image', createReadStream(filePath), {
+  //     filename: basename(filePath)
+  //   })
+  //   .then(imageAsset => {
+  //     return client
+  //       .patch({query: `*[_type == "visualVocabs"]`})
+  //       .set({
+  //         theImageField: {
+  //           _type: 'image',
+  //           asset: {
+  //             _type: "reference",
+  //             _ref: imageAsset._id
+  //           }
+  //         }
+  //       })
+  //       .commit()
+  //   })
+  //   .then(() => {
+  //     console.log("Done!");
+  //   })
+
+  //   // //adding new visual vocabulary data
+  //   // const VisualVocabulary = {
+  //   //   _type: 'otherways',//otherways document
+  //   //   // imageUrl: urlFor({_ref: reference}).auto('format').url()
+  //   //   imageUrl: '',
+  //   // };
+
+  //   // //creating a new VisualVocabulary data into sanity
+  //   // client.create(VisualVocabulary).then(() =>{
+  //   //   setLoading(false);//loading
+  //   //   setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+  //   //   setFormData([]);
+  //   // }).catch((err) => console.log(err));
+  // }//handleSubmit
+
+  //submit new VisualVocabulary to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
-    
+alert(formData.imageUrl.split("\\")[2]);
+    let image = formData.imageUrl.split("\\")[2];
     //adding new visual vocabulary data
     const VisualVocabulary = {
-      _type: 'otherways',//otherways document
-      // imageUrl: urlFor({_ref: reference}).auto('format').url()
-      imageUrl: '',
+      _type: 'visualVocabs',//visualvocabs document
+      imageUrl : {
+        "_type": "image",
+        "asset": {
+          "_type": "reference",
+          "_ref" : `https://cdn.sanity.io/images/12bn7nhe/production/image-${urlFor(image).width(200).url()}`,
+          // "_ref" : `https://cdn.sanity.io/images/12bn7nhe/production/G3i4emG6B8JnTmGoN0UjgAp8-300x450.jpg?rect=70,20,120,150&h=200&blur=10`,
+          // "_ref": `https://cdn.sanity.io/images/12bn7nhe/production-${image}`,
+          
+        }
+      }
     };
 
     //creating a new VisualVocabulary data into sanity
@@ -55,7 +109,6 @@ const VisualVocabulary = () => {
       console.error('Delete failed: ', err.message)
     })
   }//handleDelete
-
 
   //fetching visual vocabs data from sanity
   useEffect(() => {
