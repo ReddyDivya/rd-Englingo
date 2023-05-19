@@ -36,6 +36,13 @@ const Grammar = () => {
       setFormData({...formData, [name] : value}); //setting previous data, and add new word data
   }//handleChangeInput
 
+  //updating a word
+  const handleChangeEditInput = (e) => {
+ 
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeEditInput
+
   //submit new grammar to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
@@ -70,9 +77,8 @@ const Grammar = () => {
     //updating new grammar phrases
     const grammar = {
       _type : 'grammar',
-      heading : formData.heading,
-      notes : formData.notes,
-      imageUrl : formData.imageUrl,
+      heading : editFormData.editHeading,
+      notes : editFormData.editNotes,
     }
 
     client.patch({query: `*[_type == "grammar"][${vIndex}]`})
@@ -155,10 +161,10 @@ const Grammar = () => {
               <h3>Update Grammar Notes</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a heading" name="heading" value={heading} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a heading" name="editHeading" value={editHeading} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
+              <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="editNotes" value={editNotes} onChange={handleChangeEditInput} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Grammar Notes' : 'Updating...'}</button>
