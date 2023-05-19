@@ -13,8 +13,10 @@ const Vocabulary = () => {
   const [isShowEditVocabForm, setShowEditVocabForm] = useState(false);
   const [loading, setLoading] = useState(false);  
   const [vocabs, setVocabs] = useState([]);
+
   let vIndex = 0;
 
+  //add
   const [formData, setFormData] = useState({
     word : '',
     meaning : '',
@@ -22,12 +24,27 @@ const Vocabulary = () => {
   });
   const {word, meaning, sentence} = formData;
   
+  //edit
+  const [editFormData, setEditFormData] = useState({
+    editWord : '',
+    editMeaning : '',
+    editSentence: '',
+  });
+  const {editWord, editMeaning, editSentence} = editFormData;
+  
   //adding new word
   const handleChangeInput = (e) => {
  
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
+
+   //updating new word
+   const handleChangeEditInput = (e) => {
+ 
+    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+  }//handleChangeEditInput
 
   //submit new vocab to sanity
   const handleSubmit = () => {
@@ -50,9 +67,10 @@ const Vocabulary = () => {
   }//handleSubmit
 
   //show update form
-  const handleShowEditForm = (index, word, synonyms, sentence) => {
-    
+  const handleShowEditForm = (index, vocab) => {
+
     vIndex = index;
+    setEditFormData({editWord : vocab.word, editMeaning : vocab.meaning, editSentence : vocab.sentence});
     setShowEditVocabForm(true);//show update vocabs form
   }//handleShowEditForm
 
@@ -62,9 +80,9 @@ const Vocabulary = () => {
     //updating vocabs
     const vocabs = {
       _type : 'vocabs',
-      word: formData.word,
-      meaning: formData.meaning,
-      sentence: formData.sentence,
+      word: editFormData.editWord,
+      meaning: editFormData.editMeaning,
+      sentence: editFormData.editSentence,
     }
 
     client.patch({query: `*[_type == "vocabs"][${vIndex}]`})
@@ -148,13 +166,13 @@ const Vocabulary = () => {
               <h3>Update Vocabulary</h3>
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a word" name="word" value={word} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a word" name="editWord" value={editWord} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="meaning" value={meaning} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a meaning" name="editMeaning" value={editMeaning} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="sentence" value={sentence} onChange={handleChangeInput} />
+              <input className="p-text" type="text" placeholder="Please, enter a sentence" name="editSentence" value={editSentence} onChange={handleChangeEditInput} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Vocabulary' : 'Updating...'}</button>
@@ -180,7 +198,8 @@ const Vocabulary = () => {
               > 
                 <h4>
                   <RiDeleteBack2Fill onClick={() => handleDelete(index, vocab._id)}/>
-                  <AiFillEdit onClick={() => handleShowEditForm(index, vocab.word, vocab.meaning, vocab.sentence)}/>
+                  &nbsp;&nbsp;
+                  <AiFillEdit onClick={() => handleShowEditForm(index, vocab)}/>
                   &nbsp;&nbsp;
                   {vocab.word} : {vocab.meaning}
                 </h4>
