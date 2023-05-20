@@ -71,30 +71,64 @@ const VisualVocabulary = () => {
   // }//handleSubmit
 
   //submit new VisualVocabulary to sanity
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLoading(true);//loading
 
-    let image = formData.imageUrl.split("\\")[2];
-    let assetId = urlFor({_ref: image}).auto('format').url();
-    alert(assetId);
+    // let image = formData.imageUrl.split("\\")[2];
+    // let assetId = urlFor({_ref: image}).auto('format').url();
+    // alert(assetId);
     //adding new visual vocabulary data
-    const VisualVocabulary = {
-      _type: 'visualVocabs',//visualvocabs document
-      imageUrl : {
-        "_type": "image",
-        "assetId" : "0G0Pkg3JLakKCLrF1podAdE9",
-        "path": "images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
-        "url" : "https://cdn.sanity.io/images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
-        "originalFilename": image,
-      }
-    };
+    // const VisualVocabulary = {
+    //   _type: 'visualVocabs',//visualvocabs document
+    //   imageUrl : {
+    //     "_type": "image",
+    //     "assetId" : "0G0Pkg3JLakKCLrF1podAdE9",
+    //     "path": "images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
+    //     "url" : "https://cdn.sanity.io/images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
+    //     "originalFilename": image,
+    //   }
+    // };
 
     //creating a new VisualVocabulary data into sanity
-    client.create(VisualVocabulary).then(() =>{
-      setLoading(false);//loading
-      setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-      setFormData([]);
-    }).catch((err) => console.log(err));
+    // client.create(VisualVocabulary).then(() =>{
+    //   setLoading(false);//loading
+    //   setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+    //   setFormData([]);
+    // }).catch((err) => console.log(err));
+
+    const fileInput = document.getElementById('file-input');
+    const file = fileInput.files[0];
+
+    try {
+      // const response = await client.assets.upload('image', file);
+      // console.log(response);
+      // const assetId = response.assetId;
+      // console.log('Asset uploaded successfully:', assetId);
+      client.assets
+      .upload('image', file)
+      .then(imageAsset => {
+        console.log(imageAsset);
+        client
+          .patch({query: `*[_type == "visualVocabs"]`})
+          .set({
+            theImageField: {
+              _type: 'image',
+              asset: {
+                _type: "reference",
+                _ref: imageAsset.assetId
+              }
+            }
+          })
+          .commit()
+      })
+      .then(() => {
+        setLoading(false);//loading
+        setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+        setFormData([]);
+      })
+    } catch (error) {
+      console.error('Error uploading asset:', error.message);
+    }
   }//handleSubmit
 
   //delete VisualVocabulary
@@ -137,7 +171,7 @@ const VisualVocabulary = () => {
               <h3>Add Visual Vocabulary</h3>
             </div>
             <div className='app__flex'>
-              <input type="file" name="imageUrl" value={imageUrl} onChange={handleChangeInput} />
+              <input type="file" id='file-input' name="imageUrl" value={imageUrl} onChange={handleChangeInput} />
             </div>
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Visual Vocabulary' : 'Sending...'}</button>
