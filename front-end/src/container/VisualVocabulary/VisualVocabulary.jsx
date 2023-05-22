@@ -24,7 +24,10 @@ const VisualVocabulary = () => {
     await handleAddVisualVocab(image);
   }//handleChangeInput
 
-  // Function to upload an image and return its Sanity image reference
+  /*
+    uploadImage takes a file as input, uploads it to Sanity using client.assets.upload, 
+    and returns the image reference in the required format.
+  */
    const uploadImage = async (file) => {
     const imageData = await client.assets.upload('image', file);
 
@@ -37,7 +40,10 @@ const VisualVocabulary = () => {
     };
   }//uploadImage
 
-  // Function to create a new document in the Studio with the image field
+  /*
+    handleAddVisualVocab takes an image reference as input, 
+    creates a new document with the image field, and creates the document in Sanity using client.create.
+  */
   const handleAddVisualVocab = async (imageUrl) => {
     const visualVocabsDoc = {
       _type: 'visualVocabs',
@@ -49,6 +55,7 @@ const VisualVocabulary = () => {
 
     toast.success('Successfully uploaded!');
     setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+    window.location.reload();
   }//handleAddVisualVocab
 
   //delete VisualVocabulary
@@ -56,7 +63,7 @@ const VisualVocabulary = () => {
     client.delete({query: `*[_type == "visualVocabs"][${index}]`})
     .then(() => {
       toast.success('Successfully deleted!');
-      console.log('Deleted');
+      window.location.reload();      
     })
     .catch((err) => {
       console.error('Delete failed: ', err.message)
