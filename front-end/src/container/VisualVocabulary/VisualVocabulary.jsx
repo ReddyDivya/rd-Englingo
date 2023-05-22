@@ -19,116 +19,92 @@ const VisualVocabulary = () => {
   const {imageUrl} = formData;
 
   //adding new word
-  const handleChangeInput = (e) => {
- 
-    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
-    setFormData({...formData, [name] : value});//setting previous data, and add new word data
+  const handleChangeInput = async (event) => {
+
+    // Usage example
+    let fileInput = document.querySelector('input[type="file"]');
+    console.log('fileInput >> '+ fileInput);
+    
+    const file = event.target.files[0];
+    console.log('file >> '+ file);
+
+    // Upload the image
+    const image = await uploadImage(file);
+    console.log('image >> '+ image);
+
+    // Create a document with the uploaded image
+    await createDocumentWithImage(image);
+  
+    // const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    // setFormData({...formData, [name] : value});//setting previous data, and add new word data
   }//handleChangeInput
 
-  //submit new VisualVocabulary to sanity
-  // const handleSubmit = () => {
-  //   setLoading(true);//loading
+// Function to upload an image and return its Sanity image reference
+async function uploadImage(file) {
+  const imageData = await client.assets.upload('image', file);
+  console.log('imageData >> '+ imageData);
 
-  //   alert(formData.imageUrl);
-    
-  //   const filePath = 'D://Divya//Program//rd-react-projects//englingo//front-end//src//assets';
+  return {
+    _type: 'visualVocabs',
+    asset: {
+      _ref: imageData._id,
+      _type: 'reference'
+    }
+  };
+}//uploadImage
 
-  //   client.assets
-  //   .upload('image', createReadStream(filePath), {
-  //     filename: basename(filePath)
-  //   })
-  //   .then(imageAsset => {
-  //     return client
-  //       .patch({query: `*[_type == "visualVocabs"]`})
-  //       .set({
-  //         theImageField: {
-  //           _type: 'image',
-  //           asset: {
-  //             _type: "reference",
-  //             _ref: imageAsset._id
-  //           }
-  //         }
-  //       })
-  //       .commit()
-  //   })
-  //   .then(() => {
-  //     console.log("Done!");
-  //   })
+// Function to create a new document in the Studio with the image field
+async function createDocumentWithImage(imageUrl) {
+  const document = {
+    _type: 'visualVocabs',
+    // Other fields of your document
+    imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
+  };
 
-  //   // //adding new visual vocabulary data
-  //   // const VisualVocabulary = {
-  //   //   _type: 'otherways',//otherways document
-  //   //   // imageUrl: urlFor({_ref: reference}).auto('format').url()
-  //   //   imageUrl: '',
-  //   // };
+  // Create the document in Sanity
+  await client.create(document);
 
-  //   // //creating a new VisualVocabulary data into sanity
-  //   // client.create(VisualVocabulary).then(() =>{
-  //   //   setLoading(false);//loading
-  //   //   setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-  //   //   setFormData([]);
-  //   // }).catch((err) => console.log(err));
-  // }//handleSubmit
+  setLoading(false);//loading
+  setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+  setFormData([]);
+
+  console.log('Document created successfully with image!');
+}//createDocumentWithImage
 
   //submit new VisualVocabulary to sanity
   const handleSubmit = async () => {
-    setLoading(true);//loading
+    // setLoading(true);//loading
+    
+    // const fileInput = document.getElementById('file-input');
+    // const file = fileInput.files[0];
 
-    // let image = formData.imageUrl.split("\\")[2];
-    // let assetId = urlFor({_ref: image}).auto('format').url();
-    // alert(assetId);
-    //adding new visual vocabulary data
-    // const VisualVocabulary = {
-    //   _type: 'visualVocabs',//visualvocabs document
-    //   imageUrl : {
-    //     "_type": "image",
-    //     "assetId" : "0G0Pkg3JLakKCLrF1podAdE9",
-    //     "path": "images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
-    //     "url" : "https://cdn.sanity.io/images/12bn7nhe/production/bg_0G0Pkg3JLakKCLrF1podAdE9-538x538.jpg",
-    //     "originalFilename": image,
-    //   }
-    // };
+    // try {
 
-    //creating a new VisualVocabulary data into sanity
-    // client.create(VisualVocabulary).then(() =>{
-    //   setLoading(false);//loading
-    //   setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-    //   setFormData([]);
-    // }).catch((err) => console.log(err));
-
-    const fileInput = document.getElementById('file-input');
-    const file = fileInput.files[0];
-
-    try {
-      // const response = await client.assets.upload('image', file);
-      // console.log(response);
-      // const assetId = response.assetId;
-      // console.log('Asset uploaded successfully:', assetId);
-      client.assets
-      .upload('image', file)
-      .then(imageAsset => {
-        console.log(imageAsset);
-        client
-          .patch({query: `*[_type == "visualVocabs"]`})
-          .set({
-            theImageField: {
-              _type: 'image',
-              asset: {
-                _type: "reference",
-                _ref: imageAsset.assetId
-              }
-            }
-          })
-          .commit()
-      })
-      .then(() => {
-        setLoading(false);//loading
-        setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-        setFormData([]);
-      })
-    } catch (error) {
-      console.error('Error uploading asset:', error.message);
-    }
+    //   client.assets
+    //   .upload('image', file)
+    //   .then(imageAsset => {
+    //     console.log(imageAsset);
+    //     client
+    //       .patch({query: `*[_type == "visualVocabs"]`})
+    //       .set({
+    //         theImageField: {
+    //           _type: 'image',
+    //           asset: {
+    //             _type: "reference",
+    //             _ref: imageAsset.assetId
+    //           }
+    //         }
+    //       })
+    //       .commit()
+    //   })
+    //   .then(() => {
+    //     setLoading(false);//loading
+    //     setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+    //     setFormData([]);
+    //   })
+    // } catch (error) {
+    //   console.error('Error uploading asset:', error.message);
+    // }
   }//handleSubmit
 
   //delete VisualVocabulary
