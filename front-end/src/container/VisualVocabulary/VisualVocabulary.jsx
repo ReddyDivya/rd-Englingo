@@ -10,7 +10,6 @@ import {RiDeleteBack2Fill} from 'react-icons/ri';
 const VisualVocabulary = () => {
 
   const [isShowVisualVocabForm, setShowVisualVocabForm] = useState(false);
-  const [loading, setLoading] = useState(false);  
   const [visualVocabs, setVisualVocabs] = useState([]);
   
   //adding new word
@@ -40,16 +39,15 @@ const VisualVocabulary = () => {
 
   // Function to create a new document in the Studio with the image field
   const handleAddVisualVocab = async (imageUrl) => {
-    const document = {
+    const visualVocabsDoc = {
       _type: 'visualVocabs',
       imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
     };
 
     // Create the document in Sanity
-    await client.create(document);
+    await client.create(visualVocabsDoc);
 
     toast.success('Successfully uploaded!');
-    setLoading(false);//loading
     setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
   }//handleAddVisualVocab
 
