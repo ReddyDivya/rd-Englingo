@@ -21,97 +21,51 @@ const VisualVocabulary = () => {
   //adding new word
   const handleChangeInput = async (event) => {
 
-    // Usage example
     let fileInput = document.querySelector('input[type="file"]');
-    console.log('fileInput >> '+ fileInput);
+    const file = event.target.files[0];//file
     
-    const file = event.target.files[0];
-    console.log('file >> '+ file);
-
     // Upload the image
     const image = await uploadImage(file);
-    console.log('image >> '+ image);
 
     // Create a document with the uploaded image
-    await createDocumentWithImage(image);
-  
-    // const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
-    // setFormData({...formData, [name] : value});//setting previous data, and add new word data
+    await handleAddVisualVocab(image);
   }//handleChangeInput
 
-// Function to upload an image and return its Sanity image reference
-async function uploadImage(file) {
-  const imageData = await client.assets.upload('image', file);
-  console.log('imageData >> '+ imageData);
+  // Function to upload an image and return its Sanity image reference
+  async function uploadImage(file) {
+    const imageData = await client.assets.upload('image', file);
 
-  return {
-    _type: 'visualVocabs',
-    asset: {
-      _ref: imageData._id,
-      _type: 'reference'
-    }
-  };
-}//uploadImage
+    return {
+      _type: 'visualVocabs',
+      asset: {
+        _ref: imageData._id,
+        _type: 'reference'
+      }
+    };
+  }//uploadImage
 
-// Function to create a new document in the Studio with the image field
-async function createDocumentWithImage(imageUrl) {
-  const document = {
-    _type: 'visualVocabs',
-    // Other fields of your document
-    imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
-  };
+  // Function to create a new document in the Studio with the image field
+  async function handleAddVisualVocab(imageUrl) {
+    const document = {
+      _type: 'visualVocabs',
+      // Other fields of your document
+      imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
+    };
 
-  // Create the document in Sanity
-  await client.create(document);
+    // Create the document in Sanity
+    await client.create(document);
 
-  setLoading(false);//loading
-  setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-  setFormData([]);
-
-  console.log('Document created successfully with image!');
-}//createDocumentWithImage
-
-  //submit new VisualVocabulary to sanity
-  const handleSubmit = async () => {
-    // setLoading(true);//loading
-    
-    // const fileInput = document.getElementById('file-input');
-    // const file = fileInput.files[0];
-
-    // try {
-
-    //   client.assets
-    //   .upload('image', file)
-    //   .then(imageAsset => {
-    //     console.log(imageAsset);
-    //     client
-    //       .patch({query: `*[_type == "visualVocabs"]`})
-    //       .set({
-    //         theImageField: {
-    //           _type: 'image',
-    //           asset: {
-    //             _type: "reference",
-    //             _ref: imageAsset.assetId
-    //           }
-    //         }
-    //       })
-    //       .commit()
-    //   })
-    //   .then(() => {
-    //     setLoading(false);//loading
-    //     setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-    //     setFormData([]);
-    //   })
-    // } catch (error) {
-    //   console.error('Error uploading asset:', error.message);
-    // }
-  }//handleSubmit
+    toast.success('Successfully uploaded!');
+    setLoading(false);//loading
+    setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+    setFormData([]);
+  }//handleAddVisualVocab
 
   //delete VisualVocabulary
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "visualVocabs"][${index}]`})
     .then(() => {
-      toast.success('Successfully deleted!')
+      toast.success('Successfully deleted!');
       console.log('Deleted');
     })
     .catch((err) => {
