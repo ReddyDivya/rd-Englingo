@@ -13,17 +13,11 @@ const VisualVocabulary = () => {
   const [loading, setLoading] = useState(false);  
   const [visualVocabs, setVisualVocabs] = useState([]);
   
-  const [formData, setFormData] = useState({
-    imageUrl : '',
-  });
-  const {imageUrl} = formData;
-
   //adding new word
   const handleChangeInput = async (event) => {
 
-    let fileInput = document.querySelector('input[type="file"]');
     const file = event.target.files[0];//file
-    
+
     // Upload the image
     const image = await uploadImage(file);
 
@@ -32,7 +26,7 @@ const VisualVocabulary = () => {
   }//handleChangeInput
 
   // Function to upload an image and return its Sanity image reference
-  async function uploadImage(file) {
+   const uploadImage = async (file) => {
     const imageData = await client.assets.upload('image', file);
 
     return {
@@ -45,10 +39,9 @@ const VisualVocabulary = () => {
   }//uploadImage
 
   // Function to create a new document in the Studio with the image field
-  async function handleAddVisualVocab(imageUrl) {
+  const handleAddVisualVocab = async (imageUrl) => {
     const document = {
       _type: 'visualVocabs',
-      // Other fields of your document
       imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
     };
 
@@ -58,7 +51,6 @@ const VisualVocabulary = () => {
     toast.success('Successfully uploaded!');
     setLoading(false);//loading
     setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
-    setFormData([]);
   }//handleAddVisualVocab
 
   //delete VisualVocabulary
@@ -101,10 +93,8 @@ const VisualVocabulary = () => {
               <h3>Add Visual Vocabulary</h3>
             </div>
             <div className='app__flex'>
-              <input type="file" id='file-input' name="imageUrl" value={imageUrl} onChange={handleChangeInput} />
+              <input type="file" name="imageUrl" onChange={handleChangeInput} />
             </div>
-
-            <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Visual Vocabulary' : 'Sending...'}</button>
           </div>
         )
         :
