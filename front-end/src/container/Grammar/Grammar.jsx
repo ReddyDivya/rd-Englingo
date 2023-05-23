@@ -27,9 +27,9 @@ const Grammar = () => {
   const [editFormData, setEditFormData] = useState({
     editHeading : '',
     editNotes : '',
-    // imageUrl: '',
+    editImageUrl: '',
   });
-  const {editHeading, editNotes} = editFormData;
+  const {editHeading, editNotes, editImageUrl} = editFormData;
 
   //adding new grammar
   const handleChangeInput = async (event) => {
@@ -37,12 +37,21 @@ const Grammar = () => {
     setFormData({...formData, [name] : value}); //setting previous data, and add new word data
   }//handleChangeInput
 
-  const handleChangeImage = async (event) => {
+  const handleChangeAddImage = async (event) => {
     const file = event.target.files[0];//file
 
     // Upload the image
     formData.imageUrl = await uploadImage(file);
-  }//handleChangeImage
+  }//handleChangeAddImage
+
+  const handleChangeEditImage = async (event) => {
+    const file = event.target.files[0];//file
+
+    // Upload the image
+    editFormData.editImageUrl = await uploadImage(file);
+  }//handleChangeEditImage
+
+
 
   //updating a word
   const handleChangeEditInput = async (event) => {
@@ -164,7 +173,7 @@ const Grammar = () => {
               <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input type="file" name="imageUrl" onChange={handleChangeImage} />
+              <input type="file" name="imageUrl" onChange={handleChangeAddImage} />
             </div>
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar Notes' : 'Sending...'}</button>
@@ -194,7 +203,7 @@ const Grammar = () => {
               <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="editNotes" value={editNotes} onChange={handleChangeEditInput} />
             </div>
             <div className='app__flex'>
-              <input type="file" name="imageUrl" onChange={handleChangeImage} />
+              <input type="file" name="editImageUrl" onChange={handleChangeEditImage} />
             </div>
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Grammar Notes' : 'Updating...'}</button>
