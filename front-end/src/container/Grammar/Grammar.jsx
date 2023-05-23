@@ -31,15 +31,23 @@ const Grammar = () => {
   const {editHeading, editNotes} = editFormData;
 
   //adding new grammar
-  const handleChangeInput = (e) => {
-      const {name, value} = e.target; //assigning form fields data like grammar, meaning, sentence
-      setFormData({...formData, [name] : value}); //setting previous data, and add new word data
+  const handleChangeInput = async (event) => {
+    const {name, value} = event.target; //assigning form fields data like grammar, meaning, sentence
+    setFormData({...formData, [name] : value}); //setting previous data, and add new word data
+
+    const file = event.target.files[0];//file
+
+    // Upload the image
+    const image = await uploadImage(file);
+
+    // Create a document with the uploaded image
+    await handleAddGrammarImage(image);
   }//handleChangeInput
 
   //updating a word
   const handleChangeEditInput = async (event) => {
  
-    const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
+    const {name, value} = event.target;//assigning form fields data like word, meaning, sentence
     setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
 
     const file = event.target.files[0];//file
@@ -48,7 +56,7 @@ const Grammar = () => {
     const image = await uploadImage(file);
 
     // Create a document with the uploaded image
-    await handleAddVisualVocab(image);
+    await handleAddGrammarImage(image);
   }//handleChangeEditInput
 
 
@@ -90,10 +98,10 @@ const Grammar = () => {
   }//uploadImage
 
   /*
-    handleAddVisualVocab takes an image reference as input, 
+    handleAddGrammarImage takes an image reference as input, 
     creates a new document with the image field, and creates the document in Sanity using client.create.
   */
-  const handleAddVisualVocab = async (imageUrl) => {
+  const handleAddGrammarImage = async (imageUrl) => {
     const grammarDoc = {
       _type: 'grammar',
       imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
@@ -103,9 +111,9 @@ const Grammar = () => {
     await client.create(grammarDoc);
 
     toast.success('Successfully uploaded!');
-    setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+    setShowAddGrammarForm(false);
     window.location.reload();
-  }//handleAddVisualVocab
+  }//handleAddGrammarImage
 
   //show update form
   const handleShowEditForm = (index, grammar) => {
