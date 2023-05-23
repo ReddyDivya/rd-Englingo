@@ -24,8 +24,8 @@
 
 //synonym item
 .app__visualVocab-item {
-  width: 30rem;
-  height: 30rem;
+  width: 22rem;
+  height: 22rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -36,8 +36,8 @@
   border: 1px solid var(--gray-color);
 
   img{
-    width: 25rem;
-    height: 25rem;
+    width: 20rem;
+    height: 20rem;
   }
 
   svg {
