@@ -19,9 +19,9 @@ const Grammar = () => {
   const [formData, setFormData] = useState({
     heading : '',
     notes : '',
-    imageUrl : '',
+    // imageUrl : '',
   });
-  const {heading, notes, imageUrl} = formData;
+  const {heading, notes} = formData;
 
   //edit
   const [editFormData, setEditFormData] = useState({
