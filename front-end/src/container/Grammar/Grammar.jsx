@@ -37,11 +37,20 @@ const Grammar = () => {
   }//handleChangeInput
 
   //updating a word
-  const handleChangeEditInput = (e) => {
+  const handleChangeEditInput = async (event) => {
  
     const {name, value} = e.target;//assigning form fields data like word, meaning, sentence
     setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
+
+    const file = event.target.files[0];//file
+
+    // Upload the image
+    const image = await uploadImage(file);
+
+    // Create a document with the uploaded image
+    await handleAddVisualVocab(image);
   }//handleChangeEditInput
+
 
   //submit new grammar to sanity
   const handleSubmit = () => {
@@ -62,6 +71,41 @@ const Grammar = () => {
       setFormData([]);
     }).catch((err) => console.log(err));
   }//handleSubmit
+
+    
+  /*
+    uploadImage takes a file as input, uploads it to Sanity using client.assets.upload, 
+    and returns the image reference in the required format.
+  */
+    const uploadImage = async (file) => {
+    const imageData = await client.assets.upload('image', file);
+
+    return {
+      _type: 'grammar',
+      asset: {
+        _ref: imageData._id,
+        _type: 'reference'
+      }
+    };
+  }//uploadImage
+
+  /*
+    handleAddVisualVocab takes an image reference as input, 
+    creates a new document with the image field, and creates the document in Sanity using client.create.
+  */
+  const handleAddVisualVocab = async (imageUrl) => {
+    const grammarDoc = {
+      _type: 'grammar',
+      imageUrl : imageUrl,  // Assign the image reference obtained from uploadImage()
+    };
+
+    // Create the document in Sanity
+    await client.create(grammarDoc);
+
+    toast.success('Successfully uploaded!');
+    setShowVisualVocabForm(false);//hide VisualVocabulary form after submission of new word
+    window.location.reload();
+  }//handleAddVisualVocab
 
   //show update form
   const handleShowEditForm = (index, grammar) => {
@@ -138,6 +182,9 @@ const Grammar = () => {
             </div>
             <div className='app__flex'>
               <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
+            </div>
+            <div className='app__flex'>
+              <input type="file" name="imageUrl" onChange={handleChangeInput} />
             </div>
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar Notes' : 'Sending...'}</button>
