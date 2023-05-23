@@ -62,12 +62,12 @@ const VisualVocabulary = () => {
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "visualVocabs"][${index}]`})
     .then(() => {
-      toast.success('Successfully deleted!');
-      window.location.reload();      
+      toast.success('Successfully deleted!'); 
+      window.location.reload();
     })
     .catch((err) => {
       console.error('Delete failed: ', err.message)
-    })
+    });
   }//handleDelete
 
   //fetching visual vocabs data from sanity
