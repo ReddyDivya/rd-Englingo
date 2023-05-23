@@ -75,6 +75,7 @@ const Grammar = () => {
       setLoading(false);//loading
       setShowAddGrammarForm(false);//hide grammar form after submission of new word
       setFormData([]);
+      window.location.reload();
     }).catch((err) => console.log(err));
   }//handleSubmit
 
@@ -236,9 +237,9 @@ const Grammar = () => {
                 {grammar.heading}
               </h4>
               <div className='app__flex'>
-              {
-                grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
-              }
+                {
+                  grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
+                }
                 <pre>
                   {grammar.notes}
                 </pre>

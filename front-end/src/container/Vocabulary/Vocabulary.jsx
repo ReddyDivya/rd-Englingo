@@ -64,6 +64,8 @@ const Vocabulary = () => {
       setShowAddVocabForm(false);//hide vocab form after submission of new word
       setFormData([]);
     }).catch((err) => console.log(err));
+
+    window.location.reload();
   }//handleSubmit
 
   //show update form
@@ -90,23 +92,25 @@ const Vocabulary = () => {
     .then(() => {
       setShowEditVocabForm(false);//hide update vocabs form after updating the synonyms.
       toast.success('Successfully updated!')
-      window.location.reload();
     })
     .catch((err) => {
       console.error('Updated failed: ', err.message)
     })
+
+    window.location.reload();
   }//handleUpdate
 
   //delete vocab
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "vocabs"][${index}]`})
     .then(() => {
-      toast.success('Successfully deleted!')
-      console.log('Deleted');
+      toast.success('Successfully deleted!');
     })
     .catch((err) => {
       console.error('Delete failed: ', err.message)
     })
+
+    window.location.reload();
   }//handleDelete
 
   //fetching vocabs data from sanity
