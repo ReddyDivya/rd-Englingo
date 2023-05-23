@@ -33,7 +33,8 @@
   
   //idiom item
   .app__grammar-item {
-    width: 900px;
+    width: 45rem;
+    height: 45rem;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -42,6 +43,13 @@
     padding: 1rem;
     border-radius: 5px;
     border: 1px solid var(--gray-color);
+
+    img{
+      width: 15rem;
+      height: 15rem;
+      margin-top: -23rem;
+      margin-right:2rem;
+    }
   
     svg{
       color:#ff0000;

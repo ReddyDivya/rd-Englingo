@@ -51,8 +51,6 @@ const Grammar = () => {
     editFormData.editImageUrl = await uploadImage(file);
   }//handleChangeEditImage
 
-
-
   //updating a word
   const handleChangeEditInput = async (event) => {
  
@@ -112,6 +110,7 @@ const Grammar = () => {
       _type : 'grammar',
       heading : editFormData.editHeading,
       notes : editFormData.editNotes,
+      imageUrl : editFormData.editImageUrl,
     }
 
     client.patch({query: `*[_type == "grammar"][${vIndex}]`})
@@ -236,14 +235,14 @@ const Grammar = () => {
                 &nbsp;&nbsp;
                 {grammar.heading}
               </h4>
-              <pre>
-                {grammar.notes}
-              </pre>
+              <div className='app__flex'>
               {
                 grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
               }
-
-
+                <pre>
+                  {grammar.notes}
+                </pre>
+              </div>
             </motion.div>
             ))
           }
