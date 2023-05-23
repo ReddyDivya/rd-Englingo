@@ -14,17 +14,18 @@
   flex-wrap: wrap; //wraps items in the container
   margin-top: 2rem;
 
-  img{
-      width:100%;
-      height:auto;
-      border-radius: 15px;
-      object-fit: cover;
+  img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    object-fit: cover;
   }
 } //app__visualVocab-items
 
 //synonym item
 .app__visualVocab-item {
-  width: 900px;
+  width: 30rem;
+  height: 30rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -34,13 +35,18 @@
   border-radius: 5px;
   border: 1px solid var(--gray-color);
 
-  svg{
-    color:#ff0000;
-    width:20px;
-    height:20px;
-    margin-bottom:-5px;
+  img{
+    width: 25rem;
+    height: 25rem;
   }
-  
+
+  svg {
+    color: #ff0000;
+    width: 20px;
+    height: 20px;
+    margin-bottom: -5px;
+  }
+
   &:hover {
     border: 1px solid var(--secondary-color);
   }
@@ -59,7 +65,7 @@
   } //media
 } //app__visualVocab-item
 
-.app__visualVocab-form{
+.app__visualVocab-form {
   border-radius: 5px;
   padding: 4%;
   background-color: var(--white-color);
@@ -111,7 +117,7 @@
     &:hover {
       background-color: #2430af;
     }
-  }//button
+  } //button
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -120,8 +126,8 @@
 
   //On screens that are 360px or less, hide logo
   @media screen and (max-width: 360px) {
-    margin-left:-2rem;
+    margin-left: -2rem;
   } //media
-}//app__visualVocab-form
+} //app__visualVocab-form
 
 /* Vocab ends here */
