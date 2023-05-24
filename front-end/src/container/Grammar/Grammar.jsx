@@ -61,7 +61,7 @@ const Grammar = () => {
   //submit new grammar to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
-
+console.log('formData >> '+ formData);
     //adding new grammar data
     const grammar = {
       _type : 'grammar', //grammar document
@@ -173,7 +173,7 @@ const Grammar = () => {
               <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
             </div>
             <div className='app__flex'>
-              <input type="file" name="imageUrl" onChange={handleChangeAddImage} />
+              <input type="file" name="imageUrl" value={imageUrl} onChange={handleChangeAddImage} />
             </div>
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar Notes' : 'Sending...'}</button>
