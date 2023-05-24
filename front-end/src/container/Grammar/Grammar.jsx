@@ -236,7 +236,7 @@ const Grammar = () => {
                 &nbsp;&nbsp;
                 {grammar.heading}
               </h4>
-              <div className='app__flex'>
+              <div>
                 {
                   grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
                 }
@@ -244,7 +244,7 @@ const Grammar = () => {
                   {grammar.notes}
                 </pre>
               </div>
-            </motion.div>
+             </motion.div>
             ))
           }
 
