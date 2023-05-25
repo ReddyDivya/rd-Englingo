@@ -53,7 +53,7 @@ const Grammar = () => {
 
   //updating a word
   const handleChangeEditInput = async (event) => {
- 
+    
     const {name, value} = event.target;//assigning form fields data like word, meaning, sentence
     setEditFormData({...editFormData, [name] : value});//setting previous data, and add new word data
   }//handleChangeEditInput
