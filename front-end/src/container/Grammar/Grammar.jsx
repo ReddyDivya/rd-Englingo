@@ -19,17 +19,17 @@ const Grammar = () => {
   const [formData, setFormData] = useState({
     heading : '',
     notes : '',
-    imageUrl : '',
+    // imageUrl : '',
   });
-  const {heading, notes, imageUrl} = formData;
+  const {heading, notes/*, imageUrl*/} = formData;
 
   //edit
   const [editFormData, setEditFormData] = useState({
     editHeading : '',
     editNotes : '',
-    editImageUrl: '',
+    //editImageUrl: '',
   });
-  const {editHeading, editNotes, editImageUrl} = editFormData;
+  const {editHeading, editNotes, /*editImageUrl*/} = editFormData;
 
   //adding new grammar
   const handleChangeInput = async (event) => {
@@ -37,19 +37,19 @@ const Grammar = () => {
     setFormData({...formData, [name] : value}); //setting previous data, and add new word data
   }//handleChangeInput
 
-  const handleChangeAddImage = async (event) => {
-    const file = event.target.files[0];//file
+  // const handleChangeAddImage = async (event) => {
+  //   const file = event.target.files[0];//file
 
-    // Upload the image
-    formData.imageUrl = await uploadImage(file);
-  }//handleChangeAddImage
+  //   // Upload the image
+  //   formData.imageUrl = await uploadImage(file);
+  // }//handleChangeAddImage
 
-  const handleChangeEditImage = async (event) => {
-    const file = event.target.files[0];//file
+  // const handleChangeEditImage = async (event) => {
+  //   const file = event.target.files[0];//file
 
-    // Upload the image
-    editFormData.editImageUrl = await uploadImage(file);
-  }//handleChangeEditImage
+  //   // Upload the image
+  //   editFormData.editImageUrl = await uploadImage(file);
+  // }//handleChangeEditImage
 
   //updating a word
   const handleChangeEditInput = async (event) => {
@@ -61,13 +61,13 @@ const Grammar = () => {
   //submit new grammar to sanity
   const handleSubmit = () => {
     setLoading(true);//loading
-console.log('formData >> '+ formData);
+
     //adding new grammar data
     const grammar = {
       _type : 'grammar', //grammar document
       heading : formData.heading,
       notes : formData.notes,
-      imageUrl : formData.imageUrl,
+      // imageUrl : formData.imageUrl,
     }
 
     //creating a new grammar data into sanity
@@ -83,17 +83,17 @@ console.log('formData >> '+ formData);
     uploadImage takes a file as input, uploads it to Sanity using client.assets.upload, 
     and returns the image reference in the required format.
   */
-  const uploadImage = async (file) => {
-    const imageData = await client.assets.upload('image', file);
+  // const uploadImage = async (file) => {
+  //   const imageData = await client.assets.upload('image', file);
 
-    return {
-      _type: 'grammar',
-      asset: {
-        _ref: imageData._id,
-        _type: 'reference'
-      }
-    };
-  }//uploadImage
+  //   return {
+  //     _type: 'grammar',
+  //     asset: {
+  //       _ref: imageData._id,
+  //       _type: 'reference'
+  //     }
+  //   };
+  // }//uploadImage
 
   //show update form
   const handleShowEditForm = (index, grammar) => {
@@ -111,7 +111,7 @@ console.log('formData >> '+ formData);
       _type : 'grammar',
       heading : editFormData.editHeading,
       notes : editFormData.editNotes,
-      imageUrl : editFormData.editImageUrl,
+      // imageUrl : editFormData.editImageUrl,
     }
 
     client.patch({query: `*[_type == "grammar"][${vIndex}]`})
@@ -130,8 +130,7 @@ console.log('formData >> '+ formData);
   const handleDelete = (index, _id) => {
     client.delete({query: `*[_type == "grammar"][${index}]`})
     .then(() => {
-      toast.success('Successfully deleted!')
-      console.log('Deleted');
+      toast.success('Successfully deleted!');
     })
     .catch((err) => {
       console.error('Delete failed: ', err.message)
@@ -172,9 +171,9 @@ console.log('formData >> '+ formData);
             <div className='app__flex'>
               <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="notes" value={notes} onChange={handleChangeInput} />
             </div>
-            <div className='app__flex'>
-              <input type="file" name="imageUrl" value={imageUrl} onChange={handleChangeAddImage} />
-            </div>
+            {/* <div className='app__flex'>
+              <input type="file" name="imageUrl" value={imageUrl} onChange={handleChangeInput} />
+            </div> */}
 
             <button type="button" className="p-text" onClick={handleSubmit}>{!loading ? 'Add Grammar Notes' : 'Sending...'}</button>
           </div>
@@ -202,9 +201,9 @@ console.log('formData >> '+ formData);
             <div className='app__flex'>
               <textarea className="p-text" type="text" placeholder="Please, enter a notes" name="editNotes" value={editNotes} onChange={handleChangeEditInput} />
             </div>
-            <div className='app__flex'>
+            {/* <div className='app__flex'>
               <input type="file" name="editImageUrl" onChange={handleChangeEditImage} />
-            </div>
+            </div> */}
 
             <button type="button" className="p-text" onClick={() => handleUpdate() }>{!loading ? 'Update Grammar Notes' : 'Updating...'}</button>
           </div>
@@ -238,7 +237,7 @@ console.log('formData >> '+ formData);
               </h4>
               <div>
                 {
-                  grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
+                  // grammar.imageUrl ? <img src={urlFor(grammar.imageUrl)}/> : <></>
                 }
                 <pre>
                   {grammar.notes}

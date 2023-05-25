@@ -6,7 +6,7 @@
     flex-direction: column;
   } //app__grammar
   
-  //idiom items
+  //grammar items
   .app__grammar-items {
     display: flex;
     justify-content: center;
@@ -31,10 +31,10 @@
     }
   } //app__grammar-items
   
-  //idiom item
+  //grammar item
   .app__grammar-item {
     width: 45rem;
-    height: 45rem;
+    height: auto;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
