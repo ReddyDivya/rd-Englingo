@@ -62,6 +62,8 @@ const Synonyms = () => {
       setLoading(false);//loading
       setShowAddSynonymsForm(false);//hide synonym form after submission of new word
       setFormData([]);
+      toast.success('Successfully added!')
+      window.location.reload();
     }).catch((err) => console.log(err));
   }//handleSubmit
 

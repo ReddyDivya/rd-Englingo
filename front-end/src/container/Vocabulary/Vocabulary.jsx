@@ -58,14 +58,17 @@ const Vocabulary = () => {
       sentence: formData.sentence,
     };
 
+    // console.log(' new vocabs >> ', vocab);
+    //debugger;
+    
     //creating a new vocab data into sanity
     client.create(vocab).then(() =>{
       setLoading(false);//loading
       setShowAddVocabForm(false);//hide vocab form after submission of new word
       setFormData([]);
+      toast.success('Successfully added!')
+      window.location.reload();
     }).catch((err) => console.log(err));
-
-    window.location.reload();
   }//handleSubmit
 
   //show update form
@@ -86,18 +89,18 @@ const Vocabulary = () => {
       meaning: editFormData.editMeaning,
       sentence: editFormData.editSentence,
     }
-
+// console.log(' vocabs >> ', vocabs);
+// debugger;
     client.patch({query: `*[_type == "vocabs"][${vIndex}]`})
     .set(vocabs).commit()
     .then(() => {
       setShowEditVocabForm(false);//hide update vocabs form after updating the synonyms.
       toast.success('Successfully updated!')
+      window.location.reload();
     })
     .catch((err) => {
       console.error('Updated failed: ', err.message)
     })
-
-    window.location.reload();
   }//handleUpdate
 
   //delete vocab
@@ -110,7 +113,7 @@ const Vocabulary = () => {
       console.error('Delete failed: ', err.message)
     })
 
-    window.location.reload();
+    // window.location.reload();
   }//handleDelete
 
   //fetching vocabs data from sanity

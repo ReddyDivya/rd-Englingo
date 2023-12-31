@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'englingo',
 
-  projectId: '',
-  dataset: '',
+  projectId: '12bn7nhe',
+  dataset: 'production',
 
   plugins: [deskTool(), visionTool()],
 
