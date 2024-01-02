@@ -6,6 +6,8 @@ import { client } from '../../client.js';
 import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
+import jsPDF from "jspdf";
+
 
 const Vocabulary = () => {
 
@@ -31,7 +33,7 @@ const Vocabulary = () => {
     editSentence: '',
   });
   const {editWord, editMeaning, editSentence} = editFormData;
-  
+
   //adding new word
   const handleChangeInput = (e) => {
  
@@ -57,9 +59,6 @@ const Vocabulary = () => {
       meaning: formData.meaning,
       sentence: formData.sentence,
     };
-
-    // console.log(' new vocabs >> ', vocab);
-    //debugger;
     
     //creating a new vocab data into sanity
     client.create(vocab).then(() =>{
@@ -89,8 +88,7 @@ const Vocabulary = () => {
       meaning: editFormData.editMeaning,
       sentence: editFormData.editSentence,
     }
-// console.log(' vocabs >> ', vocabs);
-// debugger;
+    
     client.patch({query: `*[_type == "vocabs"][${vIndex}]`})
     .set(vocabs).commit()
     .then(() => {
@@ -125,6 +123,35 @@ const Vocabulary = () => {
     });
   }, []);
 
+
+  const generatePDF = () => {
+    //create a new instance of jsPDF
+    const pdf = new jsPDF();
+
+    //styling
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(24);
+    pdf.text('Vocabularies', 10, 10);//heading
+
+    pdf.setFont('times', 'italic');
+    pdf.setFontSize(12);
+    vocabs.map((vocab, index) => {
+      const yPosition = 30 + index * 20;//Adjust Y position based on index
+
+      //add content to the pdf (string, x, y)
+      pdf.text(`${index+1}. ${vocab.word} - ${vocab.meaning}`, 10, yPosition); 
+      pdf.text(`${vocab.sentence}`, 10, (yPosition + 10)); 
+
+      // Split the 'sentences' into lines
+      // const lines = pdf.splitTextToSize(`${vocab.sentence}`, pdf.internal.pageSize.width - 10);
+      // pdf.text(lines, 10, (yPosition + 10));
+      pdf.text('', 10, (yPosition + 10)); //empty line
+    })
+    
+     // Save the PDF or display it to the user
+     pdf.save('vocabulary.pdf');
+  };//generatePDF
+
   return (
     <>
       <h2 className='head-text'>Vocabulary 
@@ -135,6 +162,9 @@ const Vocabulary = () => {
       </h2>
       <p className='p-text'>In this section you can do practice vocabulary.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
+      <div>
+          <button type="button" className="app__vocab-form"  onClick={generatePDF}>Generate PDF</button>
+      </div>
 
       {/*1. Add new vocab starts here */}
       {
@@ -235,4 +265,4 @@ const Vocabulary = () => {
 export default AppWrap(MotionWrap(Vocabulary, 'app__vocab'), //component 
 "vocabulary", //idName
 "app__whitebg" //className for bg color
-); 
+);
