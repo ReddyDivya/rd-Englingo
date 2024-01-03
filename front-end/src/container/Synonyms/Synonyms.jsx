@@ -6,6 +6,7 @@ import { client } from '../../client.js';
 import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
+import { generatePDFWrapper } from '../../utils/useGeneratePDF.js';
 
 const Synonyms = () => {
 
@@ -120,6 +121,11 @@ const Synonyms = () => {
     });
   }, []);
 
+  const generatePDF = () => {
+    // Call the custom hook wrapper
+    generatePDFWrapper({ engData: vSynonyms, heading: 'Synonyms', fileName: 'synonyms' });
+  };
+
   return (
     <>
       <h2 className='head-text'>Synonyms 
@@ -130,6 +136,10 @@ const Synonyms = () => {
       </h2>
       <p className='p-text'>In this section you can do practice synonyms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
+      
+      <div>
+          <button type="button" className="app__synonym-form"  onClick={generatePDF}>Generate PDF</button>
+      </div>
 
       {/*1. Add synonym starts here */}
       {

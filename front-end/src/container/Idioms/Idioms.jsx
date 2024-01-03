@@ -6,6 +6,7 @@ import { client } from '../../client.js';
 import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
+import { generatePDFWrapper } from '../../utils/useGeneratePDF.js';
 
 const Idioms = () => {
   
@@ -116,6 +117,11 @@ const Idioms = () => {
     });
   }, []);
 
+  const generatePDF = () => {
+    // Call the custom hook wrapper
+    generatePDFWrapper({ engData: idioms, heading: 'Idioms', fileName: 'idioms' });
+  };
+
   return (
     <>
       <h2 className='head-text'>Idioms
@@ -127,6 +133,10 @@ const Idioms = () => {
 
       <p className='p-text'>In this section you can do practice idioms.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
+
+      <div>
+          <button type="button" className="app__vocab-form"  onClick={generatePDF}>Generate PDF</button>
+      </div>
       
       {/*1. Add new idiom starts here */}
       {

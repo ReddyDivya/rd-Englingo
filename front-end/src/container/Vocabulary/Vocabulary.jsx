@@ -6,8 +6,7 @@ import { client } from '../../client.js';
 import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
-import jsPDF from "jspdf";
-
+import { generatePDFWrapper } from '../../utils/useGeneratePDF.js';
 
 const Vocabulary = () => {
 
@@ -15,7 +14,6 @@ const Vocabulary = () => {
   const [isShowEditVocabForm, setShowEditVocabForm] = useState(false);
   const [loading, setLoading] = useState(false);  
   const [vocabs, setVocabs] = useState([]);
-
   let vIndex = 0;
 
   //add
@@ -122,35 +120,11 @@ const Vocabulary = () => {
       setVocabs(data);
     });
   }, []);
-
-
+  
   const generatePDF = () => {
-    //create a new instance of jsPDF
-    const pdf = new jsPDF();
-
-    //styling
-    pdf.setFont('helvetica', 'bold');
-    pdf.setFontSize(24);
-    pdf.text('Vocabularies', 10, 10);//heading
-
-    pdf.setFont('times', 'italic');
-    pdf.setFontSize(12);
-    vocabs.map((vocab, index) => {
-      const yPosition = 30 + index * 20;//Adjust Y position based on index
-
-      //add content to the pdf (string, x, y)
-      pdf.text(`${index+1}. ${vocab.word} - ${vocab.meaning}`, 10, yPosition); 
-      pdf.text(`${vocab.sentence}`, 10, (yPosition + 10)); 
-
-      // Split the 'sentences' into lines
-      // const lines = pdf.splitTextToSize(`${vocab.sentence}`, pdf.internal.pageSize.width - 10);
-      // pdf.text(lines, 10, (yPosition + 10));
-      pdf.text('', 10, (yPosition + 10)); //empty line
-    })
-    
-     // Save the PDF or display it to the user
-     pdf.save('vocabulary.pdf');
-  };//generatePDF
+    // Call the custom hook wrapper
+    generatePDFWrapper({ engData: vocabs, heading: 'Vocabularies', fileName: 'vocabulary' });
+  };
 
   return (
     <>

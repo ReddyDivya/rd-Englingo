@@ -6,6 +6,7 @@ import { client } from '../../client.js';
 import {AiFillPlusCircle, AiFillEdit} from 'react-icons/ai';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
+import { generatePDFWrapper } from '../../utils/useGeneratePDF.js';
 
 const Sentences = () => {
   const [sentences, setSentences] = useState([]);
@@ -108,6 +109,11 @@ const Sentences = () => {
     });
   }, []);
 
+  const generatePDF = () => {
+    // Call the custom hook wrapper
+    generatePDFWrapper({ engData: sentences, heading: 'Sentences', fileName: 'sentences' });
+  };
+
   return (
     <>
       <h2 className='head-text'>Sentences
@@ -118,7 +124,9 @@ const Sentences = () => {
       </h2>
       <p className='p-text'>In this section you can do practice Sentences.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
-      
+      <div>
+          <button type="button" className="app__sentence-form"  onClick={generatePDF}>Generate PDF</button>
+      </div>
       {/* Add new sentence starts here */}
       {
         isShowAddSentenceForm ? (
