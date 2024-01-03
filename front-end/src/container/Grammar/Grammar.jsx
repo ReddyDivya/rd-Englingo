@@ -6,6 +6,7 @@ import { client, urlFor } from '../../client.js';
 import {AiFillPlusCircle, AiFillEdit } from 'react-icons/ai';
 import {RiDeleteBack2Fill} from 'react-icons/ri';
 import toast, { Toaster } from 'react-hot-toast';
+import { generatePDFWrapper } from '../../utils/useGeneratePDF.js';
 
 const Grammar = () => {
   
@@ -146,6 +147,11 @@ const Grammar = () => {
     });
   }, []);
 
+  const generatePDF = () => {
+    // Call the custom hook wrapper
+    generatePDFWrapper({ engData: grammar, heading: 'Grammar', fileName: 'grammar' });
+  };
+
   return (
     <>
       <h2 className='head-text'>Grammar
@@ -157,6 +163,9 @@ const Grammar = () => {
 
       <p className='p-text'>In this section you can do practice grammar.</p>
       <p className='p-text'>Read as much as possible. If you come across a word you don't know, add it down or look it up.</p>
+      <div>
+          <button type="button" className="app__grammar-form"  onClick={generatePDF}>Generate PDF</button>
+      </div>
       
       {/*1. Add new grammar starts here */}
       {
