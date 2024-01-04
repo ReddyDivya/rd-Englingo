@@ -27,7 +27,6 @@ export const generatePDFWrapper = ({engData, heading, fileName}) => {
         wordMeaning += `${data.idiom} - `;
       else if(heading === "Advanced Phrases")
         wordMeaning += `${data.normalPhrase} - `;
-      
 
       if(heading === "Vocabularies" || heading === "Idioms" )
         wordMeaning += `${data.meaning}`;
@@ -39,34 +38,22 @@ export const generatePDFWrapper = ({engData, heading, fileName}) => {
         wordMeaning += `${data.advancedPhrase}`;
       else if(heading === "Grammar")
       {
-        const lines = data.notes.split("\n");//number of lines
-
+        //number of lines
+        const lines = pdf.splitTextToSize(data.notes, pdf.internal.pageSize.height - 15);
         pdf.text(data.heading, 10, yPosition);//heading
-        pdf.text(data.notes, 10, lines.length > 30 ? (yPosition + 50) : 10);
-        
-        //remove empty lines
-        // const numberOfLines = lines.filter(line => line.trim() !== '');
 
-        if(lines.length > 30 || yPosition >= pdf.internal.pageSize.height)
+        //loop through the lines and add to the document
+        for(let i=0; i<lines.length; i++)
         {
-          pdf.addPage();
-          yPosition = 10;
+          if(yPosition > 180)// Assuming 20 lines will fit on a page, you can adjust the value
+          {
+            pdf.addPage();  // Start a new page
+            yPosition = 10;  // Reset y position for the new page
+          }
+
+          pdf.text(lines[i], 10, yPosition);
+          yPosition += 10;  // Adjust this value based on your font size and spacing
         }
-        // pdf.text(data.notes, 10, (yPosition + 50));
-
-        // const lines = data.notes.split("\n");
-
-        //remove empty lines
-        // const numberOfLines = lines.filter(line => line.trim() !== '');
-
-        // if(numberOfLines.length > 10)
-        // {
-        //   if(yPosition >= pdf.internal.pageSize.height)
-        //   {
-        //     pdf.addPage();
-        //     yPosition = 10;
-        //   }
-        // }
       }       
       
       //add content to the pdf (string, x, y)
